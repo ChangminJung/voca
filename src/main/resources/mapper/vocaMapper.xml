@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+	[1] namespace >> dao 파일 경로
+	[2] id >> dao interface의 추상메소드 이름
+	[3] alias >> dto class에서 설정한 alias 
+ -->
+
+<mapper namespace="com.personal.voca.dao.VocaDAO">
+
+
+    <insert id="vocaSubmit" parameterType="voca">
+        INSERT INTO VOCAT VALUES (VOC_SEQ.NEXTVAL,VOD_SEQ.CURRVAL, #{voTbName} , #{voSp}, #{voHw}, #{voImg}, #{voDate}, 0)
+    </insert>
+
+    <insert id="voDirSubmit" parameterType="voca">
+        INSERT INTO VOCADIR VALUES (VOD_SEQ.NEXTVAL, #{voTbName} , #{voDate})
+    </insert>
+
+    <select id="vocaTable" resultType="vocaTb">
+        SELECT * FROM VOCADIR
+    </select>
+
+    <select id="vocaView" resultType="voca" parameterType="int">
+        SELECT * FROM VOCAT WHERE VODIRNUM = ${dirNum} ORDER BY VONUM DESC
+    </select>
+
+
+    <select id="vocaViewOne" parameterType="int" resultType="voca">
+        SELECT * FROM VOCAT WHERE VONUM = ${voNum}
+    </select>
+
+    <update id="imgUpdate" parameterType="voca">
+        UPDATE VOCAT SET VOIMG = #{voImg}, VOIMGLV = ${voImgLv} WHERE VONUM = ${voNum}
+    </update>
+</mapper>

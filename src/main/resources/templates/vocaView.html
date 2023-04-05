@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Tables / General - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/img/favicon.png" rel="icon">
+  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Mar 09 2023 with Bootstrap v5.2.3
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+<style>
+
+  .hw{
+    color: white;
+  }
+
+  .table-hover>tbody>tr:hover>.hw{
+    color:#ECECEC;
+  }
+
+  .table-hover>tbody>tr:hover>.hw:active{
+    color: black;
+  }
+
+
+
+
+
+</style>
+
+
+</head>
+
+<body>
+
+<header data-th-include="./personalHeader.html"></header>
+<!-- ======= Header ======= -->
+
+
+<header data-th-include="./personalSidebar.html"></header>
+<!-- ======= Sidebar ======= -->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Voca Table</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">[[${voca.get(0).voTbName}]]</h5>
+              <button type="button" th:onclick="location.href='vocaCard?dirNum=[[${voca.get(0).voDirNum}]]'" class="btn btn-success" style="float: left;">그림카드</button>
+              <button type="button" class="btn btn-success" style="float: right;">수정하기</button>
+              <!-- Default Table -->
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">spelling</th>
+                    <th scope="col">한글 뜻 <button type="button" onclick="hwHide()" style="margin-left: 10px;" data-bs-toggle="tooltip" data-bs-placement="top" title="빈 곳 클릭 시 뜻을 볼 수 있습니다." class="btn btn-warning btn-sm btnTog">뜻 가리기</button></th>
+                  </tr>
+                </thead>
+                <tbody>
+                <tr th:each="voca : ${voca}" >
+                  <th scope="row">[[${vocaStat.count}]]</th>
+                  <td>[[${voca.voSp}]]</td>
+                  <td class="hw0" >[[${voca.voHw}]]</td>
+                </tr>
+
+                </tbody>
+
+              </table>
+              <!-- End Default Table Example -->
+              <button th:onclick="location.href='vocaTest?dirNum=[[${voca.get(0).voDirNum}]]&level=1'" type="button" class="btn btn-primary">시험보기</button>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+        crossorigin="anonymous"></script>
+
+
+  <!-- Vendor JS Files -->
+  <script src="/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/chart.js/chart.umd.js"></script>
+  <script src="/vendor/echarts/echarts.min.js"></script>
+  <script src="/vendor/quill/quill.min.js"></script>
+  <script src="/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/js/main.js"></script>
+
+<script>
+
+  let hwBool= false;
+
+
+  function hwHide(){
+    if(hwBool){
+      $('.hw0').removeClass("hw");
+      $('.table').unbind();
+      $('.btnTog').attr("data-bs-original-title", "빈 곳 클릭 시 뜻을 볼 수 있습니다.");
+
+      hwBool=false;
+    }else{
+      $('.hw0').addClass("hw");
+      $('.table').bind("selectstart",function (e){e.preventDefault();});
+      $('.table').bind("dragstart", function (e){e.preventDefault();});
+      $('.table').bind("contextmenu", function (e){e.preventDefault();});
+      $('.btnTog').removeAttr("data-bs-original-title");
+      hwBool=true;
+    }
+  }
+
+
+
+
+</script>
+
+</body>
+
+</html>
