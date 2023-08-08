@@ -36,24 +36,6 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-  <style>
-    .form-control:focus{
-      box-shadow: none;
-    }
-
-    .scoring{
-       -webkit-user-drag: none;
-       user-select: none;
-       -moz-user-select: none;
-       -ms-user-select: none;
-       -webkit-user-select: none;
-    }
-
-
-
-
-  </style>
-
 </head>
 
 <body>
@@ -66,7 +48,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Voca Test</h1>
+      <h1>Voca Modify</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -77,7 +59,7 @@
             <div class="card-body ">
               <div class="row mb-3" style="margin-top: 1vh;">
                 <div class="col-md-2">
-                <h5 class="card-title">[[${vocaTestList.get(0).voTbName}]]</h5>
+                  <input type="text" autocomplete="off" id="tbName" class="form-control" th:value="${voca.get(0).voTbName}" placeholder="Table Name">
                 </div>
               </div>
               <!-- General Form Elements -->
@@ -85,34 +67,24 @@
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-1 col-form-label"> </label>
                   <label for="inputText" class="col-sm-5 col-form-label">영단어</label>
-                  <label for="inputText" class="col-sm-5 col-form-label">한글 뜻</label>
+                  <label for="inputText" class="col-sm-5 col-form-label">한글 뜻 (여러 개 일경우 ' , ' 로 구분)</label>
                 </div>
 
-                <div class="row mb-3 quiz" th:each="vocaTest : ${vocaTestList}">
-                  <label for="inputText" class="col-sm-1 col-form-label" th:id="checkDiv+${vocaTestStat.count}">[[${vocaTestStat.count}]].
-                  </label>
+                <div class="row mb-3" th:each="i : ${#numbers.sequence(0, voca.size -1)}">
+                  <label for="inputText" class="col-sm-1 col-form-label">[[${i+1}]].</label>
                   <div class="col-sm-5">
-                    [[${vocaTest.firstStr}]]<input th:if="${vocaTest.curLevel ne 3}" autocomplete="off" type="text" th:maxlength="${vocaTest.quizLen}" th:id="quiz+${vocaTestStat.count}" class="form-control" th:style="'width:' + @{${vocaTest.quizLen*15}} +'px; padding:0px; display: initial;'"><input th:if="${vocaTest.curLevel eq 3}" autocomplete="off" type="text" th:id="quiz+${vocaTestStat.count}" class="form-control" style="width:250px; padding:0px; display: initial;">[[${vocaTest.lastStr}]]
-                    <div th:id="ansDiv+${vocaTestStat.count}">
-                      </div>
-
+                    <div hidden="hidden" th:id="voNum+${i}">[[${voca.get(i).voNum}]]</div>
+                    <div hidden="hidden" th:id="modiSp+${i}">[[${voca.get(i).voSp}]]</div>
+                    <input type="text" autocomplete="off" class="form-control spel" th:value="${voca.get(i).voSp}" th:id="spel+${i}" placeholder="spelling">
                   </div>
-                  <div hidden="hidden" th:id="quizNum+${vocaTestStat.count}">[[${vocaTest.voNum}]]</div>
-                  <div hidden="hidden" th:id="quizStr+${vocaTestStat.count}">[[${vocaTest.firstStr}+${vocaTest.quizStr}+${vocaTest.lastStr}]]</div>
-                  <div hidden="hidden" th:id="quizAns+${vocaTestStat.count}">[[${vocaTest.quizStr}]]</div>
                   <div class="col-sm-6">
-                    [[${vocaTest.hw}]]
+                    <input type="text" autocomplete="off" class="form-control hw" th:value="${voca.get(i).voHw}" th:id="hw+${i}" placeholder="한글 뜻">
                   </div>
                 </div>
-
-
-
 
                 <div class="row mb-3">
-
                   <div class="col-sm-10">
-                    <button onclick="quizCheck()" type="button" class="btn btn-success">채점하기</button>
-                    <button th:if="${vocaTestList.get(0).curLevel ne 3}"  th:onclick="location.href='vocaTest?dirNum=[[${vocaTestList.get(0).voDirNum}]]&level=[[${vocaTestList.get(0).curLevel+1}]]&type=[[${vocaType}]]'" type="button" class="btn btn-primary">다음 단계</button>
+                    <input type="button" onclick="vocaModify()" class="btn btn-primary" value="수정 완료">
                   </div>
                 </div>
 
@@ -148,36 +120,35 @@
 <script src="https://code.jquery.com/jquery-3.6.1.js"
         integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
         crossorigin="anonymous"></script>
-  <script>
+  <script th:inline="javascript">
 
-    function quizCheck(){
+    let dirNum = [[${voca.get(0).voDirNum}]];
 
-      let length = $('.quiz').length;
+    function vocaModify(){
       let input = "";
-      for(let i = 1; i <= length; i++){
+      let length = $('.spel').length;
 
-        if($('#quiz'+i).val() == $('#quizAns'+i).html() ){
-          input = i + "."
-                  + '<img class="scoring" src="/img/채점O.png" style="height: 70px; position:absolute;  left: -7px; margin-top: -20px;">';
-          insertHtmlFun(document.getElementById("checkDiv"+i) , input);
+      for(let i = 0; i < length; i++){
+
+        if($('#modiSp'+(i)).html() == $('#spel'+(i)).val()){
+          input += $('#voNum'+(i)).html() + "*" + 0 + "@" +  $('#spel'+(i)).val() + "/" + $('#hw'+(i)).val() +"_";
         }else{
-          input = i + "."
-                  + '<img class="scoring" src="/img/채점X.png" style="height: 70px; position:absolute;  left: -7px; margin-top: -30px;">';
-          insertHtmlFun(document.getElementById("checkDiv"+i) , input);
-
-          input = '<img class="scoring" src="/img/채점화살표.png" style="height: 70px;">'
-                  + $('#quizStr'+i).html();
-          insertHtmlFun(document.getElementById("ansDiv"+i) , input);
+          input += $('#voNum'+(i)).html() + "*" + 1 + "@" +  $('#spel'+(i)).val() + "/" + $('#hw'+(i)).val() +"_";
         }
 
       }
 
+      if($('#tbName').val()== null || $('#tbName').val() == ""){
+        $('#tbName').val(new Date().toLocaleString());
+      }
 
+      location.href = "vocaModify?tbName="+ $('#tbName').val() +"&dirNum="+ dirNum +"&input="+input;
     }
 
 
+
     function insertHtmlFun(nodeTemp, htmlTemp) {
-      removeAllChild(nodeTemp);
+      // removeAllChild(nodeTemp);
       nodeTemp.insertAdjacentHTML("beforeend", htmlTemp);
     }
 

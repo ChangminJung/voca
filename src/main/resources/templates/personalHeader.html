@@ -11,6 +11,32 @@
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="/favicon/favicon.ico" type="image/x-icon">
     <title></title>
+
+    <style>
+        #turtle {
+            position: absolute;
+        }
+
+        #light {
+            width: 30px;
+            box-sizing: initial;
+            border-bottom: 100px solid #ffc720;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            height: 3px;
+            opacity: 0.3;
+            display: none;
+            position: absolute;
+        }
+
+        .alpha {
+            height: 30px;
+            margin: -2.2px;
+            position: absolute;
+            z-index: 11111;
+        }
+    </style>
+
 </head>
 <body>
 <!-- ======= Header ======= -->
@@ -29,4 +55,174 @@
 
 </header><!-- End Header -->
 </body>
+<script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+        crossorigin="anonymous"></script>
+<script>
+    let voca = '';
+
+    $.ajax({
+        type : "POST",
+        url : "randomVoca",
+        async : false,
+        data : {
+        },
+        dataType : "text" ,
+        success : function(text){
+            voca = text;
+        },
+        error : function(){
+            alert("랜덤 단어 가져오기 통신 실패!");
+        }
+    });
+
+
+
+    let vocaLen = voca.length;
+    let vocaList = new Array();
+    let headerInput = '';
+    headerInput += '<div id="light"></div>';
+
+    for (let i = 0; i < vocaLen; i++) {
+        vocaList.push(voca.charAt(i));
+        headerInput += '<img src="/img/알파벳/' + voca.charAt(i) + '.png" alt="" class="alpha" id="alpha' + i + '">'
+    }
+    $('body').append(headerInput);
+
+    for (let i = 0; i < vocaLen; i++) {
+        $('#alpha' + i).css("left", 500 + i * 18 + 'px');
+    }
+    const a = document.getElementById('alpha0');
+
+    $('.alpha').bind("selectstart",function (e){e.preventDefault();});
+    $('.alpha').bind("dragstart", function (e){e.preventDefault();});
+    $('.alpha').bind("contextmenu", function (e){e.preventDefault();});
+
+    let big = 5;   // 질량, 크기(반지름)
+    let eX = [];      // 마우스 x위치
+    let eY = [];      // 마우스 y위치
+    let xLen = [];       // x 탄성길이
+    let yLen = [];       // y 탄성길이
+    let k = 2;        // 탄성계수
+    let mu = 0.1;       // 마찰계수
+    let g = 9.81;       // 중력가속도
+    let damping = mu * g * big * 0;    // 마찰력
+    let xForce = [];     // x 총힘
+    let yForce = [];     // y 총힘
+    let xball = [];
+    let yball = [];
+    let deg = 0;
+    let light = document.getElementById("light");
+    let radius = 67.5;
+    let xSin = 0;
+    let ySin = 0;
+
+    function move() {
+        for (let i = 0; i < vocaLen; i++) {
+            xLen[i] = (eX[i] - $('#alpha' + i).offset().left);
+            yLen[i] = (eY[i] - $('#alpha' + i).offset().top);
+            if (xLen[i] > 0) {
+                xForce[i] = xLen[i] * k - damping;
+                if (xForce[i] < 0) {
+                    xForce[i] = 0;
+                }
+            } else if (xLen[i] < 0) {
+                xForce[i] = xLen[i] * k + damping;
+                if (xForce[i] > 0) {
+                    xForce[i] = 0;
+                }
+            } else {
+                xForce[i] = 0;
+            }
+            if (yLen[i] > 0) {
+                yForce[i] = yLen[i] * k - damping;
+                if (yForce[i] < 0) {
+                    yForce[i] = 0;
+                }
+            } else if (yLen[i] < 0) {
+                yForce[i] = yLen[i] * k + damping;
+                if (yForce[i] > 0) {
+                    yForce[i] = 0;
+                }
+            } else {
+                yForce[i] = 0;
+            }
+        }
+        deg = getAngle($('#alpha0').offset().left, $('#alpha0').offset().top, eX[0] - 50, eY[0] - 20) + 180;
+
+        light.style.rotate = deg + "deg";
+        light.style.left = (Number(a.style.left.substring(0, a.style.left.length - 2))) - radius * Math.sin(deg * Math.PI / 180) + "px";
+        light.style.top = (Number(a.style.top.substring(0, a.style.top.length - 2))) + radius * Math.cos(deg * Math.PI / 180) + "px";
+
+        for (let i = 0; i < vocaLen; i++) {
+            $('#alpha' + i).css('left', xball[i] + xForce[i] * 0.1 * 0.2 + 22 + 'px');
+            $('#alpha' + i).css('top', yball[i] + yForce[i] * 0.1 * 0.2 + 'px');
+            $('#alpha' + i).css('rotate', deg - 90 + "deg");
+            if (i != 0) {
+                xball[i] = $('#alpha' + (i - 1)).offset().left;
+                yball[i] = $('#alpha' + (i - 1)).offset().top;
+            } else {
+                xball[i] = $('#alpha' + i).offset().left;
+                yball[i] = $('#alpha' + i).offset().top;
+            }
+        }
+    }
+
+    repeatMove();
+
+    function repeatMove() {  // 프레임 1초에 60번, 0.017초 마다/ 0.25초에 15번
+
+        requestAnimationFrame(move);
+        requestAnimationFrame(repeatMove);
+
+    }
+
+    function getAngle(x1, y1, x2, y2) {
+        let a;
+        if (y1 == y2) {
+            if (x2 < x1) {
+                a = -90;
+            } else {
+                a = 90;
+            }
+        } else if (x1 == x2 && y2 > y1) {
+            a = 180;
+        } else {
+            const rad = Math.atan((x2 - x1) / (y1 - y2));
+            a = rad * 180 / Math.PI;
+
+            if (y2 > y1 && x2 > x1) {
+                a = 180 + a;
+            } else if (y2 > y1 && x2 < x1) {
+                a = -180 + a;
+            }
+        }
+        return a;
+    }
+
+    window.addEventListener('mousemove', function (e) {
+        for (let i = 0; i < vocaLen; i++) {
+            if (i == 0) {
+                eX[i] = e.pageX - 410;
+                eY[i] = e.pageY + 80;
+            } else {
+                eX[i] = $('#alpha' + (i - 1)).offset().left;
+                eY[i] = $('#alpha' + (i - 1)).offset().top;
+            }
+        }
+        for (let i = 0; i < vocaLen; i++) {
+
+            if (i > 0) {
+                xball[i] = $('#alpha' + (i - 1)).offset().left;
+                yball[i] = $('#alpha' + (i - 1)).offset().top;
+            } else {
+                xball[i] = $('#alpha' + i).offset().left;
+                yball[i] = $('#alpha' + i).offset().top;
+            }
+        }
+    })
+
+</script>
+
+
 </html>

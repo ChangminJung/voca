@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Tables / General - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/img/favicon.png" rel="icon">
+  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/css/style.css" rel="stylesheet">
+
+  <style>
+    table,
+    tr,
+    td,
+    th {
+      /* 테이블의 선을 합친다. */
+      text-align: center;
+      border: solid 1px;
+      border-collapse: collapse;
+    }
+    *, ::after, ::before{
+      box-sizing: initial;
+    }
+    #tb{
+    }
+
+    tr{
+      height: 50px;
+    }
+    .table-secondary{
+      background-color: #d1d2d4;
+    }
+
+    td {
+      height: 50px;
+      width: 50px;
+      font-size: x-large;
+    }
+
+
+    .aInput {
+      width: 60%;
+      height: 60%;
+      border: 0.1px solid #408cfc;
+      text-align: center;
+      border-radius: 7px;
+      font-size: large;
+
+    }
+
+    .tbDiv{
+      width:20px;
+      height:20px;
+      border-radius:50%;
+      background-color:#0d6efd;
+      position: absolute;
+      margin-top: -10px;
+      /* margin-left: 35px; */
+
+    }
+
+    .divCard1{
+      position: absolute;
+      z-index: 11111;
+      max-width: 300px;
+      max-height: 300px;
+      margin: 50px;
+    }
+
+    .divCard2{
+      position: absolute;
+      z-index: 11111;
+      max-width: 300px;
+      max-height: 300px;
+      top:100px;
+      margin: 50px;
+    }
+
+    .divCard3{
+      position: absolute;
+      z-index: 11111;
+      max-width: 300px;
+      max-height: 300px;
+      top:100px;
+      margin: 50px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<header data-th-include="./personalHeader.html"></header>
+<!-- ======= Header ======= -->
+
+
+<header data-th-include="./personalSidebar.html"></header>
+<!-- ======= Sidebar ======= -->
+
+ <main id="main" class="main">
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+
+              <!-- Table Variants -->
+              <table  id="tb">
+
+              </table>
+              <!-- End Table Variants -->
+
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/chart.js/chart.umd.js"></script>
+  <script src="/vendor/echarts/echarts.min.js"></script>
+  <script src="/vendor/quill/quill.min.js"></script>
+  <script src="/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/js/main.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+
+<script th:inline="javascript">
+
+
+    let cardList = [[${vocaCardList}]];
+
+    let aList = [];
+
+    for(let i = 0; i < cardList.length; i++){
+        // 팔렸는지(1 존재, 0 없음), 영단어, 뜻, 사진
+        aList.push([1, cardList[i].voSp, cardList[i].voHw, cardList[i].voImg]);
+    }
+
+  // 테이블 만들기
+
+  // 십자 말풀이 밀집도
+  let groupNum = 4;
+
+  let input0 = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+  let inputListBig = [];
+  let inputListBig2 = [];
+
+  let aPosList = [];
+
+  tenQuizMake(aList);
+  tableMake(inputListBig);
+
+  let width = 0;
+  let height = 0;
+  for (let i = 0; i < inputListBig2[0].length; i++) {
+    if (inputListBig2[0][i].length >= width) {
+      width = inputListBig2[0][i].length;
+    }
+    height = inputListBig2[0].length;
+  }
+
+  let aIdList = [];
+  let aIdCount = 1;
+  // num, 세로인지 1, 가로인지 0, 시작tbId , 길이, 풀렸는지(0) 안풀렸는지(1) 푸는중인지(2)
+  for (let i = 0; i < aPosList.length; i++) {
+    if (aPosList[i][1] == aPosList[i][2]) {
+      // 세로
+      let alp = '';
+      let alpHw = '';
+      let alpImg = '';
+      for(let j = aPosList[i][3] ; j <= aPosList[i][4]; j++){
+          alp += inputListBig2[0][j].charAt(aPosList[i][1]);
+      }
+      for(let k = 0; k < aList.length; k++){
+        if(aList[k][1] == alp){
+          alpHw = aList[k][2];
+          alpImg = aList[k][3];
+        }
+      }
+      aIdList.push([aIdCount, 1, ((width) * aPosList[i][3] + aPosList[i][1]), (aPosList[i][4] - aPosList[i][3] + 1), 1, alpHw, alpImg]);
+
+    } else {
+      // 가로
+      let alp = '';
+      for(let j = aPosList[i][1] ; j <= aPosList[i][2]; j++){
+        alp += inputListBig2[0][aPosList[i][3]].charAt(j);
+      }
+      for(let k = 0; k < aList.length; k++){
+        if(aList[k][1] == alp){
+          alpHw = aList[k][2];
+          alpImg = aList[k][3];
+        }
+      }
+      aIdList.push([aIdCount, 0, ((width) * aPosList[i][3] + aPosList[i][1]), (aPosList[i][2] - aPosList[i][1] + 1), 1, alpHw, alpImg])
+    }
+
+    aIdCount++;
+  }
+
+
+  let input = '';
+  let count = 0;
+  for (let i = 0; i < height; i++) {
+    input += "<tr>";
+    for (let j = 0; j < width; j++) {
+
+      try {
+        if (inputListBig2[0][i].charAt(j) != 0) {
+          input += "<td id='tb" + count + "'>";
+          input += "<span hidden='hidden' id='ans" + count + "'>";
+          input += inputListBig2[0][i].charAt(j);
+          input += "</span>";
+        } else {
+          input += "<td id='tb" + count + "' class='table-secondary'>";
+        }
+      } catch (error) {
+        input += "<td id='tb" + count + "' class='table-secondary'>";
+      }
+      + "</span>";
+      count++;
+    }
+    input += "</tr>";
+  }
+  $('#tb').append(input);
+
+  for (let i = 0; i < aIdList.length; i++) {
+
+
+    if($('#tb' + aIdList[i][2] + ' .tbDiv').length == 1 ){
+      // <div class="spinner-border text-primary" role="status">
+      //   <span class="visually-hidden">Loading...</span>
+      // </div>
+
+      $('#tb' + aIdList[i][2]).append('<a href="javascript:void(0);"><div id="tbDiv' + i + '" class="tbDiv" style="margin-left:27px;" role="status" onmousedown="inputMake(' + i + ')" ><span hidden="hidden">'+i+'</span></div></a>');
+    }else if($('#tb' + aIdList[i][2] + ' .tbDiv').length > 1){
+      $('#tb' + aIdList[i][2]).append('<a href="javascript:void(0);"><div id="tbDiv' + i + '" class="tbDiv" style="margin-left:13.5px;" role="status" onmousedown="inputMake(' + i + ')" ><span hidden="hidden">'+i+'</span></div></a>');
+    }else{
+      $('#tb' + aIdList[i][2]).append('<a href="javascript:void(0);"><div id="tbDiv' + i + '" class="tbDiv" role="status" onmousedown="inputMake(' + i + ')" ><span hidden="hidden">'+i+'</span></div></a>');
+    }
+  }
+
+  let divCard = '';
+  let tbDiv0 = null;
+
+  $('.tbDiv').hover(function (e){
+
+  let aIdNumber = $(this).html().toString().substring($(this).html().toString().indexOf('>')+1, $(this).html().toString().indexOf('<',3));
+
+    if(tbDiv0 != this){
+    $('#divCard').click();
+    divCard= '';
+    }
+
+    $(".spinner-border").css({"width" : "20px"});
+    $(".spinner-border").css({"height" : "20px"});
+    $(".spinner-border").css({"background-color" : "#0d6efd"});
+    $(".spinner-border").removeClass("spinner-border text-primary");
+
+    $(this).addClass("spinner-border text-primary");
+    $(this).css({"display" : "block"});
+    $(this).css({"background-color" : "white"});
+    $(this).css({"width" : "10px"});
+    $(this).css({"height" : "10px"});
+
+    let aa = Math.round($('.section').offset().left);
+    let bb = Math.round($(this).offset().left);
+    let cc = Math.round($(this).offset().top);
+    let dd = Math.round(e.screenY);
+
+
+    if(tbDiv0 != this){
+    if((bb-aa) >= 420){
+
+      if(divCard == ''){
+        divCard += '<div class="alert alert-light border-light alert-dismissible fade show divCard1" style="left: '+ (aa + (bb-aa -435)) +'px; top: '+ (cc-67) +'px;" role="alert">\n' +
+                '      <img src="'+ aIdList[aIdNumber][6] +'" style="width: 300px; height: 180px;">' +
+                '      <hr>\n' +
+                '      <p class="mb-0">'+ aIdList[aIdNumber][5]+'</p>\n' +
+                '      <button id="divCard" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onmousedown="divCardClose()"></button>\n' +
+                '    </div>';
+        $('#main').append(divCard);
+      }
+    }else{
+
+      if(divCard == '') {
+        if (dd <= 500) {
+          divCard += '<div class="alert alert-light border-light alert-dismissible fade show divCard1" style="left: ' + (bb + 15) + 'px; top: ' + (cc) + 'px;" role="alert">\n' +
+                  '      <img src="'+ aIdList[aIdNumber][6] +'" style="width: 300px; height: 180px;">' +
+                  '      <hr>\n' +
+                  '      <p class="mb-0">'+ aIdList[aIdNumber][5]+'</p>\n' +
+                  '      <button id="divCard" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onmousedown="divCardClose()"></button>\n' +
+                  '    </div>';
+          $('#main').append(divCard);
+        } else {
+          divCard += '<div class="alert alert-light border-light alert-dismissible fade show divCard1" style="left: ' + (bb + 15) + 'px; top: ' + (cc - 345) + 'px;" role="alert">\n' +
+                  '      <img src="'+ aIdList[aIdNumber][6] +'" style="width: 300px; height: 180px;">' +
+                  '      <hr>\n' +
+                  '      <p class="mb-0">'+ aIdList[aIdNumber][5]+'</p>\n' +
+                  '      <button id="divCard" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onmousedown="divCardClose()"></button>\n' +
+                  '    </div>';
+          $('#main').append(divCard);
+        }
+      }
+    }
+    }
+
+    tbDiv0 = this;
+
+  }
+  //   ,function(){
+  //   $(this).removeClass("spinner-grow text-primary");
+  //
+  // }
+  );
+
+
+  // 예외처리(초기화)
+  $('.table-secondary').on({
+    'click': function (e) {
+
+      tbDiv0 = null;
+      $('#divCard').click();
+      divCard= '';
+      $(".spinner-border").css({"width" : "20px"});
+      $(".spinner-border").css({"height" : "20px"});
+      $(".spinner-border").css({"background-color" : "#0d6efd"});
+      $(".spinner-border").removeClass("spinner-border text-primary");
+      $('.aInput').remove();
+      for (let i = 0; i < aIdList.length; i++) {
+
+        if (aIdList[i][4] == 0) { // 풀림
+
+        } else {   // 안풀림
+          if ($('#tbDiv' + i).length <= 0) {
+            $('#tb' + i).append('<a href="javascript:void(0);"><div id="tbDiv' + i + '" class="tbDiv" style="margin-left:27px;" role="status" onmousedown="inputMake(' + i + ')">&nbsp;</div></a>');
+          }
+        }
+      }
+    }
+  });
+  $(document).keydown(function (e) {
+    if (e.keyCode == 27 || e.which == 27) {
+      tbDiv0 = null;
+      $('#divCard').click();
+      divCard= '';
+      $('.aInput').remove();
+      for (let i = 0; i < aIdList.length; i++) {
+
+        if (aIdList[i][4] == 0) { // 풀림
+
+        } else {   // 안풀림
+
+          if ($('#tbDiv' + i).length <= 0) {
+            $('#tb' + i).append('<a href="javascript:void(0);"><div id="tbDiv' + i + '" class="tbDiv" style="margin-left:27px;" role="status" onmousedown="inputMake(' + i + ')">&nbsp;</div></a>');
+          }
+        }
+      }
+    }
+  });
+
+  // 십자 말풀이 만들기 -> 결과값 : inputListBig
+  function tenQuizMake(list) {
+    // 만들기 완료
+    let num0 = 1;
+    let listBool = true;
+    while (listBool) {
+
+      // 모두 쓰이면 종료
+      listBool = false;
+      for (let i = 0; i < aList.length; i++) {
+        if (aList[i][0] == 1) {
+          listBool = true;
+          num0 = i;
+        }
+      }
+      if (!listBool) {
+        break;
+      }
+      let inputList = [];
+
+      for (let i = 0; i < 100; i++) {
+        inputList.push(input0);
+      }
+
+      inputList[50] = inputList[50].substring(0, (50 - Math.floor(aList[num0][1].length / 2))) + aList[num0][1] + inputList[50].substring((50 + Math.ceil(aList[num0][1].length / 2)), 100);
+      aList[num0][0] = 0;
+      // 맨앞, 맨뒤 위치 넣기 (추후에 단어 묶음 위해) inputPage, x1 , x2, y1, y2
+      aPosList.push([inputListBig.length, (50 - Math.floor(aList[num0][1].length / 2)), (50 + Math.ceil(aList[num0][1].length / 2) - 1), 50, 50]);
+      let aListCount = 0;
+      for (let i = 0; i < aList.length; i++) {
+
+        if (aList[i][0] == 0) {
+          continue;
+        }
+
+        if (aListCount > 7) {
+          aListCount = 0;
+          break;
+        }
+
+        for (let j = 0; j < inputList.length; j++) {  // y 좌표계
+
+          for (let k = 0; k < aList[i][1].length; k++) {   // 단어 알파벳
+
+            if (inputList[j].indexOf(aList[i][1].charAt(k)) != -1) {  // 알파벳이 포함될 때
+
+              for (let f = 0; f < 100; f++) {    // x 좌표계
+
+                if (inputList[j].charAt(f) == aList[i][1].charAt(k)) {
+
+                  if (inputList[j].charAt(f - 1) != 0 || inputList[j].charAt(f + 1) != 0) { // 가로일 때
+
+                    if (j - 1 < 0 ? false : inputList[j - 1].charAt(f) != 0 || j + 1 >= inputList.length ? false : inputList[j + 1].charAt(f) != 0) {
+                      // 정한 위치가 십자모양일 때
+                      continue;
+                    } else {
+                      if ((j - 1 < 0 ? false : inputList[j - 1].charAt(f - 1) != 0) || (j - 1 < 0 ? false : inputList[j - 1].charAt(f + 1) != 0) || (j + 1 >= inputList.length ? false : inputList[j + 1].charAt(f - 1) != 0) || (j + 1 >= inputList.length ? false : inputList[j + 1].charAt(f + 1) != 0)) {
+                        // 다른 블럭과 붙어있을 때
+                        continue;
+                      }
+
+
+                      // 가능한 위치
+                      // 넣기전에 확인, 맨 끝 두 곳에서 추가 연결이 되어있는지
+                      let indexBe = k - 0;
+                      let indexAf = aList[i][1].length - k;
+                      if (j - indexBe - 1 < 0 ? false : inputList[j - indexBe - 1].charAt(f) != 0 || j + indexAf >= inputList.length + 1 ? false : inputList[j + indexAf - 1].charAt(f) != 0) {
+                        // 추가연결이 되어있을 때
+                        continue;
+                      } else {
+
+                        // 추가 위치
+                        // 추가 위치에 길에 영어 끼어있을 때, 같은 영어로 연결 되는지 확인
+                        let num01 = 0;
+                        let passBool = true;
+                        for (let e = j - indexBe; e < j + indexAf;) {
+                          let aListChar = aList[i][1].charAt(num01);
+
+                          if (inputList[e].charAt(f) != aListChar && inputList[e].charAt(f) != 0) {
+                            // 길목에 영어가 끼어 있는데 다를 때
+                            passBool = false;
+                          } else {
+                          }
+                          if (inputList[e].charAt(f) == 0 && (inputList[e].charAt(f - 1) != 0 || inputList[e].charAt(f + 1) != 0)) {
+                            // 길목에 영어가 안끼어 있는데 좌우에 단어가 있을 때
+                            passBool = false;
+                          } else {
+                          }
+
+                          num01++;
+                          e++;
+                          if (num01 >= aList[i][1].length) {
+                            break;
+                          }
+                        }
+
+                        if (!passBool) {
+                          break;
+                        }
+
+                        let num00 = 0;
+                        // 맨앞, 맨뒤 위치 넣기 (추후에 단어 묶음 위해) inputPage, x1 , x2, y1, y2
+                        aPosList.push([inputListBig.length, f, f, (j - indexBe), (j + indexAf - 1)]);
+                        for (let e = j - indexBe; e < j + indexAf;) {
+
+                          let aListChar = aList[i][1].charAt(num00);
+                          inputList[e] = inputList[e].substring(0, f) + aListChar + inputList[e].substring(f + 1, inputList[e].length);
+
+                          num00++;
+                          e++;
+                          if (num00 >= aList[i][1].length) {
+                            break;
+                          }
+                        }
+                        // 넣기 완료. 추가사항(다음 단어로, )
+                        k = aList[i][1].length + 1;
+                        j = inputList.length + 1;
+                        aList[i][0] = 0;
+                        aListCount++;
+                        break;
+                      }
+                    }
+                  } else {  // 세로일 때
+
+
+                    if (f - 1 < 0 ? false : inputList[j].charAt(f - 1) != 0 || f + 1 > 100 ? false : inputList[j].charAt(f + 1) != 0) {
+                      // 정한 위치가 십자모양일 때
+                      continue;
+                    } else {
+                      if ((f - 1 < 0 ? false : inputList[j - 1].charAt(f - 1) != 0) || (f - 1 < 0 ? false : inputList[j + 1].charAt(f - 1) != 0) || (f + 1 > 100 ? false : inputList[j - 1].charAt(f + 1) != 0) || (f + 1 > 100 ? false : inputList[j + 1].charAt(f + 1) != 0)) {
+                        // 다른 블럭과 붙어있을 때
+                        continue;
+                      }
+
+
+                      // 가능한 위치
+                      // 넣기전에 확인, 맨 끝 두 곳에서 추가 연결이 되어있는지
+                      let indexBe = k - 0;
+                      let indexAf = aList[i][1].length - k;
+                      if (f - indexBe - 1 < 0 ? false : inputList[j].charAt(f - indexBe - 1) != 0 || f + indexAf > 100 ? false : inputList[j].charAt(f + indexAf - 1) != 0) {
+                        // 추가연결이 되어있을 때
+                        continue;
+                      } else {
+
+                        // 추가 위치
+                        // 추가 위치에 길에 영어 끼어있을 때, 같은 영어로 연결 되는지 확인
+                        let num01 = 0;
+                        let passBool = true;
+                        for (let e = f - indexBe; e < f + indexAf;) {
+                          let aListChar = aList[i][1].charAt(num01);
+
+                          if (inputList[j].charAt(e) != aListChar && inputList[j].charAt(e) != 0) {
+                            // 길목에 영어가 끼어 있는데 다를 때
+                            passBool = false;
+                          } else {
+                          }
+
+                          if (inputList[j].charAt(e) == 0 && (inputList[j - 1].charAt(e) != 0 || inputList[j + 1].charAt(e) != 0)) {
+                            // 길목에 영어가 안끼어 있는데 위아래에 단어가 있을 때
+                            passBool = false;
+                          } else {
+                          }
+
+
+                          num01++;
+                          e++;
+                          if (num01 >= aList[i][1].length) {
+                            break;
+                          }
+                        }
+
+                        if (!passBool) {
+                          break;
+                        }
+
+                        // 맨앞, 맨뒤 위치 넣기 (추후에 단어 묶음 위해) inputPage, x1 , x2, y1, y2
+                        aPosList.push([inputListBig.length, (f - indexBe), (f + indexAf - 1), j, j]);
+
+                        // 가로 줄에 값 넣기
+                        inputList[j] = inputList[j].substring(0, f - indexBe) + aList[i][1] + inputList[j].substring(f + indexAf, inputList[j].length);
+
+                        // 넣기 완료. 추가사항(다음 단어로, )
+                        k = aList[i][1].length + 1;
+                        j = inputList.length + 1;
+                        aList[i][0] = 0;
+                        aListCount++;
+                        break;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      // 가능한 단어 모두 넣기 완료
+      inputListBig.push(inputList);
+    }
+  }
+
+  // 십자 말풀이 떼어내기 -> 결과값 : inputListBig2
+  function tableMake(list) {
+
+    let xPosB = 0;
+    let yPosB = 0;
+    let xPosS = 100;
+    let yPosS = 100;
+    let totHeight = 0;
+    let inputList = [];
+    for (let i = 0; i < list.length; i++) {
+      for (let j = 0; j < list[i].length; j++) {
+        for (let k = 0; k < list[i][j].length; k++) {
+          if (list[i][j].charAt(k) != 0) {
+
+            if (yPosS >= j) {
+              yPosS = j;
+            }
+            if (xPosS >= k) {
+              xPosS = k;
+            }
+            if (yPosB <= j) {
+              yPosB = j;
+            }
+            if (xPosB <= k) {
+              xPosB = k;
+            }
+          }
+
+        }
+      }
+
+      for (let e = yPosS - 1; e < yPosB + 2; e++) {
+        inputList.push(list[i][e].substring(xPosS - 1, xPosB + 2));
+      }
+
+      for (let w = 0; w < aPosList.length; w++) {
+        if (aPosList[w][0] == i) {
+          aPosList[w][1] = aPosList[w][1] - xPosS + 1;
+          aPosList[w][2] = aPosList[w][2] - xPosS + 1;
+          aPosList[w][3] = aPosList[w][3] - yPosS + 1 + totHeight;
+          aPosList[w][4] = aPosList[w][4] - yPosS + 1 + totHeight;
+
+
+
+
+        }
+      }
+      totHeight += (yPosB - yPosS) + 3;
+
+      xPosB = 0;
+      yPosB = 0;
+      xPosS = 100;
+      yPosS = 100;
+
+    }
+    inputListBig2.push(inputList);
+  }
+
+  // 십자 말풀이 정답 입력칸 만들기
+  function inputMake(num) {
+
+    for (let i = 0; i < aIdList.length; i++) {
+
+      if (aIdList[i][4] == 0) { // 풀림
+
+      } else {   // 안풀림
+
+        if ($('#tbDiv' + i).length <= 0) {
+          $('#tb' + aIdList[i][2]).append('<a href="javascript:void(0);"><div id="tbDiv' + i + '" class="tbDiv" style="margin-left:27px;" role="status" onmousedown="inputMake(' + i + ')">&nbsp;</div></a>');
+        }
+      }
+    }
+
+    let alpLen = aIdList[num][3];
+    let tbNum = aIdList[num][2];
+
+    $('.aInput').remove();
+
+    let inputCount = 0;
+    let ansList = [];
+    if (aIdList[num][1] == 1) {   // 세로일 때
+      for (let i = tbNum; i < tbNum + (width * (alpLen - 1)) + 1; i = i + width) {
+        ansList.push($('#ans' + i).html());
+
+        if ($('#rst' + i).length > 0) {    // 길목에 정답이 존재할 때
+          $('#tb' + i).append('<input id="inputt' + inputCount + '" type="text" hidden="hidden" class="aInput" maxlength="1" value="'+ $('#rst' + i).text() +'">');
+        } else {  // 정상 작동
+          $('#tb' + i).append('<input id="input' + inputCount + '" type="text" class="aInput" maxlength="1" >');
+        }
+
+        inputCount++;
+      }
+    } else {  // 가로일 때
+      for (let i = tbNum; i < tbNum + (alpLen); i++) {
+        ansList.push($('#ans' + i).html());
+
+        if ($('#rst' + i).length > 0) {    // 길목에 정답이 존재할 때
+          $('#tb' + i).append('<input id="inputt' + inputCount + '" type="text" hidden="hidden" class="aInput" maxlength="1" value="'+ $('#rst' + i).text() +'">');
+        } else {  // 정상 작동
+          $('#tb' + i).append('<input id="input' + inputCount + '" type="text" class="aInput" maxlength="1" >');
+        }
+
+        inputCount++;
+      }
+    }
+    console.log(ansList.toString().replaceAll(",",""));
+
+    if($('#input0').length <= 0){
+
+
+      if($('#input1').length <= 0){
+        let setInt =setInterval(function (){$('#input2').focus(); clearInterval(setInt);},50);
+          if($('#input2').length <= 0){
+              let setInt =setInterval(function (){$('#input3').focus(); clearInterval(setInt);},50);
+          }
+      }else {
+          let setInt =setInterval(function (){$('#input1').focus(); clearInterval(setInt);},50);
+      }
+    }else{
+      let setInt =setInterval(function (){$('#input0').focus(); clearInterval(setInt);},50);
+    }
+
+
+    for (let i = 0; i <= inputCount; i++) {
+      $('#input' + i).on({
+        'keyup': function (e) {
+          if (/[a-zA-Z]/g.test(e.key) && e.key.length == 1) {
+
+            if($('#input' + (i+1)).length <= 0 && i != aIdList[num][3]-1){
+              $('#input' + (i)).val(e.key);
+              i++;
+            }
+            $('#input' + (i)).val(e.key);
+            $('#input' + (i + 1)).focus();
+
+
+            let sum = 0;
+            for (let j = 0; j < $('.aInput').length; j++) {
+              if ($('.aInput').get(j).value == '') {
+                sum++;
+              }
+            }
+
+            if (sum == 0) {     // 모든 칸 입력
+
+              let length = $('.aInput').length;
+              let dd = [];
+
+              $('#tb').css({ 'border': '#0d6efd solid 1.2px' });
+              for (let k = 0; k < length; k++) {
+                dd.push($('.aInput').get(k).value);
+              }
+
+              let eCount = 0;
+
+              if(aIdList[num][1]==1){     // 세로일 때
+                for (let e = tbNum; e < tbNum + (width * (alpLen - 1)) + 1; e = e + width) {
+                  if (ansList.toString().replaceAll(',', '') == dd.toString().replaceAll(',', '')) {
+                    // 정답 맞춤
+                    tbDiv0 = null;
+                    $('#divCard').click();
+                    divCard= '';
+                    $('#tbDiv' + num).remove();
+                    $('.aInput').remove();
+                    if($('#rst' + e).length > 0){   // 값이 이미 있으면
+
+                    }else{  // 없으면, 정상 작동
+                      $('#tb' + e).append('<span id="rst' + e + '">' + dd[eCount] + '</span>');
+                    }
+                    $('#tb' + e).css({ 'border': '#0d6efd solid 1.5px' });
+                    aIdList[num][4] = 0;
+                    eCount++;
+                  }
+                }
+              }else{      // 가로일 때
+                for (let e = tbNum; e < tbNum + (alpLen); e++) {
+                  if (ansList.toString().replaceAll(',', '') == dd.toString().replaceAll(',', '')) {
+                    // 정답 맞춤
+                    tbDiv0 = null;
+                    $('#divCard').click();
+                    divCard= '';
+                    $('#tbDiv' + num).remove();
+                    $('.aInput').remove();
+                    if($('#rst' + e).length > 0){   // 값이 이미 있으면
+
+                    }else{  // 없으면, 정상 작동
+                      $('#tb' + e).append('<span id="rst' + e + '">' + dd[eCount] + '</span>');
+                    }
+
+                    $('#tb' + e).css({ 'border': '#0d6efd solid 1.5px' });
+                    aIdList[num][4] = 0;
+                    eCount++;
+                  }
+                }
+              }
+
+            }
+
+
+
+          }
+
+
+        }
+      });
+    }
+    for (let i = 0; i < inputCount; i++) {
+      $('#input' + i).on({
+        'keyup': function (e) {
+
+          if (e.keyCode === 8) {
+
+            if($('#input' + (i-1)).length <= 0 && i != 0){
+              $('#input' + i).val('');
+              i--;
+            }else{
+              $('#input' + i).val('');
+            }
+            $('#input' + (i - 1)).focus();
+
+            let sum = 0;
+            for (let i = 0; i < $('.aInput').length; i++) {
+              if ($('.aInput').get(i).value == '') {
+                sum++;
+              }
+            }
+            if (sum != 0) {
+              $('#tb').css({ 'border': 'solid 1px' });
+            }
+
+          }
+        }
+      });
+    }
+
+  }
+
+  function divCardClose(){
+    divCard = '';
+  }
+
+
+</script>
+
+</body>
+
+</html>

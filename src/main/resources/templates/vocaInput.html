@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
   <meta charset="utf-8">
@@ -36,9 +36,59 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+  <style>
+    .page-loader {
+      position: fixed;
+      background: #ffffff;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      top: 0;
+      z-index: 9998;
+    }
+
+    .loader {
+      position: absolute;
+      border-left: 2px solid #ffffff;
+      border-top: 2px solid rgba(255, 255, 255, 0.2);
+      border-right: 2px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+      height: 46px;
+      width: 46px;
+      left: 50%;
+      top: 50%;
+      margin: -23px 0 0 -23px;
+      text-indent: -9999em;
+      font-size: 10px;
+      z-index: 9999;
+      -webkit-animation: load 0.8s infinite linear;
+      -moz-animation: load 0.8s infinite linear;
+      ms-animation: load 0.8s infinite linear;
+      o-animation: load 0.8s infinite linear;
+      animation: load 0.8s infinite linear;
+    }
+
+    .searchTitle{
+      position: fixed;
+      width: 100%;
+      z-index: 10000;
+      background-color: #f6f9ff;
+      box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
+      border-radius: 5px;
+      top:0px;
+      left: 0px;
+      height: 30%;
+      padding: 10px;
+    }
+
+  </style>
+
 </head>
 
 <body>
+
+
 
 <header data-th-include="./personalHeader.html"></header>
 <!-- ======= Header ======= -->
@@ -125,12 +175,14 @@
     </div>
   </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<!--  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>-->
 
 
 <script src="https://code.jquery.com/jquery-3.6.1.js"
         integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
         crossorigin="anonymous"></script>
+
+
   <script>
 
     function vocaAdd(){
@@ -150,32 +202,182 @@
       }
       insertHtmlFun(document.getElementById("newVoca") , input);
 
-
-
-
     }
+
+    let sbBool = -1;
+    let len = 0;
 
     function vocaSubmit(){
       let input = "";
       let length = $('.spel').length;
 
-      for(let i = 0; i < length; i++){
+      for(let i = length-1 ; i > -1 ; i--){
         if($('#spel'+(i+1)).val() != null && $('#spel'+(i+1)).val() != "" && $('#hw'+(i+1)).val() != null && $('#hw'+(i+1)).val() != ""){
           input += $('#spel'+(i+1)).val() + "/" + $('#hw'+(i+1)).val() +"_";
+          len++;
         }
+      }
+
+      if(len == 0){
+        return;
       }
 
       if($('#tbName').val()== null || $('#tbName').val() == ""){
 
         $('#tbName').val(new Date().toLocaleString());
       }
+
+      // 확인 후 제거
+      len = 40;
+
+      sbBool = 1;
       location.href = "vocaSubmit?tbName="+ $('#tbName').val() +"&input="+input;
-
-
-
-
-
+      // location.href = "vocaSubmit?tbName=Day12&input=adversity/역경,  불운_promising/유망한,  전망이 좋은_impede/저해하다,  방해하다_dwindle/줄어들다,  감소되다_depression/불황_prosperity/번영_wane/감소,  쇠퇴_implication/영향,  밀접한 관계_thrive/번영하다,  성공하다_economical/경제적인,  절약되는_fairly/상당히,  꽤_consequence/결과_substitute/대용품;  대신하다_director/임원,  책임자_boom/붐,  호황_likely/~할 것 같은_industry/산업_indicator/지표,  지수_period/기간,  시기_fall/(값,  가치가) 하락하다_lead/이끌다,  지휘하다;  (어떤 결과에) 이르다_prospect/전망,  예상_evidence/증거_evenly/고르게,  균등하게_drastic/과감한;  급격한_particular/특정한_costly/비용이 많이 드는,  손실이 큰_limited/제한된,  한정된_remain/계속 ~한 상태이다;  아직 ~해야 하다_pleased/만족해하는,  기쁜_potential/잠재적인;  가능성_analyst/분석가_boost/(경기를) 부양시키다,  상승시키다_assert/단언하다,  주장하다_soar/(물가 등이) 폭등하다,  높이 치솟다_rapidly/급속히,  빨리_unstable/불안정한,  변하기 쉬운_brisk/활발한,  호황의_dramatically/극적으로_stagnant/침체된,  불경기의_";
     }
+
+    let dirNum = 0;
+    let countSet = new Set();
+
+    setInterval(()=> {
+      if(sbBool >= 0){
+
+        if(sbBool >= 1 && sbBool <= 3){
+
+
+        if(sbBool ==3){
+          $.ajax({
+            type : "POST",
+            url : "dirNumCheck",
+            data : {
+            },
+            dataType : "text" ,
+            success : function(num){
+              dirNum = Number(num);
+            },
+            error : function(){
+              alert("테이블 번호 확인 통신 실패!");
+            }
+          });
+
+          let searchBody = '<main id="main" class="main"  style="margin-top: 0px; margin-left: 0px; " >\n' +
+                  '\n <div class="searchTitle">' +
+                  '    <div class="pagetitle">\n' +
+                  '        <h1>Saving.. &nbsp;'+ $('#tbName').val() +'</h1>\n' +
+                  '\n' +
+                  '    </div><!-- End Page Title -->\n' +
+                  '\n' +
+                  '    <div class="pagetitle" style="text-align: center;">\n' +
+                  '        <h1> &nbsp; </h1>\n' +
+                  '        <h1>\n' +
+                  '            Searching&nbsp;&nbsp;\n' +
+                  '            <div class="spinner-border" role="status">\n' +
+                  '                <span class="visually-hidden">Loading...</span>\n' +
+                  '            </div><!-- End Border spinner -->\n' +
+                  '        </h1>\n' +
+                  '        <h1> &nbsp; </h1>\n' +
+                  '\n' +
+                  '        <h1 id="countNum"> 0/'+ len +' </h1>\n' +
+                  '\n' +
+                  '        <h1> &nbsp; </h1>\n' +
+                  '\n' +
+                  '        <h1> &nbsp; </h1>\n' +
+                  '    </div></div><!-- End Page Title -->\n' +
+                  '\n' +
+                  '    <section class="section" style=" position: absolute; top: 33%; left: 1%; width: 98%;">\n' +
+                  '        <div class="row align-items-top">\n' +
+                  '\n' +
+                  '\n' +
+                  '            <div class="col-lg-6" id="voca1">\n' +
+                  '            </div>\n' +
+                  '\n' +
+                  '\n' +
+                  '            <div class="col-lg-6" id="voca2">\n' +
+                  '            </div>\n' +
+                  '\n' +
+                  '        </div>\n' +
+                  '    </section>\n' +
+                  '\n' +
+                  '</main><!-- End #main -->';
+
+          $('main').remove();
+          $('footer').remove();
+          $('header').remove();
+          $('.alpha').remove();
+          insertHtmlFun(document.getElementsByTagName("body").item(0) , searchBody);
+
+        }
+          sbBool++;
+
+        }else if(sbBool >= 4 && sbBool <= 6){
+          sbBool++;
+        }else{
+
+          $.ajax({
+            type : "POST",
+            url : "searching",
+            data : {
+              "dirNum" : dirNum
+            },
+            dataType : "json" ,
+            success : function(data){
+              if(data == null){
+                return;
+              }else{
+
+                for(let i = 0 ; i < data.length ; i++){
+
+                  let searchCard = '<div class="alert alert-secondary alert-dismissible fade show" role="alert" style="padding: 0px; margin: 0px; border: 0px; " id="card'+ data[i].voImgLv +'">\n' +
+                          '                    <div class="card mb-3" style="padding: 20px;">\n' +
+                          '                        <div class="row g-0">\n' +
+                          '                            <div class="col-md-4" style="height: 200px;">\n' +
+                          '                                <img src="'+ data[i].voImg +'" class="img-fluid rounded-start" alt="..." style="height: 200px;">\n' +
+                          '                            </div>\n' +
+                          '                            <div class="col-md-8">\n' +
+                          '                                <div class="card-body">\n' +
+                          '                                    <h5 class="card-title">'+ data[i].voImgLv +'. '+ data[i].voSp +'</h5>\n' +
+                          '                                    <p class="card-text">'+ data[i].voHw +'</p>\n' +
+                          '                                </div>\n' +
+                          '                            </div>\n' +
+                          '                        </div>\n' +
+                          '                    </div><!-- End Card with an image on left -->\n' +
+                          '                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" hidden="hidden"></button>\n' +
+                          '                <span id="voCount'+ data[i].voImgLv +'" hidden="hidden">'+ data[i].voImgLv +'</span>\n' +
+                          '                <span id="voNum'+ data[i].voImgLv +'" hidden="hidden">'+ data[i].voNum +'</span>' +
+                          '                </div>\n';
+
+
+                  if(data[i].voImgLv % 2 == 1){
+                    if(countSet.has(data[i].voNum)){
+
+                    }else{
+                      insertHtmlFun(document.getElementById("voca1") , searchCard);
+                      countSet.add(data[i].voNum);
+                      break;
+                    }
+                  }else{
+                    if(countSet.has(data[i].voNum)){
+
+                    }else{
+                      insertHtmlFun(document.getElementById("voca2") , searchCard);
+                      countSet.add(data[i].voNum);
+                      break;
+                    }
+                  }
+                }
+                $('#countNum').html(" "+ data[data.length-1].voImgLv +"/"+ len +" ");
+
+              }
+            },
+            error : function(){
+              alert("단어 서칭 통신 실패!");
+            }
+          });
+
+
+        }
+      }
+    },1000);
+
 
     function insertHtmlFun(nodeTemp, htmlTemp) {
       // removeAllChild(nodeTemp);

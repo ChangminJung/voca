@@ -81,9 +81,51 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">[[${voca.get(0).voTbName}]]</h5>
-              <button type="button" th:onclick="location.href='vocaCard?dirNum=[[${voca.get(0).voDirNum}]]'" class="btn btn-success" style="float: left;">그림카드</button>
-              <button type="button" class="btn btn-success" style="float: right;">수정하기</button>
+              <h5 class="card-title">[[${voca.get(0).voTbName}]]
+                <button id="cardBtn" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal2" style="margin-left: 10px; float: revert;">
+                  그림카드
+                </button>
+                <div class="modal fade" id="basicModal2" tabindex="-1">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">범위를 선택하세요.</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-footer">
+                        <button style="float: left;" type="button" class="btn btn-primary" onclick="vocaCard(0)">모든 단어</button>
+                        <button style="float: left;" type="button" class="btn btn-primary" onclick="vocaCard(1)">외운 단어 제외</button>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- End Basic Modal-->
+
+                <button id="tenBtn" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal3" style="margin-left: 10px; float: revert; background-color: #fd7e14; border-color: #fd7e14;">
+                  십자 말풀이
+                </button>
+                <div class="modal fade" id="basicModal3" tabindex="-1">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">범위를 선택하세요.</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-footer">
+                        <button style="float: left;" type="button" class="btn btn-primary" onclick="vocaTenQuiz(0)">모든 단어</button>
+                        <button style="float: left;" type="button" class="btn btn-primary" onclick="vocaTenQuiz(1)">외운 단어 제외</button>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- End Basic Modal-->
+
+              <button type="button" id="modBtn" th:onclick="location.href='vocaModiForm?dirNum=[[${voca.get(0).voDirNum}]]'" class="btn btn-primary" style="float: right;">수정하기</button>
+              </h5>
+              <h1 id="checkH" class="card-title" style="margin: 2px; padding: 2px;">
+                <button type="button" onclick="remCheck()" class="btn btn-outline-primary btn-sm btnTog" style="float: revert;" data-bs-toggle="tooltip" data-bs-placement="top" title="체크 시 단어가 제외 됩니다.">외운 단어 체크</button>
+                <button type="button" id="delBtn" onclick="delCheck()" class="btn btn-outline-danger btn-sm btnTog" style="float: revert; margin-left: 10px;" data-bs-toggle="tooltip" data-bs-placement="top" title="외운 단어를 제거합니다." >외운 단어 제거</button>
+                <button type="button" id="addBtn" onclick="addCheck()" class="btn btn-outline-warning btn-sm" style="float: revert; margin-left: 10px; display: none;">모든 단어 표시</button>
+
+              </h1>
               <!-- Default Table -->
               <table class="table table-hover">
                 <thead>
@@ -93,18 +135,38 @@
                     <th scope="col">한글 뜻 <button type="button" onclick="hwHide()" style="margin-left: 10px;" data-bs-toggle="tooltip" data-bs-placement="top" title="빈 곳 클릭 시 뜻을 볼 수 있습니다." class="btn btn-warning btn-sm btnTog">뜻 가리기</button></th>
                   </tr>
                 </thead>
-                <tbody>
-                <tr th:each="voca : ${voca}" >
-                  <th scope="row">[[${vocaStat.count}]]</th>
+                <tbody id="tbBody">
+                <tr th:each="voca : ${voca}">
+                  <th th:id="voCount+${vocaStat.count}" scope="row">[[${vocaStat.count}]]</th>
                   <td>[[${voca.voSp}]]</td>
                   <td class="hw0" >[[${voca.voHw}]]</td>
+                  <td hidden="hidden" th:id="voNum+${vocaStat.count}">[[${voca.voNum}]]</td>
                 </tr>
 
                 </tbody>
 
               </table>
               <!-- End Default Table Example -->
-              <button th:onclick="location.href='vocaTest?dirNum=[[${voca.get(0).voDirNum}]]&level=1'" type="button" class="btn btn-primary">시험보기</button>
+              <div id="lastBtn">
+                <button id="testBtn" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal" >
+                  시험보기
+                </button>
+                <div class="modal fade" id="basicModal" tabindex="-1">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">시험 범위를 선택하세요.</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-footer" >
+                        <button style="float: left;" type="button" class="btn btn-primary" onclick="vocaTest(0)">모든 단어</button>
+                        <button style="float: left;" type="button" class="btn btn-primary" onclick="vocaTest(1)">외운 단어 제외</button>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- End Basic Modal-->
+
+              </div>
             </div>
           </div>
 
@@ -132,13 +194,6 @@
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-
-
-<script src="https://code.jquery.com/jquery-3.6.1.js"
-        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
-        crossorigin="anonymous"></script>
-
-
   <!-- Vendor JS Files -->
   <script src="/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -152,10 +207,16 @@
   <!-- Template Main JS File -->
   <script src="/js/main.js"></script>
 
-<script>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+
+  <script th:inline="javascript">
 
   let hwBool= false;
+  let dirNum = [[${voca.get(0).voDirNum}]];
+  let vocaTot = [[${voca}]];
+  let vocaCheck = [[${vocaCheck}]];
 
+  console.log(vocaCheck);
 
   function hwHide(){
     if(hwBool){
@@ -174,7 +235,144 @@
     }
   }
 
+  let checkBool = false;
 
+  function remCheck(){
+
+    if(checkBool == true){
+      checkBool = false;
+      $('#cardBtn').css({'visibility' : 'visible'});
+      $('#tenBtn').css({'visibility' : 'visible'});
+      $('#modBtn').css({'visibility' : 'visible'});
+      $('#testBtn').css({'display' : 'initial'});
+      $('#delBtn').css({'display' : 'initial'});
+      $('.checkBtn').remove();
+      $('.checkBox').remove();
+      return;
+    }
+
+    let tbInput = '';
+
+    for(let i = 0; i < vocaTot.length; i++){
+      tbInput += '<tr>\n' +
+              '      <th id="voCount'+ (i+1)+'" scope="row">'+ (i+1) +'</th>\n' +
+              '      <td>'+ vocaTot[i].voSp +'</td>\n' +
+              '      <td class="hw0">'+ vocaTot[i].voHw +'</td>\n' +
+              '      <td hidden="hidden" id="voNum'+ (i+1)+'">'+ vocaTot[i].voNum +'</td>\n' +
+              '    </tr>';
+    }
+    $('#tbBody').html(tbInput);
+
+    checkBool = true;
+    $('#cardBtn').css({'visibility' : 'hidden'});
+    $('#tenBtn').css({'visibility' : 'hidden'});
+    $('#modBtn').css({'visibility' : 'hidden'});
+    $('#testBtn').css({'display' : 'none'});
+    $('#delBtn').css({'display' : 'none'});
+    $('#addBtn').css({'display' : 'none'});
+
+    $('#checkH').append('<button type="button" onclick="checkSave()" class="btn btn-outline-success btn-sm checkBtn" style="margin-left: 10px; float: revert;" >저장하기</button>')
+    $('#lastBtn').append('<button type="button" onclick="checkSave()" class="btn btn-outline-success btn-sm checkBtn" style="margin-left: 10px; float: revert;" >저장하기</button>')
+    for(let i = 0; i < vocaTot.length; i++){
+      if(vocaTot[i].voCheck == 0){
+        $('#voCount'+(i+1)).append('<input class="form-check-input checkBox" type="checkbox" name="ckList" id="voCheck'+ (i+1) +'" style="width: 30px; height: 30px; margin: 0px; margin-left: 15px;">');
+      }else{
+        $('#voCount'+(i+1)).append('<input class="form-check-input checkBox" type="checkbox" name="ckList" id="voCheck'+ (i+1) +'" checked="checked" style="width: 30px; height: 30px; margin: 0px; margin-left: 15px;">');
+      }
+    }
+
+    // <input class="form-check-input" type="checkbox" id="gridCheck2" checked="">
+  }
+
+  function delCheck(){
+
+    $('#addBtn').css({'display' : 'initial'});
+    $('#delBtn').css({'display' : 'none'});
+    $('.tooltip').remove();
+
+    let tbInput = '';
+
+    for(let i = 0; i < vocaCheck.length; i++){
+      tbInput += '<tr>\n' +
+              '      <th id="voCount'+ (i+1)+'" scope="row">'+ (i+1) +'</th>\n' +
+              '      <td>'+ vocaCheck[i].voSp +'</td>\n' +
+              '      <td class="hw0">'+ vocaCheck[i].voHw +'</td>\n' +
+              '      <td hidden="hidden" id="voNum'+ (i+1)+'">'+ vocaCheck[i].voNum +'</td>\n' +
+              '    </tr>';
+    }
+    $('#tbBody').html(tbInput);
+  }
+
+  function addCheck(){
+
+    $('#addBtn').css({'display' : 'none'});
+    $('#delBtn').css({'display' : 'initial'});
+    $('.tooltip').remove();
+
+    let tbInput = '';
+
+    for(let i = 0; i < vocaTot.length; i++){
+      tbInput += '<tr>\n' +
+              '      <th id="voCount'+ (i+1)+'" scope="row">'+ (i+1) +'</th>\n' +
+              '      <td>'+ vocaTot[i].voSp +'</td>\n' +
+              '      <td class="hw0">'+ vocaTot[i].voHw +'</td>\n' +
+              '      <td hidden="hidden" id="voNum'+ (i+1)+'">'+ vocaTot[i].voNum +'</td>\n' +
+              '    </tr>';
+    }
+    $('#tbBody').html(tbInput);
+
+  }
+
+  function checkSave(){
+    checkBool = false;
+    $('#cardBtn').css({'visibility' : 'visible'});
+    $('#tenBtn').css({'visibility' : 'visible'});
+    $('#modBtn').css({'visibility' : 'visible'});
+    $('#testBtn').css({'display' : 'initial'});
+    $('#delBtn').css({'display' : 'initial'});
+
+
+    let checkInput = "";
+
+    for(let i = 0; i < $('.hw0').length; i++){
+      let voCheck = 0;
+      if($('#voCheck'+ (i+1)).is(":checked")){ voCheck=1; };
+      checkInput += $('#voNum'+(i+1)).html() + "/" + voCheck +"_";
+    }
+    $('.checkBtn').remove();
+    $('.checkBox').remove();
+
+    $.ajax({
+      type : "POST",
+      url : "checkSave",
+      data : {
+        "input" : checkInput,
+        "dirNum" : dirNum
+      },
+      dataType : "json" ,
+      success : function(data){
+        vocaTot = data[0];
+        vocaCheck = data[1];
+
+      },
+      error : function(){
+        alert("체크 저장 통신 실패!");
+      }
+    });
+
+  }
+
+  function vocaTest(num){
+    location.href='vocaTest?dirNum='+ dirNum +'&level=1&type='+num;
+  }
+
+  function vocaCard(num){
+    location.href='vocaCard?dirNum='+ dirNum +'&type='+num;
+  }
+
+  function vocaTenQuiz(num){
+    location.href='vocaTenQuiz?dirNum='+ dirNum +'&type='+num;
+  }
 
 
 </script>

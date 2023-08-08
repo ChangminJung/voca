@@ -1,5 +1,6 @@
 package com.personal.voca.controller;
 
+import com.personal.voca.dto.VocaDTO;
 import com.personal.voca.service.VocaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -20,6 +21,16 @@ public class VocaController {
 
     private final HttpSession session;
     private final VocaService vsvc;
+
+//    @GetMapping("/")
+//    public String main(){
+//        return "test3";
+//    }
+@GetMapping("/test")
+public String test3(){
+    return "tenQuiz";
+}
+
 
 
     @GetMapping("/")
@@ -42,6 +53,10 @@ public class VocaController {
         return "vocaInput";
     }
 
+    @GetMapping("/vocaCardQuiz")
+    public ModelAndView vocaCardQuiz(@RequestParam int dirNum, @RequestParam int quizLv, @RequestParam int type){
+        return vsvc.vocaCardQuiz(dirNum, quizLv, type);
+    }
 
     @GetMapping("/vocaSubmit")
     public ModelAndView vocaSubmit(@RequestParam String tbName, @RequestParam String input){
@@ -58,14 +73,34 @@ public class VocaController {
         return vsvc.vocaView(dirNum);
     }
 
+    @PostMapping("/checkSave")
+    public @ResponseBody List<List<VocaDTO>> checkSave(@RequestParam String input, @RequestParam int dirNum){
+        return vsvc.checkSave(input, dirNum);
+    }
+
     @GetMapping("/vocaTest")
-    public ModelAndView vocaTest(@RequestParam int dirNum, @RequestParam int level){
-        return vsvc.vocaTest(dirNum, level);
+    public ModelAndView vocaTest(@RequestParam int dirNum, @RequestParam int level, @RequestParam int type){
+        return vsvc.vocaTest(dirNum, level, type);
     }
 
     @GetMapping("/vocaCard")
-    public ModelAndView vocaCard(@RequestParam int dirNum){
-        return vsvc.vocaCard(dirNum);
+    public ModelAndView vocaCard(@RequestParam int dirNum, @RequestParam int type){
+        return vsvc.vocaCard(dirNum, type);
+    }
+
+    @GetMapping("/vocaTenQuiz")
+    public ModelAndView vocaTenQuiz(@RequestParam int dirNum, @RequestParam int type){
+        return vsvc.vocaTenQuiz(dirNum, type);
+    }
+
+    @GetMapping("/vocaModiForm")
+    public ModelAndView vocaModiForm(@RequestParam int dirNum){
+        return vsvc.vocaModiForm(dirNum);
+    }
+
+    @GetMapping("/vocaModify")
+    public ModelAndView vocaModify(@RequestParam String tbName, @RequestParam int dirNum, @RequestParam String input){
+        return vsvc.vocaModify(tbName, dirNum, input);
     }
 
     @PostMapping("/imgSearch")
@@ -74,6 +109,43 @@ public class VocaController {
         return vsvc.imgSearch(input);
     }
 
+    @PostMapping("/searching")
+    public @ResponseBody List<VocaDTO> searching(@RequestParam int dirNum) {
+
+        return vsvc.searching(dirNum);
+    }
+
+    @PostMapping("/dirNumCheck")
+    public @ResponseBody String dirNumCheck() {
+        return vsvc.dirNumCheck();
+    }
+
+    @GetMapping("/imgModiform")
+    public ModelAndView imgModiform(@RequestParam int voNum){
+        return vsvc.imgModiform(voNum);
+    }
+
+
+    @PostMapping("/imgModify")
+    public @ResponseBody List<Object> imgModify(@RequestParam int voNum){
+        return vsvc.imgModify(voNum);
+    }
+
+    @PostMapping("/imgPick")
+    public @ResponseBody String imgPick(@RequestParam int voNum, @RequestParam int imgLv, @RequestParam String imgUrl) {
+        return vsvc.imgPick(voNum,imgLv,imgUrl);
+    }
+
+    @GetMapping("/quizResult")
+    public ModelAndView quizResult(@RequestParam int dirNum, @RequestParam String input){
+        return vsvc.quizResult(dirNum, input);
+    }
+
+    @PostMapping("/randomVoca")
+    public @ResponseBody String randomVoca() {
+
+        return vsvc.randomVoca();
+    }
 
 
 

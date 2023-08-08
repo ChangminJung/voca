@@ -36,6 +36,41 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <style>
+    .page-loader {
+      position: fixed;
+      background: #ffffff;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      top: 0;
+      z-index: 9998;
+    }
+
+    .loader {
+      position: absolute;
+      border-left: 2px solid #ffffff;
+      border-top: 2px solid rgba(255, 255, 255, 0.2);
+      border-right: 2px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+      height: 46px;
+      width: 46px;
+      left: 50%;
+      top: 50%;
+      margin: -23px 0 0 -23px;
+      text-indent: -9999em;
+      font-size: 10px;
+      z-index: 9999;
+      -webkit-animation: load 0.8s infinite linear;
+      -moz-animation: load 0.8s infinite linear;
+      ms-animation: load 0.8s infinite linear;
+      o-animation: load 0.8s infinite linear;
+      animation: load 0.8s infinite linear;
+    }
+
+
+  </style>
+
 </head>
 
 <body>
@@ -46,6 +81,29 @@
 
 <header data-th-include="./sidebar.html"></header>
 <!-- ======= Sidebar ======= -->
+
+<div class="page-loader">
+  <!-- Growing Color spinnersr -->
+  <div class="spinner-grow text-danger" role="status" style="left: 54.5%;">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <div class="spinner-grow text-primary" role="status" style="left: 51.5%;">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+
+  <div class="spinner-grow text-success" role="status" style="left: 48.5%;">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <div class="spinner-grow text-secondary" role="status" style="left: 45.5%;">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+
+  <div class="spinner-grow text-dark" role="status" style="left: 42.5%;">
+    <span class="visually-hidden">Loading...</span>
+  </div><!-- End Growing Color spinners -->
+
+
+</div>
 
   <main id="main" class="main">
 
@@ -171,34 +229,39 @@
           </div>
 
           <div class="card">
-            <div class="card-body">
+            <div class="card-body" >
               <h5 class="card-title">Growing Color spinners</h5>
 
               <!-- Growing Color spinnersr -->
-              <div class="spinner-grow text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-              <div class="spinner-grow text-secondary" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-              <div class="spinner-grow text-success" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
               <div class="spinner-grow text-danger" role="status">
                 <span class="visually-hidden">Loading...</span>
               </div>
-              <div class="spinner-grow text-warning" role="status">
+              <div class="spinner-grow text-primary" role="status">
                 <span class="visually-hidden">Loading...</span>
               </div>
-              <div class="spinner-grow text-info" role="status">
+
+              <div class="spinner-grow text-success" role="status">
                 <span class="visually-hidden">Loading...</span>
               </div>
-              <div class="spinner-grow text-light" role="status">
+              <div class="spinner-grow text-secondary" role="status" >
                 <span class="visually-hidden">Loading...</span>
               </div>
+
               <div class="spinner-grow text-dark" role="status">
                 <span class="visually-hidden">Loading...</span>
               </div><!-- End Growing Color spinners -->
+
+
+
+<!--              <div class="spinner-grow text-light" role="status">-->
+<!--                <span class="visually-hidden">Loading...</span>-->
+<!--              </div>-->
+<!--              <div class="spinner-grow text-warning" role="status">-->
+<!--                <span class="visually-hidden">Loading...</span>-->
+<!--              </div>-->
+<!--              <div class="spinner-grow text-info" role="status">-->
+<!--                <span class="visually-hidden">Loading...</span>-->
+<!--              </div>-->
 
             </div>
           </div>
@@ -279,6 +342,21 @@
 
   <!-- Template Main JS File -->
   <script src="/js/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+        crossorigin="anonymous"></script>
+  <script>
+    $(window).on('load', function() {
+
+      $('.text-dark').delay(50).fadeIn('slow');
+      $('.text-secondary').delay(160).fadeIn('slow');
+      $('.text-success').delay(270).fadeIn('slow');
+      $('.text-primary').delay(380).fadeIn('slow');
+      $('.text-danger').delay(490).fadeIn('slow');
+
+      $('.page-loader').delay(2000).fadeOut('slow');
+    });
+  </script>
 
 </body>
 

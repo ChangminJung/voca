@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Components / Carousel - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/img/favicon.png" rel="icon">
+  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Mar 09 2023 with Bootstrap v5.2.3
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+<header data-th-include="./personalHeader.html"></header>
+<!-- ======= Header ======= -->
+
+
+<header data-th-include="./personalSidebar.html"></header>
+<!-- ======= Sidebar ======= -->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Voca Card Quiz</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+
+
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title" style=" padding-bottom: 3px;">[[${vocaCardList.get(0).voTbName}]]
+                <div class="alert alert-primary alert-dismissible fade show" role="alert" style="font-size: 14px; display: inline-flex; margin:0px; margin-left: 20px; padding-top: 10px; padding-bottom: 10px;">
+                  뜻이 여러개 일 경우 ' , ' 로 구분!
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="padding-top:  10px; padding-bottom: 10px;"></button>
+                </div>
+              </h5>
+
+              <div class="progress mt-3" style="margin-bottom: 22px;">
+                <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                <span hidden="hidden" class="cardSize" th:value="${vocaCardList.size}"></span>
+              </div>
+              <!-- Slides with controls -->
+              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                  <div class="carousel-item active">
+                    <div class="card imgCard">
+                      <img th:src="${vocaCardList.get(0).voImg}" class="card-img-top" alt="..." height="375px">
+                      <div class="card-body" style="text-align: center;">
+                        <h5 class="card-title" style="padding-bottom: 0px;" id="cardSp0">[[${vocaCardList.get(0).voSp}]]</h5>
+                      </div>
+                    </div>
+                    <span hidden="hidden" id="voNum0">[[${vocaCardList.get(0).voNum}]]</span>
+                    <span hidden="hidden" id="cardHw0">[[${vocaCardList.get(0).voHw}]]</span>
+                    <span hidden="hidden" class="inputCheck" onclick="inputCheck('0')"></span>
+                    <input autofocus class="inputHw" type="text" name="" id="input0" style="margin-bottom: 10px; left: 15%; width: 70%; position: relative; border: solid 1px #0085f2; border-radius: 5px; box-shadow:  0px 0px 0px 3px rgba(0,144,237,.4); " >
+                  </div>
+
+
+                  <div class="carousel-item" th:each=" i : ${#numbers.sequence(1,vocaCardList.size -1)}">
+                    <div class="card imgCard">
+                      <img th:src="${vocaCardList.get(i).voImg}" class="card-img-top" alt="..." height="375px">
+                      <div class="card-body" style="text-align: center;">
+                        <h5 class="card-title" style="padding-bottom: 0px;" th:id="cardSp+${i}">[[${vocaCardList.get(i).voSp}]]</h5>
+                      </div>
+                    </div>
+                    <span hidden="hidden" th:id="voNum+${i}">[[${vocaCardList.get(i).voNum}]]</span>
+                    <span hidden="hidden" th:id="cardHw+${i}">[[${vocaCardList.get(i).voHw}]]</span>
+                    <span hidden="hidden" class="inputCheck" th:onclick="|inputCheck(${i})|"></span>
+                    <input type="text" class="inputHw" name="" th:id="input+${i}" style="margin-bottom: 10px; left: 15%; width: 70%; position: relative; border: solid 1px #0085f2; border-radius: 5px; box-shadow:  0px 0px 0px 3px rgba(0,144,237,.4);" >
+                  </div>
+                </div>
+
+                <button hidden="hidden" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button hidden="hidden" class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+
+              </div><!-- End Slides with controls -->
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/chart.js/chart.umd.js"></script>
+  <script src="/vendor/echarts/echarts.min.js"></script>
+  <script src="/vendor/quill/quill.min.js"></script>
+  <script src="/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/js/main.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+        crossorigin="anonymous"></script>
+  <script th:inline="javascript">
+
+    let dirNum = [[${vocaCardList.get(0).voDirNum}]];
+    let input = "";
+
+    $('.inputHw').on("keyup", function (event) {
+      if (event.keyCode == 13) {
+        event.preventDefault();
+        $('.carousel-control-next').trigger("click");
+      }
+    });
+
+
+    function inputCheck(num){
+
+      let ansHw = $("#cardHw"+num).html();
+
+      while(ansHw.indexOf(")") != -1){
+          ansHw = ansHw.replace(ansHw.substring(ansHw.indexOf("("),ansHw.indexOf(")")+1),"");
+      }
+      ansHw = ansHw.replaceAll(" ", "");
+      ansHw = ansHw.replaceAll(";", ",");
+      let ansHwList = Array();
+      ansHwList = ansHw.split(",");
+      let inputHw = $("#input"+num).val();
+      inputHw = inputHw.replaceAll(" ","");
+      inputHw = inputHw.replaceAll(";",",");
+
+      let inputHwList = Array();
+
+      inputHwList = inputHw.split(",");
+
+      let sum = 0;
+      for(let i = 0; i < ansHwList.length; i++){
+        for(let j = 0; j < inputHwList.length; j++) if (ansHwList[i] == inputHwList[j]) {
+          sum++;
+          break;
+        }
+      }
+
+      if(sum == ansHwList.length){ // 다 맞았을 때 (클래스명 x)
+        if($('.progress-bar').hasClass("bg-warning")){
+          $('.progress-bar').removeClass("bg-warning");
+        }else if($('.progress-bar').hasClass("bg-danger")){
+          $('.progress-bar').removeClass("bg-danger");
+        }else{
+        }
+
+        sum = 0;
+      }else if(sum == 0){ // 모두 틀렸을 때 (클래스명 : bg-danger 추가)
+        if($('.progress-bar').hasClass("bg-warning")){
+          $('.progress-bar').removeClass("bg-warning");
+          $('.progress-bar').addClass("bg-danger");
+        }else if($('.progress-bar').hasClass("bg-danger")){
+        }else{
+          $('.progress-bar').addClass("bg-danger");
+        }
+
+        sum = 1;
+      }else{  // 일부 맞았을 때 (클래스명 : bg-warning 추가)
+        if($('.progress-bar').hasClass("bg-warning")){
+        }else if($('.progress-bar').hasClass("bg-danger")){
+          $('.progress-bar').removeClass("bg-danger");
+          $('.progress-bar').addClass("bg-warning");
+        }else{
+          $('.progress-bar').addClass("bg-warning");
+        }
+
+        sum = 2;
+      }
+
+      // sum : 다 맞음 0 / 다 틀림 1 / 일부 맞음 2
+      input += $('#voNum'+(num)).html() + "*" + sum + "@" + $('#input'+(num)).val() +"_";
+
+      if(num == $('.inputHw').length-1){
+        location.href= "quizResult?dirNum=" + dirNum + "&input=" + input;
+      }
+
+      console.log(num);
+    }
+
+
+
+
+  </script>
+
+
+</body>
+
+</html>

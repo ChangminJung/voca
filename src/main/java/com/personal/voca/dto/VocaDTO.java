@@ -17,6 +17,8 @@ public class VocaDTO {
     private String voImg;
     private int voImgLv;
 
+    private int voCheck;
+
 
 
 }

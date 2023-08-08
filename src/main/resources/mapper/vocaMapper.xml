@@ -12,27 +12,71 @@
 
 
     <insert id="vocaSubmit" parameterType="voca">
-        INSERT INTO VOCAT VALUES (VOC_SEQ.NEXTVAL,VOD_SEQ.CURRVAL, #{voTbName} , #{voSp}, #{voHw}, #{voImg}, #{voDate}, 0)
+        INSERT INTO VOCAT VALUES (VOC_SEQ.NEXTVAL,VOD_SEQ.CURRVAL, #{voTbName} , #{voSp}, #{voHw}, #{voImg}, #{voDate}, 0, 0)
     </insert>
 
     <insert id="voDirSubmit" parameterType="voca">
         INSERT INTO VOCADIR VALUES (VOD_SEQ.NEXTVAL, #{voTbName} , #{voDate})
     </insert>
 
+    <update id="voDirModify" parameterType="voca">
+        UPDATE VOCADIR SET VOTBNAME = #{voTbName} WHERE VODIRNUM = ${voDirNum}
+    </update>
+
     <select id="vocaTable" resultType="vocaTb">
-        SELECT * FROM VOCADIR
+        SELECT * FROM VOCADIR ORDER BY VODIRNUM ASC
     </select>
 
     <select id="vocaView" resultType="voca" parameterType="int">
         SELECT * FROM VOCAT WHERE VODIRNUM = ${dirNum} ORDER BY VONUM DESC
     </select>
 
+    <select id="vocaCheckView" resultType="voca" parameterType="int">
+        SELECT * FROM VOCAT WHERE VODIRNUM = ${dirNum} AND VOCHECK = 0 ORDER BY VONUM DESC
+    </select>
 
     <select id="vocaViewOne" parameterType="int" resultType="voca">
         SELECT * FROM VOCAT WHERE VONUM = ${voNum}
     </select>
 
+    <update id="checkSave" parameterType="voca">
+        UPDATE VOCAT SET VOCHECK = ${voCheck} WHERE VONUM = ${voNum}
+    </update>
+
     <update id="imgUpdate" parameterType="voca">
         UPDATE VOCAT SET VOIMG = #{voImg}, VOIMGLV = ${voImgLv} WHERE VONUM = ${voNum}
     </update>
+
+    <update id="vocaMod" parameterType="voca">
+        UPDATE VOCAT SET VOSP = #{voSp}, VOHW = #{voHw}, VOTBNAME = #{voTbName} WHERE VONUM = ${voNum}
+    </update>
+
+    <update id="vocaModImg" parameterType="voca">
+        UPDATE VOCAT SET VOSP = #{voSp}, VOHW = #{voHw}, VOIMG = '', VOTBNAME = #{voTbName} WHERE VONUM = ${voNum}
+    </update>
+
+    <update id="imgPick" parameterType="voca">
+        UPDATE VOCAT SET VOIMG = #{voImg}, VOIMGLV = ${voImgLv} WHERE VONUM = ${voNum}
+    </update>
+
+    <select id="searchCount" resultType="int" parameterType="int">
+        SELECT COUNT(*) FROM VOCAT WHERE VODIRNUM = ${dirNum}
+    </select>
+
+    <select id="dirNumCheck" resultType="String">
+        SELECT MAX(VODIRNUM) FROM VOCADIR
+    </select>
+
+    <select id="vocaSearch" parameterType="vocaRN" resultType="voca">
+        SELECT * FROM (SELECT VOCAT.* ,ROWNUM AS RN FROM VOCAT WHERE VODIRNUM= ${voDirNum} ORDER BY VONUM ASC) WHERE RN BETWEEN ${startNum} AND ${endNum} ORDER BY VONUM ASC
+    </select>
+
+    <select id="allCount" resultType="int" parameterType="int">
+        SELECT COUNT(*) FROM VOCAT
+    </select>
+
+    <select id="vocaRanOne" parameterType="int" resultType="voca">
+        SELECT * FROM (SELECT VOCAT.* ,ROWNUM AS RN FROM VOCAT ORDER BY VONUM ASC) WHERE RN = ${ranNum} ORDER BY VONUM ASC
+    </select>
+
 </mapper>

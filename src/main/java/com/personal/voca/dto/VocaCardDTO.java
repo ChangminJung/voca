@@ -15,6 +15,8 @@ public class VocaCardDTO {
 
     private String voImg;
 
-//    private String voDate;
+    // 퀴즈 결과에만 사용
+    private String voInput;
+    private int sum;
 
 }
