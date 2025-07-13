@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Components / Carousel - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/img/favicon.png" rel="icon">
+  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Mar 09 2023 with Bootstrap v5.2.3
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  
+  <style>
+  	.cardEng{
+  		font-size:50px; 
+  		font-family:"Nunito", sans-serif;
+  		font-weight:700;
+  	}
+  	.cardHw{
+  		padding-bottom: 0px; 
+  		font-size:30px; 
+  		/* opacity:0;  */
+  		font-weight: 500;
+		color: #012970;
+  	}
+  	.btn{
+  		font-size:20px;
+  		width:45%;
+  		padding:2%;
+  		margin:1%;
+  	}
+  	.btn-outline-base{
+  		--bs-btn-color: #012970;
+    	--bs-btn-border-color: #012970;
+    	--bs-btn-hover-color: #fff;
+    	--bs-btn-hover-bg: #012970;
+    	--bs-btn-hover-border-color: #012970;
+    	--bs-btn-focus-shadow-rgb: 108, 117, 125;
+    	--bs-btn-active-color: #fff;
+    	--bs-btn-active-bg: #012970;
+    	--bs-btn-active-border-color: #012970;
+    	--bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    	--bs-btn-disabled-color: #012970;
+    	--bs-btn-disabled-bg: transparent;
+    	--bs-btn-disabled-border-color: #012970;
+  	}
+  	.btn-primary{
+    	--bs-btn-hover-bg: #1b74f6;
+  	}
+  	 .btn-danger{
+    	--bs-btn-hover-bg: #dc3545;
+  	}
+  	 .inputHw {
+		margin-bottom: 10px;
+		left: 15%;
+		width: 70%;
+		position: relative;
+		border: solid 1px #012970;
+		border-radius: 5px;
+		box-shadow: 0px 0px 0px 3px rgb(0 46 170/ 40%);
+	}
+
+	.form-floating>label {
+		left: 15%;
+		font-size: 30px;
+		font-weight: 500;
+		color: #012970;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		padding: 1.5rem 1rem;
+		overflow: hidden;
+		text-align: start;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		pointer-events: none;
+		border: 1px solid transparent;
+		transform-origin: 0 0;
+		transition: opacity .1s ease-in-out, transform .1s ease-in-out
+	}
+
+	.form-floating>.form-control {
+		font-size: 30px;
+		font-weight: 500;
+		color: #012970;
+		height: 15%;
+	}
+  	
+  
+  </style>
+</head>
+
+<body>
+
+<header data-th-include="./personalHeader.html"></header>
+<!-- ======= Header ======= -->
+
+<header data-th-include="./personalSidebar.html"></header>
+<!-- ======= Sidebar ======= -->
+
+ 	<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Voca Training</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+
+
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title" style=" padding-bottom: 3px;">[[${vocaMmzList.get(0).voTbName}]]</h5>
+			  
+			  <div class="progress mt-3" style="margin-bottom: 22px;">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                <span hidden="hidden" class="cardSize" th:value="${vocaMmzList.size}"></span>
+              </div>
+              
+              <!-- Slides with controls -->
+              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                  <div class="carousel-item active">
+                  	<!-- 슬라이드 구분용 span -->
+			  		<span hidden="hidden" class="train">0</span>
+			  		<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+                    
+                      <div class="card-body" style="text-align: center;">
+                        <h6 class="card-title cardEng" >[[${vocaMmzList.get(0).voSp}]]</h6>
+                        
+                        <h5 class="card-title cardHw">[[${vocaMmzList.get(0).voHw}]]</h5>
+                      </div>
+                   <!-- 카드 번호(0~) -->
+                   <span hidden="hidden" class="cardNum">0</span>
+                   <span hidden="hidden" class="ansCount">0</span>
+                   
+                  </div>
+
+				  <div class="carousel-item" th:each=" i : ${#numbers.sequence(1,vocaMmzList.size -1)}">
+                    <!-- 슬라이드 구분용 span -->
+			  		<span hidden="hidden" class="train">0</span>
+			  		<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+                      <div class="card-body" style="text-align: center;">
+                        <h6 class="card-title cardEng" >[[${vocaMmzList.get(i).voSp}]]</h6>
+                        
+                        <h5 class="card-title cardHw">[[${vocaMmzList.get(i).voHw}]]</h5>
+                      </div>
+                    <!-- 카드 번호(0~) -->  
+                   	<span hidden="hidden" class="cardNum">[[${i}]]</span>
+                   	<span hidden="hidden" class="ansCount">0</span>
+                  </div>     
+                     
+                </div>
+
+                <button hidden="hidden" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button hidden="hidden" class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+
+              </div><!-- End Slides with controls -->
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+    
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/chart.js/chart.umd.js"></script>
+  <script src="/vendor/echarts/echarts.min.js"></script>
+  <script src="/vendor/quill/quill.min.js"></script>
+  <script src="/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/js/main.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+        crossorigin="anonymous"></script>
+	<script th:inline="javascript">
+	
+		let vocaMmz = [[${vocaMmzList}]];
+	
+		let numOpc = 0;
+		let numTime = 0;
+		let numTime2 = 0;
+		let numLine = 1500;
+		let rctDiv;
+		let rctNum = -1;
+		let rctTrain = 0;
+		let inputBool = true;
+		let lineBool = true;
+		let btnBool = true;
+
+		console.log(vocaMmz);
+		
+		let timer = setInterval(function() {
+
+			numTime = numTime + 150;
+			numTime2 = numTime2 + 150;
+			
+			// train 번호에 따른 현재 numLine 정하기
+			// 바뀌고나서 한번만 (0.5초 뒤)
+			if (numTime >= 1000){
+				
+				if (lineBool){
+					if($('.active .train').html() == 0 || $('.active .train').html() == 1){
+						numLine = 1500;
+						lineBool = false;
+						$('.progress-bar').removeClass("bg-danger");
+					}else if($('.active .train').html() == 2 || 
+							$('.active .train').html() == 3 || 
+							$('.active .train').html() == 4){
+						numLine = 50000;
+						lineBool = false;
+						
+				        
+					}
+				}	
+			}
+			
+			
+			
+			// Line 시간 됐을때 적용될 스크립트
+			if (numTime >= numLine) {
+				
+				// (현재) train 마다 구분
+				// (현재) 0, 1 일 경우
+				if ($('.active .train').html() == 1) {
+					// (현재) 0, 1 일때 적용되는 것들
+					$('.active h5').css('opacity', numOpc);
+					numOpc = numOpc + 0.3;
+
+				// (현재) 2 일 경우
+				}else if($('.active .train').html() == 2){
+					// (현재) 2 일때 적용되는 것들
+					if(btnBool){
+					 	
+						// 정답 안찍었을 때
+						$(".active button").eq($(".active .ansNum").eq(0).html()).removeClass("btn-outline-base");
+						$(".active button").eq($(".active .ansNum").eq(0).html()).addClass("btn-primary");
+						numTime2 = numLine;
+						btnBool = false;
+						// 틀림 체크
+						$('.active .ansCount').html(Number($('.active .ansCount').html()) - 1);
+						$('.progress-bar').addClass("bg-danger");
+					}
+					
+				}else if($('.active .train').html() == 3 
+						|| $('.active .train').html() == 4
+						|| $('.active .train').html() == 5){
+					if(inputBool){
+						// 정답 안누른 상태
+						ansCheck();
+					}
+				}
+			}
+			
+		if (numTime2 >= numLine + 3000) {
+			// 끝난 이후 한번만! 적용되는 것들
+			// + 넘기기 직전! 해야할 것들
+			
+				// train 마다 구분
+				// 현재 = 실제 적용 / 이전 = 카드 변경
+				if (rctDiv == null){
+					// 첫 시작 카드 + 첫 train
+					rctDiv = $('.active');
+					rctNum = $('.active .cardNum').html();
+					rctTrain = $('.active .train').html();
+					
+				// 두번째부터 train 적용
+				}else{
+					
+					// (이전) 0, 1일 경우 (넘기기 직전 해줘야 하는 것!)
+					if (rctDiv.find('.train').text() == 0){
+						
+						// (이전) 0 일때 변경되는 값
+						rctDiv.find('.cardHw').css('opacity', 0);
+						rctDiv.find('.train').text(Number(rctDiv.find('.train').text()) + 1);
+						
+					}else if(rctDiv.find('.train').text() == 1){
+						
+						let btnCount = 0;
+						let btnInput = "";
+						for(let i = 0; i < 4 ; i++){
+							if(vocaMmz[rctNum].btnNum == i){
+								btnInput+= '<button type="button" class="btn btn-outline-base" onclick="ansClick(' + i + ')">' + vocaMmz[rctNum].voHw + '</button> '
+								continue;
+							}
+							btnInput+= '<button type="button" class="btn btn-outline-base" onclick="ansClick(' + i + ')">' + vocaMmz[rctNum].btnRan[btnCount] + '</button> '
+							btnCount++;
+						}
+						
+						// (이전) 카드 변경 해주기
+						rctDiv.find('.cardHw').remove();
+						rctDiv.find('.card-body').append(btnInput);
+						rctDiv.append('<span hidden="hidden" class="ansNum">'+ vocaMmz[rctNum].btnNum +'</span>');
+						
+						rctDiv.find('.train').text(Number(rctDiv.find('.train').text()) + 1);
+						
+					}else if(rctDiv.find('.train').text() == 2){
+						
+						// 전단계로
+						if(Number(rctDiv.find('.ansCount').text()) < -1){
+							
+							rctDiv.find('.btn').remove();
+							rctDiv.find('.card-body').append('<h5 class="card-title cardHw">'+ vocaMmz[rctNum].voHw +'</h5>');
+							rctDiv.find('.ansNum').remove();						
+							
+							// 정답카운트 초기화, train 변경
+							rctDiv.find('.ansCount').text(0);
+							rctDiv.find('.train').text(Number(rctDiv.find('.train').text()) - 1);
+						
+						// 다음단계로	
+						}else if(Number(rctDiv.find('.ansCount').text()) >= 1){
+						
+							let fltInput = "";
+							let fltAns = "";
+							fltInput += vocaMmz[rctNum].hwConsOne[0];
+							fltAns += vocaMmz[rctNum].hwCons[0];
+							for(let i = 1; i < vocaMmz[rctNum].hwConsOne.length; i++){
+								fltInput += ', ';
+								fltInput += vocaMmz[rctNum].hwConsOne[i];
+								fltAns += ", ";
+								fltAns += vocaMmz[rctNum].hwCons[i];
+							}
+							
+							rctDiv.find('.btn').remove();
+							rctDiv.find('.ansNum').remove();
+							rctDiv.append('<span hidden="hidden" class="ansHw">'+ fltAns +'</span>');
+							rctDiv.append('<div class="form-floating">'
+									+ ' <input type="text" class="form-control inputHw" id="floatingName" placeholder="" >'
+									+ ' <label for="floatingName">' + fltInput + '</label>'
+									+ ' </div>');
+							// form-floating 만들때마다 event 생성 (append 이후 적용)		
+							rctDiv.on('keyup', '.form-floating' ,function() {
+			  					if (event.keyCode == 13) {
+			        				event.preventDefault();
+			        
+			        				if(inputBool){
+			        				ansCheck();	
+			        				}
+			      				}
+							});
+							
+							
+							// 정답카운트 초기화, train 변경
+							rctDiv.find('.ansCount').text(0);
+							rctDiv.find('.train').text(Number(rctDiv.find('.train').text()) + 1);
+							
+						// 그대로 유지
+						}else{
+							
+							// 버튼 초기화
+							rctDiv.find('.btn-primary').addClass("btn-outline-base");
+		  					rctDiv.find('.btn-danger').addClass("btn-outline-base");
+		  					rctDiv.find('.btn-primary').removeClass("btn-primary");
+		  					rctDiv.find('.btn-danger').removeClass("btn-danger");
+							
+							// 정답카운트, train 유지
+						}
+						
+						
+					}else if(rctDiv.find('.train').text() == 3){
+						
+						// 전단계로
+						if(Number(rctDiv.find('.ansCount').text()) < -1){
+							
+							rctDiv.find('.ansHw').remove();
+							rctDiv.find('.form-floating').remove();
+							
+							let btnCount = 0;
+							let btnInput = "";
+							for(let i = 0; i < 4 ; i++){
+								if(vocaMmz[rctNum].btnNum == i){
+									btnInput+= '<button type="button" class="btn btn-outline-base" onclick="ansClick(' + i + ')">' + vocaMmz[rctNum].voHw + '</button> '
+									continue;
+								}
+								btnInput+= '<button type="button" class="btn btn-outline-base" onclick="ansClick(' + i + ')">' + vocaMmz[rctNum].btnRan[btnCount] + '</button> '
+								btnCount++;
+							}
+							rctDiv.find('.card-body').append(btnInput);
+							rctDiv.append('<span hidden="hidden" class="ansNum">'+ vocaMmz[rctNum].btnNum +'</span>');
+							
+							// 정답카운트 초기화, train 변경
+							rctDiv.find('.ansCount').text(0);
+							rctDiv.find('.train').text(Number(rctDiv.find('.train').text()) - 1);
+						
+						// 다음단계로	
+						}else if(Number(rctDiv.find('.ansCount').text()) >= 1){
+							
+							let fltInput = "";
+							let fltAns = "";
+							fltInput += vocaMmz[rctNum].hwConsTwo[0];
+							fltAns += vocaMmz[rctNum].hwCons[0];
+							for(let i = 1; i < vocaMmz[rctNum].hwConsTwo.length; i++){
+								fltInput += ', ';
+								fltInput += vocaMmz[rctNum].hwConsTwo[i];
+								fltAns += ", ";
+								fltAns += vocaMmz[rctNum].hwCons[i];
+							}
+							// input 제거 후 생성
+							rctDiv.find('.form-floating').remove();
+							rctDiv.append('<div class="form-floating">'
+									+ ' <input type="text" class="form-control inputHw" id="floatingName" placeholder="" >'
+									+ ' <label for="floatingName">' + fltInput + '</label>'
+									+ ' </div>');
+							
+		  					rctDiv.on('keyup', '.form-floating' ,function() {
+			  					if (event.keyCode == 13) {
+			        				event.preventDefault();
+			        
+			        				if(inputBool){
+			        				ansCheck();	
+			        				}
+			      				}
+							});
+							// 정답카운트 초기화, train 변경
+							rctDiv.find('.ansCount').text(0);
+							rctDiv.find('.train').text(Number(rctDiv.find('.train').text()) + 1);
+							
+						// 그대로 유지
+						}else{
+							
+							let fltInput = "";
+							let fltAns = "";
+							fltInput += vocaMmz[rctNum].hwConsOne[0];
+							fltAns += vocaMmz[rctNum].hwCons[0];
+							for(let i = 1; i < vocaMmz[rctNum].hwConsOne.length; i++){
+								fltInput += ', ';
+								fltInput += vocaMmz[rctNum].hwConsOne[i];
+								fltAns += ", ";
+								fltAns += vocaMmz[rctNum].hwCons[i];
+							}
+							// input 초기화
+							rctDiv.find('.form-floating').remove();
+							rctDiv.append('<div class="form-floating">'
+									+ ' <input type="text" class="form-control inputHw" id="floatingName" placeholder="" >'
+									+ ' <label for="floatingName">' + fltInput + '</label>'
+									+ ' </div>');
+							
+		  
+							rctDiv.on('keyup', '.form-floating' ,function() {
+			  					if (event.keyCode == 13) {
+			        				event.preventDefault();
+			        
+			        				if(inputBool){
+			        				ansCheck();	
+			        				}
+			      				}
+							});
+							// 정답카운트, train 유지
+						}
+						
+					}else if(rctDiv.find('.train').text() == 4){
+						
+						// 전단계로
+						if(Number(rctDiv.find('.ansCount').text()) < -1){
+							
+							let fltInput = "";
+							let fltAns = "";
+							fltInput += vocaMmz[rctNum].hwConsOne[0];
+							fltAns += vocaMmz[rctNum].hwCons[0];
+							for(let i = 1; i < vocaMmz[rctNum].hwConsOne.length; i++){
+								fltInput += ', ';
+								fltInput += vocaMmz[rctNum].hwConsOne[i];
+								fltAns += ", ";
+								fltAns += vocaMmz[rctNum].hwCons[i];
+							}
+							// input 제거 후 생성
+							rctDiv.find('.form-floating').remove();
+							rctDiv.append('<div class="form-floating">'
+									+ ' <input type="text" class="form-control inputHw" id="floatingName" placeholder="" >'
+									+ ' <label for="floatingName">' + fltInput + '</label>'
+									+ ' </div>');
+							
+		  
+							rctDiv.on('keyup', '.form-floating' ,function() {
+			  					if (event.keyCode == 13) {
+			        				event.preventDefault();
+			        
+			        				if(inputBool){
+			        				ansCheck();	
+			        				}
+			      				}
+							});
+							
+							
+							// 정답카운트 초기화, train 변경
+							rctDiv.find('.ansCount').text(0);
+							rctDiv.find('.train').text(Number(rctDiv.find('.train').text()) - 1);
+						
+						// 다음단계로	
+						}else if(Number(rctDiv.find('.ansCount').text()) >= 1){
+						
+							// input 제거 후 생성
+							rctDiv.find('.form-floating').remove();
+							rctDiv.append('<div class="form-floating">'
+										+ ' <input type="text" class="form-control inputHw" id="floatingName" placeholder="" >'
+										+ ' <label for="floatingName"></label>'
+										+ ' </div>');
+		  
+							rctDiv.on('keyup', '.form-floating' ,function() {
+			  					if (event.keyCode == 13) {
+			        				event.preventDefault();
+			        
+			        				if(inputBool){
+			        				ansCheck();	
+			        				}
+			      				}
+							});
+							
+							// 정답카운트 초기화, train 변경
+							rctDiv.find('.ansCount').text(0);
+							rctDiv.find('.train').text(Number(rctDiv.find('.train').text()) + 1);
+							
+						// 그대로 유지
+						}else{
+							
+							let fltInput = "";
+							let fltAns = "";
+							fltInput += vocaMmz[rctNum].hwConsTwo[0];
+							fltAns += vocaMmz[rctNum].hwCons[0];
+							for(let i = 1; i < vocaMmz[rctNum].hwConsTwo.length; i++){
+								fltInput += ', ';
+								fltInput += vocaMmz[rctNum].hwConsTwo[i];
+								fltAns += ", ";
+								fltAns += vocaMmz[rctNum].hwCons[i];
+							}
+							// input 제거 후 생성
+							rctDiv.find('.form-floating').remove();
+							rctDiv.append('<div class="form-floating">'
+									+ ' <input type="text" class="form-control inputHw" id="floatingName" placeholder="" >'
+									+ ' <label for="floatingName">' + fltInput + '</label>'
+									+ ' </div>');
+							
+							
+							rctDiv.on('keyup', '.form-floating' ,function() {
+			  					if (event.keyCode == 13) {
+			        				event.preventDefault();
+			        
+			        				if(inputBool){
+			        				ansCheck();	
+			        				}
+			      				}
+							});
+							
+							// 정답카운트, train 유지
+						}
+						
+					}else if(rctDiv.find('.train').text() == 5){
+						
+						// 전단계로
+						if(Number(rctDiv.find('.ansCount').text()) < -1){
+							
+							let fltInput = "";
+							let fltAns = "";
+							fltInput += vocaMmz[rctNum].hwConsTwo[0];
+							fltAns += vocaMmz[rctNum].hwCons[0];
+							for(let i = 1; i < vocaMmz[rctNum].hwConsTwo.length; i++){
+								fltInput += ', ';
+								fltInput += vocaMmz[rctNum].hwConsTwo[i];
+								fltAns += ", ";
+								fltAns += vocaMmz[rctNum].hwCons[i];
+							}
+							// input 제거 후 생성
+							rctDiv.find('.form-floating').remove();
+							rctDiv.append('<div class="form-floating">'
+									+ ' <input type="text" class="form-control inputHw" id="floatingName" placeholder="" >'
+									+ ' <label for="floatingName">' + fltInput + '</label>'
+									+ ' </div>');
+							
+							
+							rctDiv.on('keyup', '.form-floating' ,function() {
+			  					if (event.keyCode == 13) {
+			        				event.preventDefault();
+			        
+			        				if(inputBool){
+			        				ansCheck();	
+			        				}
+			      				}
+							});
+							
+							
+							// 정답카운트 초기화, train 변경
+							rctDiv.find('.ansCount').text(0);
+							rctDiv.find('.train').text(Number(rctDiv.find('.train').text()) - 1);
+						
+						// 다음단계로	
+						}else if(Number(rctDiv.find('.ansCount').text()) >= 1){
+						
+							// 끝 (초기화)
+							rctDiv.find('.form-floating').remove();
+							rctDiv.append('<div class="form-floating">'
+										+ ' <input type="text" class="form-control inputHw" id="floatingName" placeholder="" >'
+										+ ' <label for="floatingName"></label>'
+										+ ' </div>');
+							rctDiv.on('keyup', '.form-floating' ,function() {
+			  					if (event.keyCode == 13) {
+			        				event.preventDefault();
+			        
+			        				if(inputBool){
+			        				ansCheck();	
+			        				}
+			      				}
+							});
+							
+							// 정답카운트 초기화, train 변경
+							rctDiv.find('.ansCount').text(0);
+							rctDiv.find('.train').text(Number(rctDiv.find('.train').text()) + 1);
+							
+						// 그대로 유지
+						}else{
+							
+							// input 제거 후 생성
+							rctDiv.find('.form-floating').remove();
+							rctDiv.append('<div class="form-floating">'
+										+ ' <input type="text" class="form-control inputHw" id="floatingName" placeholder="" >'
+										+ ' <label for="floatingName"></label>'
+										+ ' </div>');
+							rctDiv.on('keyup', '.form-floating' ,function() {
+			  					if (event.keyCode == 13) {
+			        				event.preventDefault();
+			        
+			        				if(inputBool){
+			        				ansCheck();	
+			        				}
+			      				}
+							});
+							
+							// 정답카운트, train 유지
+						}
+						
+					}
+				}
+				
+				// 이전 값 셋팅 (공통)
+				rctDiv = $('.active');
+				rctNum = $('.active .cardNum').html();
+				rctTrain = $('.active .train').html();
+			
+				// 넘기기 (공통)
+				$('.carousel-control-next').trigger("click");
+
+				// 값 초기화 (공통) 
+				numOpc = 0;
+				numTime = 0;
+				numTime2 = 0;
+				inputBool= true;
+				lineBool = true;
+				btnBool= true;
+			}
+
+		}, 150);
+		
+		
+		
+		function ansClick(i){
+			
+			
+			if(btnBool){
+				console.log($(".active .ansNum").html());
+			  if($(".active .ansNum").html() == i){
+				  // 정답일 때
+				  $(".active button").eq(i).removeClass("btn-outline-base");
+				  $(".active button").eq(i).addClass("btn-primary");
+				  numTime2 = numLine +500;
+				  // 맞음 체크
+				  $('.active .ansCount').html(Number($('.active .ansCount').html()) + 2);
+				  $('.progress-bar').removeClass("bg-danger");
+			  }else{
+				  // 오답일 때
+				  $(".active button").eq(i).removeClass("btn-outline-base");
+				  $(".active button").eq(i).addClass("btn-danger");
+				  
+				  $(".active button").eq($(".active .ansNum").eq(0).html()).removeClass("btn-outline-base");
+				  $(".active button").eq($(".active .ansNum").eq(0).html()).addClass("btn-primary");
+				  numTime2 = numLine -1000;
+				  // 틀림 체크
+				  $('.active .ansCount').html(Number($('.active .ansCount').html()) - 1);
+				  $('.progress-bar').addClass("bg-danger");
+			  }
+			  
+			  btnBool = false;
+			}
+		}
+		
+		function ansCheck(){
+			
+			
+			if(inputBool){
+				inputBool= false;
+			}else{
+				return;
+			}
+		
+			$('.inputHw').blur();	
+			
+			
+			let ansHw = $(".active .ansHw").html();
+
+	        ansHw = ansHw.replaceAll(" ", "");
+	        ansHw = ansHw.replaceAll(";", ",");
+	        let ansHwList = Array();
+	        ansHwList = ansHw.split(",");
+	        let inputHw = $(".active .inputHw").val();
+	        inputHw = inputHw.replaceAll(" ","");
+	        inputHw = inputHw.replaceAll(";",",");
+
+	        let inputHwList = Array();
+
+	        inputHwList = inputHw.split(",");
+
+	        let sum = 0;
+	        for(let i = 0; i < ansHwList.length; i++){
+	          for(let j = 0; j < inputHwList.length; j++) if (ansHwList[i] == inputHwList[j]) {
+	            sum++;
+	            break;
+	          }
+	        }
+	        
+	        if(sum == ansHwList.length){ // 맞았을 때 
+	        	
+	        	$(".active .form-floating label").css("color", "#198754");
+	            $(".active .inputHw").css("color", "#198754");
+	            $(".active .form-control").css("border-color", "#198754");
+	            $(".active .form-control").css("padding-right", "calc(1.5em + .75rem)");
+	            $(".active .form-control").css("background-image", "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e\")");
+	            $(".active .form-control").css("background-repeat", "no-repeat");
+	            $(".active .form-control").css("background-position", "right calc(.375em + .1875rem) center");
+	            $(".active .form-control").css("background-size", "calc(.75em + .375rem) calc(.75em + .375rem)");
+	            $(".active .form-control").css("box-shadow", "0px 0px 0px 3px rgb(25 135 84 / 40%)");
+	            
+	            numTime2 = numLine +500;
+	            // 맞음 체크
+	            $('.active .ansCount').html(Number($('.active .ansCount').html()) + 2);
+				$('.progress-bar').removeClass("bg-danger");
+	            
+	        }else{  // 틀렸을 때
+	        	
+	        	$(".active .form-floating label").css("color", "#dc3545");
+	            $(".active .inputHw").css("color", "#dc3545");
+	            $(".active .form-control").css("border-color", "#dc3545");
+	            $(".active .form-control").css("padding-right", "calc(1.5em + .75rem)");
+	            $(".active .form-control").css("background-image", "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e\")");
+	            $(".active .form-control").css("background-repeat", "no-repeat");
+	            $(".active .form-control").css("background-position", "right calc(.375em + .1875rem) center");
+	            $(".active .form-control").css("background-size", "calc(.75em + .375rem) calc(.75em + .375rem)");
+	            $(".active .form-control").css("box-shadow", "0px 0px 0px 3px rgb(238 0 46 / 40%)");
+	            $(".active .form-floating label").css("transition" , "initial");
+	            
+	            $('.active .form-floating label').html($('.active .inputHw').val());
+	            
+	            $(".active .form-floating label").css("transform","scale(1) translateY(0rem) translateX(-0.25rem)");
+	            
+	            // blur 후 composing 데이터 없애기 setTimeout으로 해야 브라우저와 호환하여(?) 없애줌
+	            let composingBlur = setTimeout(function(){
+	            	$('.active .inputHw').val("");
+	            },0);
+	            
+	            let labelTimer = setTimeout(function(){
+	            	$(".active .form-floating label").css("transition" , "opacity .1s ease-in-out, transform .1s ease-in-out");
+	            	$(".active .form-floating label").css("transform","scale(.65) translateY(-1.2rem) translateX(0.35rem)");	
+	            	$('.active .inputHw').val("");
+	            	
+	            	let inputTimer = setTimeout(function(){
+	                	$('.active .inputHw').val($(".active .ansHw").html());	
+	                	$(".active .form-floating label").css("text-decoration","line-through");
+	                	
+	                },300);
+	            	
+	            },100);
+	            
+	            
+	            numTime2 = numLine -1000;
+	            // 틀림 체크
+	            $('.active .ansCount').html(Number($('.active .ansCount').html()) - 1);
+	            $('.progress-bar').addClass("bg-danger");
+			
+	        }
+	        
+	        
+			let ansCount= 0;
+			for(let j = 0; j < vocaMmz.length; j++){
+				if($('.ansCount').eq(j).html() >= 2){
+					ansCount++;
+				}
+			}
+			if(ansCount >= vocaMmz.length){
+				alert('끝났습니다.');
+			}
+	    	
+		}
+		
+		
+		
+		
+	</script>
+
+
+</body>
+
+</html>

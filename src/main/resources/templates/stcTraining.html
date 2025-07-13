@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+<title>Dashboard - NiceAdmin Bootstrap Template</title>
+<meta content="" name="description">
+<meta content="" name="keywords">
+
+<!-- Favicons -->
+<link href="/img/favicon.png" rel="icon">
+<link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.gstatic.com" rel="preconnect">
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+	rel="stylesheet">
+
+<!-- Vendor CSS Files -->
+<link href="/vendor/bootstrap/css/bootstrap2.min.css" rel="stylesheet">
+<link href="/vendor/bootstrap-icons/bootstrap-icons.css"
+	rel="stylesheet">
+<link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+<link href="/vendor/quill/quill.snow.css" rel="stylesheet">
+<link href="/vendor/quill/quill.bubble.css" rel="stylesheet">
+<link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+<link href="/vendor/simple-datatables/style.css" rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link href="/css/style.css" rel="stylesheet">
+
+<!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Mar 09 2023 with Bootstrap v5.2.3
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+<style>
+
+.card{
+	min-height: 445px;
+
+}
+
+/* 
+.sp3{
+	 text-decoration: underline;
+	 font-size:25px;
+	 text-underline-position: under;
+	 text-decoration-style: wavy;
+} */
+
+.stc{
+	margin-bottom:0px; 
+	font-size:25px;
+}
+
+.sub{
+	color:rgb(68 68 68);
+}
+
+.verb{
+	color:rgb(68 68 68);
+}
+
+.obj{
+	color:rgb(68 68 68);
+}
+
+.ovMean{
+	margin-bottom:0px; 
+	font-weight:bold;
+	height:20px;
+	color:#777777;
+}
+
+.udMean{
+	margin-bottom:50px;
+	font-weight:bold;
+	height:30px;
+	color:#777777;
+}
+.wdMean{
+	position: absolute;
+	opacity:0;
+}
+
+.stcMean{
+	font-size:25px;
+}
+
+.keyWord{
+	
+	border:dashed 1.5px; 
+	padding:6px 12px 6px 12px; 
+	border-radius:0.375rem;
+	display: initial;
+}
+
+
+.arwS{
+	width:16px;
+	height:16px;
+	position:absolute;
+	margin-bottom:30px;
+	opacity:0;
+}
+
+.arwS::before, .arwS::after{
+	content:'';
+	position:absolute;
+}
+
+.arwS::before{
+	width:100%;
+	height:100%;
+	border:1.5px solid blue;
+	border-right:0;
+	border-bottom:0;
+}
+
+.arwS::after{
+	heigth: 1px;
+	transform-origin: 0 100%;
+	transform:rotate(45deg);
+	border:1px solid blue;
+	z-index:0;
+}
+
+
+.arwV{
+	width:16px;
+	height:16px;
+	position:absolute;
+	margin-bottom:30px;
+	opacity:0;
+}
+
+.arwV::before, .arwV::after{
+	content:'';
+	position:absolute;
+}
+
+.arwV::before{
+	width:100%;
+	height:100%;
+	border:1.5px solid red;
+	border-right:0;
+	border-bottom:0;
+}
+
+.arwV::after{
+	heigth: 1px;
+	transform-origin: 0 100%;
+	transform:rotate(45deg);
+	border:1px solid red;
+}
+
+
+.arwO{
+	width:16px;
+	height:16px;
+	position:absolute;
+	margin-bottom:30px;
+	opacity:0;
+}
+
+.arwO::before, .arwO::after{
+	content:'';
+	position:absolute;
+}
+
+.arwO::before{
+	width:100%;
+	height:100%;
+	border:1.5px solid green;
+	border-right:0;
+	border-bottom:0;
+}
+
+.arwO::after{
+	heigth: 1px;
+	transform-origin: 0 100%;
+	transform:rotate(45deg);
+	border:1px solid green;
+}
+
+.inp{
+	max-width:200px;
+	display:inline;
+	border:dashed 1.5px; 
+	padding:6px 12px 6px 12px; 
+	border-radius:0.375rem;
+	font-size:25px;
+	
+}
+.inp:focus{
+	box-shadow:0 0 0 .25rem rgba(68, 68, 68, .25);
+	border-color:rgb(68 68 68);
+}
+
+
+
+
+.scoring{
+	
+	
+	animation:upDown .1s 1;
+	
+	
+}
+
+.checkTip{
+	color:red;
+	animation:show .5s 1;
+	
+	
+}
+
+.inf{
+	opacity:0;
+}
+
+
+@keyframes upDown {
+  
+  from {
+    transform: translateY(8px);
+  }
+  
+  to {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes show {
+  
+  from {
+    opacity:0;
+  }
+  
+  to {
+    opacity:1;
+  }
+}
+
+
+</style>
+
+
+</head>
+
+<body>
+
+	<header data-th-include="./personalHeader.html"></header>
+	<!-- ======= Header ======= -->
+
+	<header data-th-include="./personalSidebar.html"></header>
+	<!-- ======= Sidebar ======= -->
+
+
+	<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Tooltips</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index">Home</a></li>
+          <li class="breadcrumb-item">Components</li>
+          <li class="breadcrumb-item active">Tooltips</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
+
+
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title" style="padding-bottom: 3px;">1</h5>
+
+							<div class="progress mt-3"
+								style="margin-bottom: 22px; width: 50%;">
+								<div
+									class="progress-bar progress-bar-striped progress-bar-animated"
+									role="progressbar" style="width: 0%" aria-valuenow="0"
+									aria-valuemin="0" aria-valuemax="100"></div>
+								<span hidden="hidden" class="cardSize" th:value="4"></span>
+							</div>
+
+							<!-- Slides with controls -->
+							<div id="carouselExampleControls" class="carousel slide"
+								data-bs-ride="carousel">
+								<div class="carousel-inner">
+
+									<div class="carousel-item active">
+										<!-- 슬라이드 구분용 span -->
+										<span hidden="hidden" class="stcTrain">0</span>
+										<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+
+										<div class="card-body">
+											<h5 class="card-title">Examples</h5>
+											<button hidden="hidden" class="curBtn" onclick="curBtn(0)"></button>
+											<p class="ovMean">
+												<span th:each=" i : ${#numbers.sequence(1,vocaStcList.get(0).voWord.size -1)}">
+												<span class="wdMean" th:if="${i%2 != 0}">[[${vocaStcList.get(0).voWord.get(i)}]]</span> </span>
+												
+												
+											</p>
+											<div class="keyCheck1" style="position:absolute; height: 50px;"> </div>
+											<p class="stc"></p>
+											<div class="keyAns1" style="position:absolute; line-height:150px; height: 50px;"> </div>
+
+											<p class="udMean">
+												<span th:each=" i : ${#numbers.sequence(0,vocaStcList.get(0).voWord.size -1)}">
+												<span class="wdMean" th:if="${i%2 == 0}">[[${vocaStcList.get(0).voWord.get(i)}]]</span> </span>
+											</p>
+
+											<div class="arwS"></div>
+											<div class="arwV"></div>
+											<div class="arwO"></div>
+
+											<div class="keyCheck2" style="height: 50px;"> </div>
+											<div class="inpDiv"></div>
+											<span  class="stcMean"></span>
+											
+											<div class="keyAns2" style="height: 50px;"> </div>
+		
+										</div>
+										<!-- 카드 번호(0~) -->
+										<span hidden="hidden" class="cardNum">0</span> <span
+											hidden="hidden" class="cardAns"></span>
+											<span hidden="hidden" class="cardBool"></span>
+
+									</div>
+
+									<div class="carousel-item" th:each=" j : ${#numbers.sequence(1,vocaStcList.size -1)}">
+										<!-- 슬라이드 구분용 span -->
+										<span hidden="hidden" class="stcTrain">0</span>
+										<!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+										<div class="card-body">
+											<h5 class="card-title">Examples</h5>
+											<button hidden="hidden" class="curBtn" th:onclick="curBtn([[${j}]])"></button>
+											<p class="ovMean">
+												<span th:each=" i : ${#numbers.sequence(1,vocaStcList.get(j).voWord.size -1)}">
+												<span class="wdMean" th:if="${i%2 != 0}">[[${vocaStcList.get(j).voWord.get(i)}]]</span> </span>
+											</p>
+											<div class="keyCheck1" style="position:absolute; height: 50px;"> </div>
+											<p class="stc"></p>
+											<div class="keyAns1" style="position:absolute; line-height:150px; height: 50px;"> </div>
+											<p class="udMean">
+												<span th:each=" i : ${#numbers.sequence(0,vocaStcList.get(j).voWord.size -1)}">
+												<span class="wdMean" th:if="${i%2 == 0}">[[${vocaStcList.get(j).voWord.get(i)}]]</span> </span>
+											</p>
+
+											<div class="arwS"></div>
+											<div class="arwV"></div>
+											<div class="arwO"></div>
+
+											<div class="keyCheck2" style="height: 50px;"> </div>
+											<div class="inpDiv"></div>
+											<span class="stcMean"></span>
+											<div class="keyAns2" style="height: 50px;"> </div>
+
+										</div>
+										<!-- 카드 번호(0~) -->
+										<span hidden="hidden" class="cardNum">[[${j}]]</span> <span
+											hidden="hidden" class="cardAns"></span>
+											<span hidden="hidden" class="cardBool"></span>
+											
+									</div>
+
+								</div>
+
+								<button hidden="hidden" class="carousel-control-prev" type="button"
+									data-bs-target="#carouselExampleControls" data-bs-slide="prev" onclick="cardBtn()">
+									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Previous</span>
+								</button>
+								<button id="carousel-control-next" class="carousel-control-next" type="button"
+									data-bs-target="#carouselExampleControls" data-bs-slide="next" onclick="cardBtn()">
+									<span style="background-color:gray;" class="carousel-control-next-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Next</span>
+								</button>
+
+
+								<div style="padding-left:20px;">
+									<p class="inf infSub" style="color:blue;">S (주어) : 문장 내 동작, 상태의 주체</p>
+									<p class="inf infVerb" style="color:red;">V (동사) : 문장 내 동작, 상태</p>
+									<p class="inf infObj" style="color:green;">O (목적어) : 동사의 동작 대상</p>
+								</div>
+							</div>
+							<!-- End Slides with controls -->
+
+						</div>
+					</div>
+
+
+
+
+				</div>
+
+			</div>
+		</section>
+
+	</main><!-- End #main -->
+	<!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<footer id="footer" class="footer">
+		<div class="copyright">
+			&copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights
+			Reserved
+		</div>
+		<div class="credits">
+			<!-- All the links in the footer should remain intact. -->
+			<!-- You can delete the links only if you purchased the pro version. -->
+			<!-- Licensing information: https://bootstrapmade.com/license/ -->
+			<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+			Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+		</div>
+	</footer>
+	<!-- End Footer -->
+
+	<a href="#"
+		class="back-to-top d-flex align-items-center justify-content-center"><i
+		class="bi bi-arrow-up-short"></i></a>
+
+	<!-- Vendor JS Files -->
+	<script src="/vendor/apexcharts/apexcharts.min.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="/vendor/chart.js/chart.umd.js"></script>
+	<script src="/vendor/echarts/echarts.min.js"></script>
+	<script src="/vendor/quill/quill.min.js"></script>
+	<script src="/vendor/simple-datatables/simple-datatables.js"></script>
+	<script src="/vendor/tinymce/tinymce.min.js"></script>
+	<script src="/vendor/php-email-form/validate.js"></script>
+
+	<!-- Template Main JS File -->
+	<script src="/js/main.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+        crossorigin="anonymous"></script>
+	<script th:inline="javascript">
+		
+	
+		let stcList = [[${vocaStcList}]];
+			//	[[${vocaStcList.get(0).voStcHtml}]]
+			//	[[${vocaStcList.get(0).voStcMnHtml}]]
+		
+		let opc = 0;
+		let opcTime = 0;
+		let opcBool = true;
+		let clrG = 68;
+		let clrR = 68;
+		let clrB = 68;
+		let clr = 68;
+		let nextBool = false;
+		let nextTime = 0;
+		
+		for(let j = 0; j < stcList.length; j++){
+			$(".stc").eq(j).html(stcList[j].voStcHtml);
+			$(".stcMean").eq(j).html(stcList[j].voStcMnHtml);
+			
+			
+
+			let word = $(".stc").eq(j).find(".word");
+			
+			// wdBool true : 아래 / false : 위
+			let wdBool = true;
+			// 아래일땐 + 안하고, 위 적용 후 ++;
+			let wdNum = 0;
+			
+			for(let i = 0; i < word.length; i++){
+				
+				if(wdBool){
+					// underMean
+					
+					// Math.floor(word.eq(i).offset().left)
+					// Math.floor(word.eq(i).width()/2)
+					// Math.floor($(".udMean .wdMean").eq(i/2).width()/2)
+					
+					let wdCnt = $(".udMean").eq(j).find(".wdMean").eq(wdNum).html().indexOf('^');
+					
+					let a = 0;
+					if(wdCnt == -1){
+						wdCnt = 0;
+					}else{
+						while(wdCnt != -1){
+							a++;
+							wdCnt = $(".udMean").eq(j).find(".wdMean").eq(wdNum).html().indexOf(wdCnt+1, '^');
+						}
+						wdCnt = 1;
+					}
+
+					if(wdCnt){
+						
+						$(".udMean").eq(j).find(".wdMean").eq(wdNum).html($(".udMean").eq(j).find(".wdMean").eq(wdNum).html().substring(0,$(".udMean").eq(j).find(".wdMean").eq(wdNum).html().length-a));
+						$(".udMean").eq(j).find(".wdMean").eq(wdNum).append('<span hidden="hidden" class="wdCnt">' + a + '</span>');
+						
+						
+						$(".udMean").eq(j).find(".wdMean").eq(wdNum).css({"left" : (Math.floor(word.eq(i).offset().left) + (Math.floor( word.eq(i+a).offset().left) - Math.floor(word.eq(i).offset().left) + Math.floor(word.eq(i+a).width()) )/2 - Math.floor($(".udMean .wdMean").eq(wdNum).width()/2) + 20 - Math.floor($(".udMean").offset().left))+"px"});
+						
+						i = i + a;
+						
+					}else{
+						
+						// $(".udMean .wdMean").eq(wdNum).css({"left" : (Math.floor(word.eq(i).offset().left) + Math.floor(word.eq(i).width()/2) - Math.floor($(".udMean .wdMean").eq(wdNum).width()/2)+20 - Math.floor($(".udMean").offset().left))+"px"});
+						$(".udMean").eq(j).find(".wdMean").eq(wdNum).css({"left" : (Math.floor(word.eq(i).offset().left) + Math.floor(word.eq(i).width()/2) - Math.floor($(".udMean .wdMean").eq(wdNum).width()/2)+20 - Math.floor($(".udMean").offset().left))+"px"});
+						
+					}
+					
+					wdBool = false;
+					
+					
+				}else{
+					// overMean
+					
+					let wdCnt = $(".ovMean").eq(j).find(".wdMean").eq(wdNum).html().indexOf('^');
+					
+					let a = 0;
+					if(wdCnt == -1){
+						wdCnt = 0;
+					}else{
+						while(wdCnt != -1){
+							a++;
+							wdCnt = $(".ovMean").eq(j).find(".wdMean").eq(wdNum).html().indexOf(wdCnt+1, '^');
+						}
+						wdCnt = 1;
+					}
+					
+					
+					if(wdCnt){
+						
+						$(".ovMean").eq(j).find(".wdMean").eq(wdNum).html($(".ovMean").eq(j).find(".wdMean").eq(wdNum).html().substring(0,$(".ovMean").eq(j).find(".wdMean").eq(wdNum).html().length -a));
+						$(".ovMean").eq(j).find(".wdMean").eq(wdNum).append('<span hidden="hidden" class="wdCnt">' + a + '</span>');
+						
+						$(".ovMean").eq(j).find(".wdMean").eq(wdNum).css({"left" : (Math.floor(word.eq(i).offset().left) + (Math.floor(word.eq(i+a).offset().left) - Math.floor(word.eq(i).offset().left) + Math.floor(word.eq(i+a).width()) )/2 - Math.floor($(".ovMean .wdMean").eq(wdNum).width()/2) + 20 - Math.floor($(".ovMean").offset().left))+"px"});
+						
+						i = i + a;
+					}else{
+						
+						$(".ovMean").eq(j).find(".wdMean").eq(wdNum).css({"left" : (Math.floor(word.eq(i).offset().left) + Math.floor(word.eq(i).width()/2) - Math.floor($(".ovMean .wdMean").eq(wdNum).width()/2)+20 - Math.floor($(".ovMean").offset().left))+"px"});
+					}
+					
+					
+					wdBool = true;
+					wdNum++;
+					
+				}
+				
+			}
+		}
+	
+		
+		let subBool = false;
+		if($(".stc").eq(0).find(".sub").length > 0 && $(".stcMean").eq(0).find(".sub").length > 0){
+			subBool = true;
+		}
+		
+		if(subBool){
+			
+		
+		// Sub
+		// Number($(".stc .sub").offset().left) + Number($(".stc .sub").width())/2 
+		// - (Number($(".stcMean .sub").offset().left) + Number($(".stcMean .sub").width())/2)
+		// = 좌우 길이
+		
+		let subWidth = (Number($(".stcMean .sub").offset().left) + Number($(".stcMean .sub").width())/2) - (Number($(".stc .sub").offset().left) + Number($(".stc .sub").width())/2); 
+		let subLen = Math.pow( (Math.pow(50,2) + Math.pow(subWidth,2)) , 1/2 );
+		let subLeft = Number($(".stcMean .sub").offset().left) + Number($(".stcMean .sub").width())/2 - Math.floor($(".stc").offset().left);
+		
+		
+		let rootAfterStyle  = document.createElement("style");
+
+		// 원하는 ::after style을 작용합니다.
+		rootAfterStyle.innerHTML = ".arwS::after {width:" + subLen + "px; }";
+		  
+		// <head> tag에 넣습니다.
+		document.head.appendChild(rootAfterStyle);
+		
+	
+		
+		// 수직일 때 
+		if(subWidth >= -10 && subWidth <= 10){
+			$(".arwS").css({"left" : (subLeft+15) + "px"});
+			$(".arwS").css({"transform" : "rotate(225deg)"});
+		}else if(subWidth > 10){
+			// if +일때
+			// if 45도 이하 일때 (-20) 
+			// 180 - (45 - 각도 tan-1(높이/좌우))
+			if(Math.atan(50/subWidth)*180/Math.PI < 45){
+				let subDeg = 180 - (45 - Math.atan(50/subWidth)*180/Math.PI);
+				
+				// left, rotate 조절
+				$(".arwS").css({"left" : (subLeft) + "px"});
+				$(".arwS").css({"transform" : "rotate(" + subDeg + "deg)"});
+				
+			}else{
+				// if 45도 이상 일때 (-10)
+				// 180 + (각도 tan-1(높/좌) - 45)
+				let subDeg = 180 + (Math.atan(50/subWidth)*180/Math.PI - 45);
+				
+				// left, rotate 조절
+				$(".arwS").css({"left" : (subLeft) + "px"});
+				$(".arwS").css({"transform" : "rotate(" + subDeg + "deg)"});
+				
+			}
+			
+		}else{
+			// if -일때
+			// -붙여서(+만들어서) 각도 재기
+			// if 45도 이하 일때 (-40)
+			// -90 + (45 - 각도 tan-1(높/-좌))
+			if(Math.atan(50/(-subWidth))*180/Math.PI < 45){
+				let subDeg = -90 + (45 - Math.atan(50/(-subWidth))*180/Math.PI);
+				
+				// left, rotate 조절
+				$(".arwS").css({"left" : (subLeft+ 30) + "px"});
+				$(".arwS").css({"transform" : "rotate(" + subDeg + "deg)"});
+			}else{
+				// if 45도 이상 일때 (-20)
+				// -90 - (각도 tan-1(높/-좌) -45)
+				
+				let subDeg = -90 - (Math.atan(50/(-subWidth))*180/Math.PI - 45);
+				
+				// left, rotate 조절
+				$(".arwS").css({"left" : (subLeft+ 20) + "px"});
+				$(".arwS").css({"transform" : "rotate(" + subDeg + "deg)"});
+				
+			}
+			
+		}
+		}
+		
+		
+		let verbBool = false;
+		if($(".stc").eq(0).find(".verb").length > 0 && $(".stcMean").eq(0).find(".verb").length > 0){
+			verbBool = true;
+		}
+		
+		if(verbBool){
+			
+		
+		// verb
+		let verbWidth = (Number($(".stcMean .verb").offset().left) + Number($(".stcMean .verb").width())/2) - (Number($(".stc .verb").offset().left) + Number($(".stc .verb").width())/2); 
+		let verbLen = Math.pow( (Math.pow(50,2) + Math.pow(verbWidth,2)) , 1/2 );
+		let verbLeft = Number($(".stcMean .verb").offset().left) + Number($(".stcMean .verb").width())/2 - Math.floor($(".stc").offset().left);
+		
+		
+		let verbRootAfterStyle  = document.createElement("style");
+
+		// 원하는 ::after style을 작용합니다.
+		verbRootAfterStyle.innerHTML = ".arwV::after {width:" + verbLen + "px; }";
+		  
+		// <head> tag에 넣습니다.
+		document.head.appendChild(verbRootAfterStyle);
+
+		
+		// 수직일 때 
+		if(verbWidth >= -10 && verbWidth <= 10){
+			$(".arwV").css({"left" : (verbLeft+15) + "px"});
+			$(".arwV").css({"transform" : "rotate(225deg)"});
+		}else if(verbWidth > 10){
+			// if +일때
+			// if 45도 이하 일때 (-20) 
+			// 180 - (45 - 각도 tan-1(높이/좌우))
+			if(Math.atan(50/verbWidth)*180/Math.PI < 45){
+				let verbDeg = 180 - (45 - Math.atan(50/verbWidth)*180/Math.PI);
+				
+				// left, rotate 조절
+				$(".arwV").css({"left" : (verbLeft) + "px"});
+				$(".arwV").css({"transform" : "rotate(" + verbDeg + "deg)"});
+				
+			}else{
+				// if 45도 이상 일때 (-10)
+				// 180 + (각도 tan-1(높/좌) - 45)
+				let verbDeg = 180 + (Math.atan(50/verbWidth)*180/Math.PI - 45);
+				
+				// left, rotate 조절
+				$(".arwV").css({"left" : (verbLeft) + "px"});
+				$(".arwV").css({"transform" : "rotate(" + verbDeg + "deg)"});
+				
+			}
+			
+		}else{
+			// if -일때
+			// -붙여서(+만들어서) 각도 재기
+			// if 45도 이하 일때 (-40)
+			// -90 + (45 - 각도 tan-1(높/-좌))
+			if(Math.atan(50/(-verbWidth))*180/Math.PI < 45){
+				let verbDeg = -90 + (45 - Math.atan(50/(-verbWidth))*180/Math.PI);
+				
+				// left, rotate 조절
+				$(".arwV").css({"left" : (verbLeft + 30) + "px"});
+				$(".arwV").css({"transform" : "rotate(" + verbDeg + "deg)"});
+			}else{
+				// if 45도 이상 일때 (-20)
+				// -90 - (각도 tan-1(높/-좌) -45)
+				
+				let verbDeg = -90 - (Math.atan(50/(-verbWidth))*180/Math.PI - 45);
+				
+				// left, rotate 조절
+				$(".arwV").css({"left" : (verbLeft+ 20) + "px"});
+				$(".arwV").css({"transform" : "rotate(" + verbDeg + "deg)"});
+			}
+		}
+		}
+		
+		
+		let objBool = false;
+		if($(".stc").eq(0).find(".obj").length > 0 && $(".stcMean").eq(0).find(".obj").length > 0){
+			objBool = true;
+		}
+		// object
+		if(objBool){
+		
+	
+		let objWidth = (Number($(".stcMean .obj").offset().left) + Number($(".stcMean .obj").width())/2) - (Number($(".stc .obj").offset().left) + Number($(".stc .obj").width())/2); 
+		let objLen = Math.pow( (Math.pow(50,2) + Math.pow(objWidth,2)) , 1/2 );
+		let objLeft = Number($(".stcMean .obj").offset().left) + Number($(".stcMean .obj").width())/2 - Math.floor($(".stc").offset().left);
+		
+		
+		let objRootAfterStyle  = document.createElement("style");
+
+		// 원하는 ::after style을 작용합니다.
+		objRootAfterStyle.innerHTML = ".arwO::after {width:" + objLen + "px; }";
+		  
+		// <head> tag에 넣습니다.
+		document.head.appendChild(objRootAfterStyle);
+
+		
+		// 수직일 때 
+		if(objWidth >= -10 && objWidth <= 10){
+			$(".arwO").css({"left" : (objLeft+15) + "px"});
+			$(".arwO").css({"transform" : "rotate(225deg)"});
+		}else if(objWidth > 10){
+			// if +일때
+			// if 45도 이하 일때 (-20) 
+			// 180 - (45 - 각도 tan-1(높이/좌우))
+			if(Math.atan(50/objWidth)*180/Math.PI < 45){
+				let objDeg = 180 - (45 - Math.atan(50/objWidth)*180/Math.PI);
+				
+				// left, rotate 조절
+				$(".arwO").css({"left" : (objLeft) + "px"});
+				$(".arwO").css({"transform" : "rotate(" + objDeg + "deg)"});
+				
+			}else{
+				// if 45도 이상 일때 (-10)
+				// 180 + (각도 tan-1(높/좌) - 45)
+				let objDeg = 180 + (Math.atan(50/objWidth)*180/Math.PI - 45);
+				
+				// left, rotate 조절
+				$(".arwO").css({"left" : (objLeft) + "px"});
+				$(".arwO").css({"transform" : "rotate(" + objDeg + "deg)"});
+				
+			}
+			
+		}else{
+			// if -일때
+			// -붙여서(+만들어서) 각도 재기
+			// if 45도 이하 일때 (-40)
+			// -90 + (45 - 각도 tan-1(높/-좌))
+			if(Math.atan(50/(-objWidth))*180/Math.PI < 45){
+				let objDeg = -90 + (45 - Math.atan(50/(-objWidth))*180/Math.PI);
+				
+				// left, rotate 조절
+				$(".arwO").css({"left" : (objLeft + 30) + "px"});
+				$(".arwO").css({"transform" : "rotate(" + objDeg + "deg)"});
+			}else{
+				// if 45도 이상 일때 (-20)
+				// -90 - (각도 tan-1(높/-좌) -45)
+				
+				let objDeg = -90 - (Math.atan(50/(-objWidth))*180/Math.PI - 45);
+				
+				// left, rotate 조절
+				$(".arwO").css({"left" : (objLeft+ 20) + "px"});
+				$(".arwO").css({"transform" : "rotate(" + objDeg + "deg)"});
+			}
+		}
+		
+		}
+		
+		
+		
+	
+		let opcSet = setInterval(function() {
+			
+			
+			if(opcBool){
+				opcTime += 100;
+			}
+			
+			if(opcTime>= 500 && opcBool){
+				
+				opc+=0.3;
+				
+				$(".active .wdMean").css({"opacity" : opc });
+				
+				if(subBool){
+					$(".active .arwS").css({"opacity" : opc });
+					$(".infSub").css({"opacity" : opc });
+				}
+				
+				if(verbBool){
+					$(".active .arwV").css({"opacity" : opc });
+					$(".infVerb").css({"opacity" : opc });
+				}
+				
+				if(objBool){
+					$(".active .arwO").css({"opacity" : opc });
+					$(".infObj").css({"opacity" : opc });
+				}
+				
+				
+				clr-=17;
+				clrG+=15;
+				clrR+=46.75;
+				clrB+=46.75;
+				
+				if(subBool){
+					$(".active .sub").css({"color" : "rgb("+ clr +" " + clr + " " + clrB + ")" });
+					$(".active .sub .inp").css({"box-shadow" : "0 0 0 .25rem rgba("+ clr +", " + clr + ", " + clrB + ", .25)" });
+					$(".active .sub .inp").css({"border-color" : "rgb("+ clr +", " + clr + ", " + clrB + ")" }); 
+					
+					
+				}
+				
+				if(verbBool){
+					$(".active .verb").css({"color" : "rgb("+ clrR +" " + clr + " " + clr + ")" });
+					$(".active .verb .inp").css({"box-shadow" : "0 0 0 .25rem rgba("+ clrR +", " + clr + ", " + clr + ", .25)" });
+					$(".active .verb .inp").css({"border-color" : "rgb("+ clrR +", " + clr + ", " + clr + ")" });
+					    
+				
+				}
+				
+				if(objBool){
+					$(".active .obj").css({"color" : "rgb("+ clr +" " + clrG + " " + clr + ")" });
+					$(".active .obj .inp").css({"box-shadow" : "0 0 0 .25rem rgba("+ clr +", " + clrG + ", " + clr + ", .25)" });
+					$(".active .obj .inp").css({"border-color" : "rgb("+ clr +", " + clrG + ", " + clr + ")" });
+					
+				}
+				
+				
+				
+			}
+			
+			
+			if(opc >= 1){
+				opcBool = false;
+				
+			}
+			
+			
+			
+			if(nextBool){
+				nextTime+= 100;
+				
+				if(nextTime >= 5000){
+					$('.carousel-control-next').trigger("click");
+					nextTime=0;
+					nextBool=false;
+					
+				}
+			}
+			
+			
+		},100);
+		
+		
+		
+		function curBtn(num){
+			
+			let j = num+1; 
+			if(j == stcList.length){
+				j = 0;
+			}
+			
+			
+			let word = $(".stc").eq(j).find(".word");
+				
+			// wdBool true : 아래 / false : 위
+			let wdBool = true;
+			// 아래일땐 + 안하고, 위 적용 후 ++;
+			let wdNum = 0;
+			
+			for(let i = 0; i < word.length; i++){
+				
+				
+				if(wdBool){
+					// underMean
+					
+					// Math.floor(word.eq(i).offset().left)
+					// Math.floor(word.eq(i).width()/2)
+					// Math.floor($(".udMean .wdMean").eq(i/2).width()/2)
+					
+					let wdCnt = $(".udMean").eq(j).find(".wdMean").eq(wdNum).find(".wdCnt").html();
+					
+					let a = Number($(".udMean").eq(j).find(".wdMean").eq(wdNum).find(".wdCnt").html());
+					
+					if(wdCnt){
+						$(".udMean").eq(j).find(".wdMean").eq(wdNum).css({"left" : (Math.floor(word.eq(i).offset().left) + (Math.floor(word.eq(i+a).offset().left) - Math.floor(word.eq(i).offset().left) + Math.floor(word.eq(i+a).width()) )/2 - Math.floor($(".udMean").eq(j).find(".wdMean").eq(wdNum).width()/2) + 20 - Math.floor($(".udMean").eq(j).offset().left))+"px"});
+						
+						i = i + a;
+						
+						
+					}else{
+						// $(".udMean .wdMean").eq(wdNum).css({"left" : (Math.floor(word.eq(i).offset().left) + Math.floor(word.eq(i).width()/2) - Math.floor($(".udMean .wdMean").eq(wdNum).width()/2)+20 - Math.floor($(".udMean").offset().left))+"px"});
+						$(".udMean").eq(j).find(".wdMean").eq(wdNum).css({"left" : (Math.floor(word.eq(i).offset().left) + Math.floor(word.eq(i).width()/2) - Math.floor($(".udMean").eq(j).find(".wdMean").eq(wdNum).width()/2)+20 - Math.floor($(".udMean").eq(j).offset().left))+"px"});
+						
+					}
+					
+					wdBool = false;
+					
+					
+				}else{
+					// overMean
+					
+					let wdCnt = $(".ovMean").eq(j).find(".wdMean").eq(wdNum).find(".wdCnt").html();
+					
+					let a = Number($(".ovMean").eq(j).find(".wdMean").eq(wdNum).find(".wdCnt").html());
+					
+					
+					if(wdCnt){
+						
+						$(".ovMean").eq(j).find(".wdMean").eq(wdNum).css({"left" : (Math.floor(word.eq(i).offset().left) + (Math.floor(word.eq(i+a).offset().left) - Math.floor(word.eq(i).offset().left) + Math.floor(word.eq(i+a).width()) )/2 - Math.floor($(".ovMean").eq(j).find(".wdMean").eq(wdNum).width()/2) + 20 - Math.floor($(".ovMean").eq(j).offset().left))+"px"});
+						
+						i = i + a;
+					}else{
+						
+						$(".ovMean").eq(j).find(".wdMean").eq(wdNum).css({"left" : (Math.floor(word.eq(i).offset().left) + Math.floor(word.eq(i).width()/2) - Math.floor($(".ovMean").eq(j).find(".wdMean").eq(wdNum).width()/2)+20 - Math.floor($(".ovMean").eq(j).offset().left))+"px"});
+					}
+					
+					
+					wdBool = true;
+					wdNum++;
+					
+				}
+				
+			}
+			
+			
+			subBool = false;
+			if($(".stc").eq(j).find(".sub").length > 0 && $(".stcMean").eq(j).find(".sub").length > 0){
+				subBool = true;
+			}
+			
+			if(subBool){
+				
+			
+			// Sub
+			// Number($(".stc .sub").offset().left) + Number($(".stc .sub").width())/2 
+			// - (Number($(".stcMean .sub").offset().left) + Number($(".stcMean .sub").width())/2)
+			// = 좌우 길이
+			
+			let subWidth = (Number($(".stc").eq(j).find(".sub").offset().left) + Number($(".stc").eq(j).find(".sub").width())/2) - (Number($(".stc").eq(j).find(".sub").offset().left) + Number($(".stc").eq(j).find(".sub").width())/2); 
+			let subLen = Math.pow( (Math.pow(50,2) + Math.pow(subWidth,2)) , 1/2 );
+			let subLeft = Number($(".stc").eq(j).find(".sub").offset().left) + Number($(".stc").eq(j).find(".sub").width())/2 - Math.floor($(".stc").eq(j).offset().left);
+			
+			
+			let rootAfterStyle  = document.createElement("style");
+
+			// 원하는 ::after style을 작용합니다.
+			rootAfterStyle.innerHTML = ".arwS::after {width:" + subLen + "px; }";
+			  
+			// <head> tag에 넣습니다.
+			document.head.appendChild(rootAfterStyle);
+			
+		
+			
+			// 수직일 때 
+			if(subWidth >= -10 && subWidth <= 10){
+				$(".arwS").eq(j).css({"left" : (subLeft+15) + "px"});
+				$(".arwS").eq(j).css({"transform" : "rotate(225deg)"});
+			}else if(subWidth > 10){
+				// if +일때
+				// if 45도 이하 일때 (-20) 
+				// 180 - (45 - 각도 tan-1(높이/좌우))
+				if(Math.atan(50/subWidth)*180/Math.PI < 45){
+					let subDeg = 180 - (45 - Math.atan(50/subWidth)*180/Math.PI);
+					
+					// left, rotate 조절
+					$(".active .arwS").css({"left" : (subLeft) + "px"});
+					$(".active .arwS").css({"transform" : "rotate(" + subDeg + "deg)"});
+					
+				}else{
+					// if 45도 이상 일때 (-10)
+					// 180 + (각도 tan-1(높/좌) - 45)
+					let subDeg = 180 + (Math.atan(50/subWidth)*180/Math.PI - 45);
+					
+					// left, rotate 조절
+					$(".active .arwS").css({"left" : (subLeft) + "px"});
+					$(".active .arwS").css({"transform" : "rotate(" + subDeg + "deg)"});
+					
+				}
+				
+			}else{
+				// if -일때
+				// -붙여서(+만들어서) 각도 재기
+				// if 45도 이하 일때 (-40)
+				// -90 + (45 - 각도 tan-1(높/-좌))
+				if(Math.atan(50/(-subWidth))*180/Math.PI < 45){
+					let subDeg = -90 + (45 - Math.atan(50/(-subWidth))*180/Math.PI);
+					
+					// left, rotate 조절
+					$(".active .arwS").css({"left" : (subLeft+ 30) + "px"});
+					$(".active .arwS").css({"transform" : "rotate(" + subDeg + "deg)"});
+				}else{
+					// if 45도 이상 일때 (-20)
+					// -90 - (각도 tan-1(높/-좌) -45)
+					
+					let subDeg = -90 - (Math.atan(50/(-subWidth))*180/Math.PI - 45);
+					
+					// left, rotate 조절
+					$(".active .arwS").css({"left" : (subLeft+ 20) + "px"});
+					$(".active .arwS").css({"transform" : "rotate(" + subDeg + "deg)"});
+					
+				}
+				
+			}
+			}
+			
+			verbBool = false;
+			if($(".active .stc .verb").length > 0 && $(".active .stcMean .verb").length > 0){
+				verbBool = true;
+			}
+			
+			if(verbBool){
+				
+			
+			// verb
+			let verbWidth = (Number($(".active .stcMean .verb").offset().left) + Number($(".active .stcMean .verb").width())/2) - (Number($(".active .stc .verb").offset().left) + Number($(".active .stc .verb").width())/2); 
+			let verbLen = Math.pow( (Math.pow(50,2) + Math.pow(verbWidth,2)) , 1/2 );
+			let verbLeft = Number($(".active .stcMean .verb").offset().left) + Number($(".active .stcMean .verb").width())/2 - Math.floor($(".active .stc").offset().left);
+			
+			
+			let verbRootAfterStyle  = document.createElement("style");
+
+			// 원하는 ::after style을 작용합니다.
+			verbRootAfterStyle.innerHTML = ".arwV::after {width:" + verbLen + "px; }";
+			  
+			// <head> tag에 넣습니다.
+			document.head.appendChild(verbRootAfterStyle);
+
+			
+			// 수직일 때 
+			if(verbWidth >= -10 && verbWidth <= 10){
+				$(".active .arwV").css({"left" : (verbLeft+15) + "px"});
+				$(".active .arwV").css({"transform" : "rotate(225deg)"});
+			}else if(verbWidth > 10){
+				// if +일때
+				// if 45도 이하 일때 (-20) 
+				// 180 - (45 - 각도 tan-1(높이/좌우))
+				if(Math.atan(50/verbWidth)*180/Math.PI < 45){
+					let verbDeg = 180 - (45 - Math.atan(50/verbWidth)*180/Math.PI);
+					
+					// left, rotate 조절
+					$(".active .arwV").css({"left" : (verbLeft) + "px"});
+					$(".active .arwV").css({"transform" : "rotate(" + verbDeg + "deg)"});
+					
+				}else{
+					// if 45도 이상 일때 (-10)
+					// 180 + (각도 tan-1(높/좌) - 45)
+					let verbDeg = 180 + (Math.atan(50/verbWidth)*180/Math.PI - 45);
+					
+					// left, rotate 조절
+					$(".active .arwV").css({"left" : (verbLeft) + "px"});
+					$(".active .arwV").css({"transform" : "rotate(" + verbDeg + "deg)"});
+					
+				}
+				
+			}else{
+				// if -일때
+				// -붙여서(+만들어서) 각도 재기
+				// if 45도 이하 일때 (-40)
+				// -90 + (45 - 각도 tan-1(높/-좌))
+				if(Math.atan(50/(-verbWidth))*180/Math.PI < 45){
+					let verbDeg = -90 + (45 - Math.atan(50/(-verbWidth))*180/Math.PI);
+					
+					// left, rotate 조절
+					$(".active .arwV").css({"left" : (verbLeft + 30) + "px"});
+					$(".active .arwV").css({"transform" : "rotate(" + verbDeg + "deg)"});
+				}else{
+					// if 45도 이상 일때 (-20)
+					// -90 - (각도 tan-1(높/-좌) -45)
+					
+					let verbDeg = -90 - (Math.atan(50/(-verbWidth))*180/Math.PI - 45);
+					
+					// left, rotate 조절
+					$(".active .arwV").css({"left" : (verbLeft+ 20) + "px"});
+					$(".active .arwV").css({"transform" : "rotate(" + verbDeg + "deg)"});
+				}
+			}
+			}
+			
+			
+			objBool = false;
+			if($(".active .stc .obj").length > 0 && $(".active .stcMean .obj").length > 0){
+				objBool = true;
+			}
+			
+			console.log(objBool);
+			// object
+			if(objBool){
+			
+			let objWidth = (Number($(".active .stcMean .obj").offset().left) + Number($(".active .stcMean .obj").width())/2) - (Number($(".active .stc .obj").offset().left) + Number($(".active .stc .obj").width())/2); 
+			let objLen = Math.pow( (Math.pow(50,2) + Math.pow(objWidth,2)) , 1/2 );
+			let objLeft = Number($(".active .stcMean .obj").offset().left) + Number($(".active .stcMean .obj").width())/2 - Math.floor($(".active .stc").offset().left);
+			
+			
+			let objRootAfterStyle  = document.createElement("style");
+
+			// 원하는 ::after style을 작용합니다.
+			objRootAfterStyle.innerHTML = ".arwO::after {width:" + objLen + "px; }";
+			  
+			// <head> tag에 넣습니다.
+			document.head.appendChild(objRootAfterStyle);
+			
+			
+			// 수직일 때 
+			if(objWidth >= -10 && objWidth <= 10){
+				$(".active .arwO").css({"left" : (objLeft+15) + "px"});
+				$(".active .arwO").css({"transform" : "rotate(225deg)"});
+			}else if(objWidth > 10){
+				// if +일때
+				// if 45도 이하 일때 (-20) 
+				// 180 - (45 - 각도 tan-1(높이/좌우))
+				if(Math.atan(50/objWidth)*180/Math.PI < 45){
+					let objDeg = 180 - (45 - Math.atan(50/objWidth)*180/Math.PI);
+					
+					// left, rotate 조절
+					$(".active .arwO").css({"left" : (objLeft) + "px"});
+					$(".active .arwO").css({"transform" : "rotate(" + objDeg + "deg)"});
+					
+				}else{
+					// if 45도 이상 일때 (-10)
+					// 180 + (각도 tan-1(높/좌) - 45)
+					let objDeg = 180 + (Math.atan(50/objWidth)*180/Math.PI - 45);
+					
+					// left, rotate 조절
+					$(".active .arwO").css({"left" : (objLeft) + "px"});
+					$(".active .arwO").css({"transform" : "rotate(" + objDeg + "deg)"});
+					
+				}
+				
+			}else{
+				// if -일때
+				// -붙여서(+만들어서) 각도 재기
+				// if 45도 이하 일때 (-40)
+				// -90 + (45 - 각도 tan-1(높/-좌))
+				if(Math.atan(50/(-objWidth))*180/Math.PI < 45){
+					let objDeg = -90 + (45 - Math.atan(50/(-objWidth))*180/Math.PI);
+					
+					// left, rotate 조절
+					$(".active .arwO").css({"left" : (objLeft + 30) + "px"});
+					$(".active .arwO").css({"transform" : "rotate(" + objDeg + "deg)"});
+				}else{
+					// if 45도 이상 일때 (-20)
+					// -90 - (각도 tan-1(높/-좌) -45)
+					
+					let objDeg = -90 - (Math.atan(50/(-objWidth))*180/Math.PI - 45);
+					
+					// left, rotate 조절
+					$(".active .arwO").css({"left" : (objLeft+ 20) + "px"});
+					$(".active .arwO").css({"transform" : "rotate(" + objDeg + "deg)"});
+				}
+			}
+			
+			}
+			
+			
+			// 전에꺼 변경
+			let cardNum = Number($(".active .cardNum").html())-1;
+			console.log(cardNum);
+			console.log($(".carousel-item").eq(cardNum).find(".keyWord").eq(0).html());
+			
+			if(cardNum == -1){
+				cardNum = stcList.length-1;
+			}
+			
+			
+			
+			if($(".carousel-item").eq(cardNum).find(".stcTrain").html() == 0){
+				
+				
+				$(".stc").eq(cardNum).html(stcList[cardNum].voStcHtml);
+				let inp = '<input type="text" class="inp form-control">';
+				$(".stcMean").eq(cardNum).html(stcList[cardNum].voStcMnHtml);
+				let consBool = true;
+				let keyWord = $(".stcMean").eq(cardNum).find(".keyWord").eq(0).html();
+				let keyWidth = $(".stcMean").eq(cardNum).find(".keyWord").eq(0).html().length;
+				
+				for(let k = 0; k < stcList[cardNum].voCons.length; k++){
+					if($(".stcMean").eq(cardNum).find(".keyWord").eq(0).html() == stcList[cardNum].voCons[k]){
+						consBool= false;
+					}
+				}
+				if(consBool){
+					$(".cardAns").eq(cardNum).html($(".stcMean").eq(cardNum).find(".keyWord").eq(0).html() + "," + stcList[cardNum].voCons);
+				}else{
+					$(".cardAns").eq(cardNum).html(stcList[cardNum].voCons+" ");
+				}
+				$(".stcMean").eq(cardNum).find(".keyWord").eq(0).html(inp);
+				$(".stcMean").eq(cardNum).find(".inp").eq(0).css({"width" : (keyWidth*30 +40)+"px"});
+				$(".stcMean").eq(cardNum).find(".keyWord").eq(0).addClass("key");
+				$(".stcMean").eq(cardNum).find(".keyWord").eq(0).removeClass("keyWord");
+				
+				$('.stcMean').eq(cardNum).on('keyup', '.inp' ,function() {
+						if (event.keyCode == 13) {
+	    				event.preventDefault();
+	    
+	    				let ansHw = $(".cardAns").eq(cardNum).html();
+
+	    		        ansHw = ansHw.replaceAll(" ", "");
+	    		        let ansHwList = Array();
+	    		        ansHwList = ansHw.split(",");
+	    		        let inputHw = $(".section .active .inp").val();
+	    		        inputHw = inputHw.replaceAll(" ","");
+	    		        inputHw = inputHw.replaceAll(";",",");
+
+	    		        let inputHwList = Array();
+
+	    		        inputHwList = inputHw.split(",");
+
+	    		        let sum = 0;
+	    		        for(let i = 0; i < ansHwList.length; i++){
+	    		          for(let k = 0; k < inputHwList.length; k++) if (ansHwList[i] == inputHwList[k]) {
+	    		            sum++;
+	    		            break;
+	    		          }
+	    		        }
+	    		        
+	    		        if(sum > 0){
+	    		        	// 맞음
+	    		        	$('.keyCheck2').eq(cardNum).html('<img class="scoring" src="/img/채점O.png" style="height: 150px; position:absolute;  left:'+ (($(".stcMean").eq(cardNum).find(".key").offset().left)-($(".stcMean").eq(cardNum).offset().left)-5) +'px;">');
+	    		        	$('.keyAns2').eq(cardNum).html('');
+	    		        	
+	    		        	if($('.cardBool').eq(cardNum).html()==''){
+	    		        		$('.cardBool').eq(cardNum).html(0);	
+	    		        	}
+	    		        	
+	    		        	nextBool = true;
+	    		        	
+	    		        	
+	    		        }else{
+	    		        	// 틀림
+	    		        	$('.keyCheck2').eq(cardNum).html('<span class="checkTip">정답을 입력하면 넘어갑니다.</span><img class="scoring" src="/img/채점X.png" style="height: 95px; position:absolute;  left:'+ (($(".stcMean").eq(cardNum).find(".key").offset().left)-($(".stcMean").eq(cardNum).offset().left)-15) +'px;">');
+	        				$('.keyAns2').eq(cardNum).html('<img class="scoring" src="/img/채점화살표.png" style="height: 70px; position:absolute;  left:'+ (($(".stcMean").eq(cardNum).find(".key").offset().left)-($(".stcMean").eq(cardNum).offset().left)+20) +'px;"> <div class="scoring" style="font-size:30px; line-height: 70px; position:absolute; height:70px; left:'+ (($(".stcMean").eq(cardNum).find(".key").offset().left)-($(".stcMean").eq(cardNum).offset().left)+100) +'px;">'+ keyWord +'</div>');
+	    		        	
+	        				if($('.cardBool').eq(cardNum).html()==''){
+	    		        		$('.cardBool').eq(cardNum).html(1);	
+	    		        	}
+	        				
+	        				opcBool = false;
+	        				$(".wdMean").css({"opacity" : 0 });
+	        				$(".arwS").css({"opacity" : 0 });
+	        				$(".arwV").css({"opacity" : 0 });
+	        				$(".arwO").css({"opacity" : 0 });
+							$(".inf").css({"opacity" : 0 });
+	        				
+	        				
+	    		        }
+						}
+				});
+				
+				$(".carousel-item").eq(cardNum).find(".stcTrain").html(1);
+				
+				
+			}else if($(".carousel-item").eq(cardNum).find(".stcTrain").html() == 1){
+				
+				
+				
+				if($('.cardBool').eq(cardNum).html() == 1 || $('.cardBool').eq(cardNum).html() == ''){
+					// 그대로
+					$('.keyCheck2').eq(cardNum).html('');
+    				$('.keyAns2').eq(cardNum).html('');
+					
+    				$('.cardBool').eq(cardNum).html('');	
+    				$('.stcMean').eq(cardNum).find('.inp').val('');
+    				
+				}else{
+					
+				$('.keyCheck2').eq(cardNum).html('');
+    			$('.keyAns2').eq(cardNum).html('');
+				
+				let inp = ' <input type="text" class="inp form-control"> ';
+				$(".stc").eq(cardNum).html(stcList[cardNum].voStcHtml);
+				$(".stcMean").eq(cardNum).html(stcList[cardNum].voStcMnHtml);
+				let consBool = true;
+				let keyWord = $(".stc").eq(cardNum).find(".keyWord").eq(0).html();
+				let keyWidth = $(".stc").eq(cardNum).find(".keyWord").eq(0).html().length;
+				$(".stc").eq(cardNum).find(".keyWord").eq(0).html(inp);
+				$(".stc").eq(cardNum).find(".inp").eq(0).css({"width" : (keyWidth*20 +20)+"px"});
+				$(".stc").eq(cardNum).find(".keyWord").eq(0).addClass("key");
+				$(".stc").eq(cardNum).find(".keyWord").eq(0).removeClass("keyWord");
+				
+				$('.stc').eq(cardNum).on('keyup', '.inp' ,function() {
+						if (event.keyCode == 13) {
+	    				event.preventDefault();
+	    
+	    		        let inputHw = $(".section .active .inp").val();
+	    		        inputHw = inputHw.replaceAll(" ","");
+	    		        inputHw = inputHw.replaceAll(";",",");
+
+	    		        let inputHwList = Array();
+
+	    		        inputHwList = inputHw.split(",");
+
+	    		        let sum = 0;
+	    		        for(let i = 0; i < 1; i++){
+	    		          for(let k = 0; k < inputHwList.length; k++) if (keyWord == inputHwList[k]) {
+	    		            sum++;
+	    		            break;
+	    		          }
+	    		        }
+	    		        
+	    		        if(sum > 0){
+	    		        	// 맞음
+	    		        	$('.keyCheck1').eq(cardNum).html('<img class="scoring" src="/img/채점O.png" style="height: 150px; position:absolute;  top:-50px; left:'+ (($(".stc").eq(cardNum).find(".key").offset().left)-($(".stc").eq(cardNum).offset().left)-25) +'px;">');    		        	
+	    		        	$('.keyAns1').eq(cardNum).html('');
+	    		        	
+	    		        	if($('.cardBool').eq(cardNum).html()==''){
+	    		        		$('.cardBool').eq(cardNum).html(0);	
+	    		        	}
+	    		        	
+	    		        	nextBool = true;
+	    		        	
+	    		        }else{
+	    		        	// 틀림
+	    		        	$('.keyCheck1').eq(cardNum).html('<img class="scoring" src="/img/채점X.png" style="height: 95px; position:absolute; top:-50px;  left:'+ (($(".stc").eq(cardNum).find(".key").offset().left)-($(".stc").eq(cardNum).offset().left)-35) +'px;">');
+	        				$('.keyAns1').eq(cardNum).html('<span class="checkTip">정답을 입력하면 넘어갑니다.</span><img class="scoring" src="/img/채점화살표.png" style="height: 70px; position:absolute;  left:'+ (($(".stc").eq(cardNum).find(".key").offset().left)-($(".stc").eq(cardNum).offset().left)) +'px;"> <div class="scoring" style="top:20px; background-color:white; font-size:30px; line-height: 30px; position:absolute; height:30px; z-index:100; left:'+ (($(".stc").eq(cardNum).find(".key").offset().left)-($(".stc").eq(cardNum).offset().left)+80) +'px;">'+ keyWord +'</div>');
+	        				
+	        				$('.cardBool').eq(cardNum).html(1);
+	        				
+	        				opcBool = false;
+	        				$(".wdMean").css({"opacity" : 0 });
+	        				$(".arwS").css({"opacity" : 0 });
+	        				$(".arwV").css({"opacity" : 0 });
+	        				$(".arwO").css({"opacity" : 0 });
+	        				$(".inf").css({"opacity" : 0 });
+	    		        }
+	  				}
+				});
+				
+				$(".carousel-item").eq(cardNum).find(".stcTrain").html(2);
+				
+				
+				
+				}
+			}else if($(".carousel-item").eq(cardNum).find(".stcTrain").html() == 2){
+				
+				
+				if($('.cardBool').eq(cardNum).html() == 1 || $('.cardBool').eq(cardNum).html() == ''){
+					$('.keyCheck1').eq(cardNum).html('');
+    				$('.keyAns1').eq(cardNum).html('');
+					
+    				$('.cardBool').eq(cardNum).html('');	
+    				$('.stc').eq(cardNum).find('.inp').val('');
+					
+				}else{
+					// 임시
+				
+					$(".stc").eq(cardNum).html(stcList[cardNum].voStcHtml);
+					
+					let inp = ' <input type="text" class="inp form-control"> ';
+					let keyWidth = stcList[cardNum].voStcMean.length;
+					
+					$(".inpDiv").eq(cardNum).html(inp);
+					$(".inpDiv").eq(cardNum).find(".inp").eq(0).css({"max-width" : (keyWidth*30 +40)+"px"});
+					$(".inpDiv").eq(cardNum).find(".inp").eq(0).css({"width" : (keyWidth*30 +40)+"px"});
+					$(".stcMean").eq(cardNum).css({"opacity" : 0});
+					$(".stcMean").eq(cardNum).css({"position" : "absolute"});
+					
+					$('.keyCheck1').eq(cardNum).html('');
+    				$('.keyAns1').eq(cardNum).html('');
+    				$('.cardBool').eq(cardNum).html('');	
+    				
+    				$('.stcMean').eq(cardNum).on('keyup', '.inp' ,function() {
+						if (event.keyCode == 13) {
+	    				event.preventDefault();
+	    
+	    				$('.carousel-control-next').trigger("click");
+						
+	    		       
+	    		        
+	    		        
+	  				}
+				});
+    				
+    				
+					
+				}
+				
+				
+			}
+			
+			
+			
+			
+			
+		}
+		
+		
+		function cardBtn(){
+			
+			
+			opcBool = true;
+			opc = 0;
+			opcTime = -800;
+			clrG = 68;
+			clrR = 68;
+			clrB = 68;
+			clr = 68;
+			
+			$(".wdMean").css({"opacity" : 0 });
+			$(".arwS").css({"opacity" : 0 });
+			$(".arwV").css({"opacity" : 0 });
+			$(".arwO").css({"opacity" : 0 });
+			$(".inf").css({"opacity" : 0 });
+			
+			$(".sub").css({"color" : "rgb(68 68 68)" });
+			$(".verb").css({"color" : "rgb(68 68 68)" });
+			$(".obj").css({"color" : "rgb(68 68 68)" });
+			
+			$(".sub .inp").css({"box-shadow" : "0 0 0 .25rem rgba(68,68,68,.25)" });
+			$(".sub .inp").css({"border-color" : "rgb(68,68,68)" });
+			$(".verb .inp").css({"box-shadow" : "0 0 0 .25rem rgba(68,68,68,.25)" });
+			$(".verb .inp").css({"border-color" : "rgb(68,68,68)" });
+			$(".obj .inp").css({"box-shadow" : "0 0 0 .25rem rgba(68,68,68,.25)" });
+			$(".obj .inp").css({"border-color" : "rgb(68,68,68)" });
+		}
+		
+	 
+
+	</script>
+</body>
+	
+
+
+
+</html>

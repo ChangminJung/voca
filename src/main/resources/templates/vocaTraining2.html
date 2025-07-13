@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Components / Carousel - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/img/favicon.png" rel="icon">
+  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Mar 09 2023 with Bootstrap v5.2.3
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  
+  <style>
+  	.btn{
+  		width:45%;
+  		padding:2%;
+  		margin:1%;
+  	}
+  
+  	.btn-outline-base{
+  		--bs-btn-color: #012970;
+    	--bs-btn-border-color: #012970;
+    	--bs-btn-hover-color: #fff;
+    	--bs-btn-hover-bg: #012970;
+    	--bs-btn-hover-border-color: #012970;
+    	--bs-btn-focus-shadow-rgb: 108, 117, 125;
+    	--bs-btn-active-color: #fff;
+    	--bs-btn-active-bg: #012970;
+    	--bs-btn-active-border-color: #012970;
+    	--bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    	--bs-btn-disabled-color: #012970;
+    	--bs-btn-disabled-bg: transparent;
+    	--bs-btn-disabled-border-color: #012970;
+  	}
+  	
+  	.btn-primary{
+  		
+    	--bs-btn-hover-bg: #1b74f6;
+    
+  	}
+  	 .btn-danger{
+  			
+    	--bs-btn-hover-bg: #dc3545;
+    
+  	}
+  	.cardEng{
+  		font-size:50px; 
+  		font-family:"Nunito", sans-serif;
+  		font-weight:700;
+  	}
+  	.btn{
+  	font-size:20px;
+  	}
+  	
+  </style>
+  
+</head>
+
+<body>
+
+<header data-th-include="./personalHeader.html"></header>
+<!-- ======= Header ======= -->
+
+
+<header data-th-include="./personalSidebar.html"></header>
+<!-- ======= Sidebar ======= -->
+
+ 	<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Voca Training</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+
+
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title" style=" padding-bottom: 3px;">Day 1
+                
+              </h5>
+			  <!-- 슬라이드 구분용 span -->
+			  <span hidden="hidden" class="train2"></span>
+			  <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+			  <div class="progress mt-3" style="margin-bottom: 22px;">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                <span hidden="hidden" class="cardSize" value="5"></span>
+              </div>	
+              
+              <!-- Slides with controls -->
+              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                  <div class="carousel-item active">
+                    
+                      <div class="card-body" style="text-align: center;">
+                        <h6 class="card-title cardEng" >adjust</h6>
+                        
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(0)">관련시키다</button>
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(1)">조정하다</button>
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(2)">조건</button>
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(3)">~이 없다; 부족</button>
+                        
+                      </div>
+                   
+                   <!-- 카드 번호(0~) -->
+                   <span hidden="hidden" class="cardNum">0</span>
+                   <!-- 정답 번호(0~) -->
+                   <span hidden="hidden" class="ansNum">1</span>
+                   
+                  </div>
+
+				  <div class="carousel-item" >
+                    
+                      <div class="card-body" style="text-align: center;">
+                        <h6 class="card-title cardEng" >acquire</h6>
+                        
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(0)">공석, 결원; 개장, 개시</button>
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(1)">얻다, 습득하다</button>
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(2)">필요조건, 요건</button>
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(3)">(필요, 요구 등을) 만족시키다</button>
+                      </div>
+                   	<!-- 카드 번호(0~) -->
+                   <span hidden="hidden" class="cardNum">1</span>
+                   <!-- 정답 번호(0~) -->
+                   <span hidden="hidden" class="ansNum">1</span>
+                  </div>     
+                  <div class="carousel-item" >
+                    
+                      <div class="card-body" style="text-align: center;">
+                        <h6 class="card-title cardEng" >adapt</h6>
+                        
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(0)">자격 있는, 적격의</button>
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(1)">후보자, 지원자</button>
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(2)">적응하다</button>
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(3)">전문적인, 직업의; 전문가</button>
+                      </div>
+                   <!-- 카드 번호(0~) -->
+                   <span hidden="hidden" class="cardNum">2</span>
+                   <!-- 정답 번호(0~) -->
+                   <span hidden="hidden" class="ansNum">2</span>
+                  </div>      
+                  <div class="carousel-item" >
+                    
+                      <div class="card-body" style="text-align: center;">
+                        <h6 class="card-title cardEng" >adequate</h6>
+                        
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(0)">고용하다</button>
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(1)">교육, 훈련</button>
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(2)">일자리, 직책; 두다</button>
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(3)">충분한, 적절한</button>
+                      </div>
+                   <!-- 카드 번호(0~) -->
+                   <span hidden="hidden" class="cardNum">3</span>
+                   <!-- 정답 번호(0~) -->
+                   <span hidden="hidden" class="ansNum">3</span>
+                   
+                  </div>      
+                  <div class="carousel-item" >
+                    
+                      <div class="card-body" style="text-align: center;">
+                        <h6 class="card-title cardEng" >adjacent</h6>
+                        
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(0)">인접한</button>
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(1)">매우, 대단히</button>
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(2)">인상 깊게 생각하는, 감명을 받은</button>
+                        <button type="button" class="btn btn-outline-base" onclick="ansClick(3)">자격이 있는, 적격의</button>
+                      </div>
+                   <!-- 카드 번호(0~) -->
+                   <span hidden="hidden" class="cardNum">4</span>
+                   <!-- 정답 번호(0~) -->
+                   <span hidden="hidden" class="ansNum">0</span>
+                  </div>      
+                               
+                  
+
+                </div>
+
+                <button hidden="hidden" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button hidden="hidden" class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+
+              </div><!-- End Slides with controls -->
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+    
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/chart.js/chart.umd.js"></script>
+  <script src="/vendor/echarts/echarts.min.js"></script>
+  <script src="/vendor/quill/quill.min.js"></script>
+  <script src="/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/js/main.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+        crossorigin="anonymous"></script>
+  <script th:inline="javascript">
+
+  
+  let numOpa = 0;
+  let numTime = 0;
+  let numTime2 = 0;
+  
+  let numLine = 5000;
+ 
+  
+  let timer = setInterval(function(){
+	  
+	  numTime= numTime +500;
+	  numTime2 = numTime2 +500;
+
+	  if(numTime >= numLine){
+		  
+		  if($(".active .btn-primary").html() != null){
+			  
+		  }else{
+			  // 정답 안찍었을 때
+			  $(".active button").eq($(".active span").eq(1).html()).removeClass("btn-outline-base");
+			  $(".active button").eq($(".active span").eq(1).html()).addClass("btn-primary");
+			  numTime2 = numLine;
+		  }
+		  
+		  
+		  
+		  
+	  }	  
+	  
+	  if(numTime2 >= numLine+2000){
+		  
+		  
+		  $('.carousel-control-next').trigger("click");
+		  numTime =0;
+		  numTime2 =0;
+	  }
+	  
+	  
+  },500);
+
+
+  function ansClick(i){
+	 
+	  if($(".active span").eq(1).html() == i){
+		  // 정답일 때
+		  $(".active button").eq(i).removeClass("btn-outline-base");
+		  $(".active button").eq(i).addClass("btn-primary");
+		  numTime2 = numLine +500;
+	  }else{
+		  // 오답일 때
+		  $(".active button").eq(i).removeClass("btn-outline-base");
+		  $(".active button").eq(i).addClass("btn-danger");
+		  
+		  $(".active button").eq($(".active span").eq(1).html()).removeClass("btn-outline-base");
+		  $(".active button").eq($(".active span").eq(1).html()).addClass("btn-primary");
+		  numTime2 = numLine -1000;
+	  }
+  }
+
+
+
+
+  </script>
+
+
+</body>
+
+</html>

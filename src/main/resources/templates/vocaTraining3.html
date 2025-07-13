@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Components / Carousel - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/img/favicon.png" rel="icon">
+  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Mar 09 2023 with Bootstrap v5.2.3
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  
+  <style>
+.cardEng {
+	font-size: 50px;
+	font-family: "Nunito", sans-serif;
+	font-weight: 700;
+}
+
+.cardHw {
+	padding-bottom: 0px;
+	font-size: 30px;
+	font-weight: 500;
+	color: #012970;
+}
+
+.inputHw {
+	margin-bottom: 10px;
+	left: 15%;
+	width: 70%;
+	position: relative;
+	border: solid 1px #012970;
+	border-radius: 5px;
+	box-shadow: 0px 0px 0px 3px rgb(0 46 170/ 40%);
+}
+
+.form-floating>label {
+	left: 15%;
+	font-size: 30px;
+	font-weight: 500;
+	color: #012970;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	padding: 1.5rem 1rem;
+	overflow: hidden;
+	text-align: start;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	pointer-events: none;
+	border: 1px solid transparent;
+	transform-origin: 0 0;
+	transition: opacity .1s ease-in-out, transform .1s ease-in-out
+}
+
+.form-floating>.form-control {
+	font-size: 30px;
+	font-weight: 500;
+	color: #012970;
+	height: 15%;
+}
+</style>
+  
+</head>
+
+<body>
+
+<header data-th-include="./personalHeader.html"></header>
+<!-- ======= Header ======= -->
+
+
+<header data-th-include="./personalSidebar.html"></header>
+<!-- ======= Sidebar ======= -->
+
+ 	<main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Voca Training</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+
+
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title" style=" padding-bottom: 3px;">Day 1
+                
+              </h5>
+			  
+			  <div class="progress mt-3" style="margin-bottom: 22px;">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                <span hidden="hidden" class="cardSize" value="5"></span>
+              </div>	
+              
+              <!-- Slides with controls -->
+              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                  <div class="carousel-item active">
+                    <!-- 슬라이드 구분용 span -->
+			  <span hidden="hidden" class="train">3</span>
+			  <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+                      <div class="card-body" style="text-align: center;">
+                        <h6 class="card-title cardEng" >adjust</h6>
+                        
+                      </div>
+                   
+                   <!-- 카드 번호(0~) -->
+                   <span hidden="hidden" class="cardNum">0</span>
+                   <!-- 정답 한글 -->
+                   <span hidden="hidden" class="ansHw">조정하다</span>
+                   <!-- (24.10.21)bootstrap.min.css 에서 focus시 -> required시 로 변경 -->
+                   <div class="form-floating">
+                    <input type="text" class="form-control inputHw" id="floatingName" placeholder="" autofocus>
+                    <label for="floatingName">ㅈㅈ하다</label>
+                  </div>
+                   
+                   
+                  </div>
+
+				  <div class="carousel-item" >
+                    <!-- 슬라이드 구분용 span -->
+			  <span hidden="hidden" class="train">3</span>
+			  <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+                      <div class="card-body" style="text-align: center;">
+                        <h6 class="card-title cardEng" >acquire</h6>
+                        
+                      </div>
+                   	<!-- 카드 번호(0~) -->
+                   <span hidden="hidden" class="cardNum">1</span>
+                   <!-- 정답 한글 -->
+                   <span hidden="hidden" class="ansHw">얻다, 습득하다</span>
+                   <div class="form-floating">
+                    <input type="text" class="form-control inputHw" id="floatingName" placeholder="" >
+                    <label for="floatingName">ㅇ다, ㅅㄷ하다</label>
+                  </div>
+                   
+                  </div>     
+                  <div class="carousel-item" >
+                    <!-- 슬라이드 구분용 span -->
+			  <span hidden="hidden" class="train">3</span>
+			  <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+                      <div class="card-body" style="text-align: center;">
+                        <h6 class="card-title cardEng" >adapt</h6>
+                        
+                      </div>
+                   <!-- 카드 번호(0~) -->
+                   <span hidden="hidden" class="cardNum">2</span>
+                   <!-- 정답 한글 -->
+                   <span hidden="hidden" class="ansHw">적응하다</span>
+                   <div class="form-floating">
+                    <input type="text" class="form-control inputHw" id="floatingName" placeholder="" >
+                    <label for="floatingName">ㅈㅇ하다</label>
+                  </div>
+                   
+                  </div>      
+                  <div class="carousel-item" >
+                    <!-- 슬라이드 구분용 span -->
+			  <span hidden="hidden" class="train">3</span>
+			  <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+                      <div class="card-body" style="text-align: center;">
+                        <h6 class="card-title cardEng" >adequate</h6>
+                        
+                      </div>
+                   <!-- 카드 번호(0~) -->
+                   <span hidden="hidden" class="cardNum">3</span>
+                   <!-- 정답 한글 -->
+                   <span hidden="hidden" class="ansHw">충분한, 적절한</span>
+                    <div class="form-floating">
+                    <input type="text" class="form-control inputHw" id="floatingName" placeholder="" >
+                    <label for="floatingName">ㅊㅂ한, ㅈㅈ한</label>
+                  </div>
+                   
+                  </div>      
+                  <div class="carousel-item" >
+                    <!-- 슬라이드 구분용 span -->
+			  <span hidden="hidden" class="train">3</span>
+			  <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+                      <div class="card-body" style="text-align: center;">
+                        <h6 class="card-title cardEng" >adjacent</h6>
+                        
+                      </div>
+                   <!-- 카드 번호(0~) -->
+                   <span hidden="hidden" class="cardNum">4</span>
+                   <!-- 정답 한글 -->
+                   <span hidden="hidden" class="ansHw">인접한</span>
+                   <div class="form-floating">
+                    <input type="text" class="form-control inputHw" id="floatingName" placeholder="" >
+                    <label for="floatingName">ㅇㅈ한</label>
+                  </div>
+                   
+                  </div>      
+                               
+                  
+
+                </div>
+
+                <button hidden="hidden" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button hidden="hidden" class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+
+              </div><!-- End Slides with controls -->
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+    
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/chart.js/chart.umd.js"></script>
+  <script src="/vendor/echarts/echarts.min.js"></script>
+  <script src="/vendor/quill/quill.min.js"></script>
+  <script src="/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/js/main.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+        crossorigin="anonymous"></script>
+  <script th:inline="javascript">
+
+  let numTime = 0;
+  let numTime2 = 0;
+  
+  let inputBool = true;
+  
+  let numLine = 5000;
+  
+  let timer = setInterval(function(){
+	  
+	  numTime= numTime +500;
+	  numTime2 = numTime2 +500;
+
+	  // 정해진 시간이 지났을 때
+	  if(numTime >= numLine){
+		  if(inputBool){
+			// 정답 안누른 상태
+			  ansCheck();
+		  }
+	  }	  
+	  
+	  // 답 보여준 후 넘어감
+	  if(numTime2 >= numLine+2000){
+		  
+		  $('.active .form-floating').remove();
+		  $('.active').append('<div class="form-floating">'
+					+ ' <input type="text" class="form-control inputHw" id="floatingName" placeholder="" >'
+					+ ' <label for="floatingName">ㅈㅈ하다</label>'
+					+ ' </div>');
+		  
+		  $('.active').on('keyup', '.form-floating' ,function() {
+			  if (event.keyCode == 13) {
+			        event.preventDefault();
+			        
+			        if(inputBool){
+			        	ansCheck();	
+			        }
+			        
+			      }
+			});
+		  
+		  /* $('.carousel-control-next').trigger("click"); */
+		  numTime =0;
+		  numTime2 =0;
+		  inputBool= true;
+	  }
+	  
+	  
+  },500);
+
+
+  
+  
+  
+  
+  $('.inputHw').on("keyup", function (event) {
+	  
+	  console.log(111);
+      if (event.keyCode == 13) {
+        event.preventDefault();
+        
+        if(inputBool){
+        	ansCheck();	
+        }
+        
+        
+      }
+	 
+    });
+  
+  
+	function ansCheck(){
+		
+		if(inputBool){
+			inputBool= false;
+		}else{
+			return;
+		}
+		
+		$('.inputHw').blur();
+		
+		let ansHw = $(".active .ansHw").html();
+
+        ansHw = ansHw.replaceAll(" ", "");
+        ansHw = ansHw.replaceAll(";", ",");
+        let ansHwList = Array();
+        ansHwList = ansHw.split(",");
+        let inputHw = $(".active .inputHw").val();
+        inputHw = inputHw.replaceAll(" ","");
+        inputHw = inputHw.replaceAll(";",",");
+
+        let inputHwList = Array();
+
+        inputHwList = inputHw.split(",");
+
+        let sum = 0;
+        for(let i = 0; i < ansHwList.length; i++){
+          for(let j = 0; j < inputHwList.length; j++) if (ansHwList[i] == inputHwList[j]) {
+            sum++;
+            break;
+          }
+        }
+        
+        if(sum == ansHwList.length){ // 맞았을 때 
+        	
+        	$(".active .form-floating label").css("color", "#198754");
+            $(".active .inputHw").css("color", "#198754");
+            $(".active .form-control").css("border-color", "#198754");
+            $(".active .form-control").css("padding-right", "calc(1.5em + .75rem)");
+            $(".active .form-control").css("background-image", "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e\")");
+            $(".active .form-control").css("background-repeat", "no-repeat");
+            $(".active .form-control").css("background-position", "right calc(.375em + .1875rem) center");
+            $(".active .form-control").css("background-size", "calc(.75em + .375rem) calc(.75em + .375rem)");
+            $(".active .form-control").css("box-shadow", "0px 0px 0px 3px rgb(25 135 84 / 40%)");
+            
+            numTime2 = numLine +500;
+            
+        }else{  // 틀렸을 때
+        	
+        	$(".active .form-floating label").css("color", "#dc3545");
+            $(".active .inputHw").css("color", "#dc3545");
+            $(".active .form-control").css("border-color", "#dc3545");
+            $(".active .form-control").css("padding-right", "calc(1.5em + .75rem)");
+            $(".active .form-control").css("background-image", "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e\")");
+            $(".active .form-control").css("background-repeat", "no-repeat");
+            $(".active .form-control").css("background-position", "right calc(.375em + .1875rem) center");
+            $(".active .form-control").css("background-size", "calc(.75em + .375rem) calc(.75em + .375rem)");
+            $(".active .form-control").css("box-shadow", "0px 0px 0px 3px rgb(238 0 46 / 40%)");
+            $(".active .form-floating label").css("transition" , "initial");
+            $('.active .form-floating label').html($('.active .inputHw').val());
+            $(".active .form-floating label").css("transform","scale(1) translateY(0rem) translateX(-0.25rem)");
+         	// composing 데이터 없애기 setTimeout으로 해야 브라우저와 호환하여(?) 없애줌
+            let composingBlur = setTimeout(function(){
+            	$('.active .inputHw').val("");
+            },0);
+            
+            let labelTimer = setTimeout(function(){
+            	$(".active .form-floating label").css("transition" , "opacity .1s ease-in-out, transform .1s ease-in-out");
+            	$(".active .form-floating label").css("transform","scale(.65) translateY(-1.2rem) translateX(0.35rem)");	
+            	
+            	let inputTimer = setTimeout(function(){
+                	$('.active .inputHw').val("조정하다");	
+                	$(".active .form-floating label").css("text-decoration","line-through");
+                	
+                	
+                },300);
+            	
+            	
+            },100);
+
+            numTime2 = numLine -1000;
+        }
+	}
+  
+  
+
+
+  
+
+
+
+
+  </script>
+
+
+</body>
+
+</html>
