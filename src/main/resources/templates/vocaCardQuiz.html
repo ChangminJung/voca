@@ -56,7 +56,7 @@
     <section class="section">
       <div class="row">
 
-
+		
         <div class="col-lg-6">
 
           <div class="card">
@@ -67,7 +67,9 @@
                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="padding-top:  10px; padding-bottom: 10px;"></button>
                 </div>
               </h5>
-
+			  <!-- 슬라이드 구분용 span -->
+			  <span hidden="hidden" class="cardQuiz"></span>
+			  <!-- ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
               <div class="progress mt-3" style="margin-bottom: 22px;">
                 <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                 <span hidden="hidden" class="cardSize" th:value="${vocaCardList.size}"></span>
@@ -75,7 +77,7 @@
               <!-- Slides with controls -->
               <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-
+				  
                   <div class="carousel-item active">
                     <div class="card imgCard">
                       <img th:src="${vocaCardList.get(0).voImg}" class="card-img-top" alt="..." height="375px">
@@ -89,7 +91,8 @@
                     <input autofocus class="inputHw" type="text" name="" id="input0" style="margin-bottom: 10px; left: 15%; width: 70%; position: relative; border: solid 1px #0085f2; border-radius: 5px; box-shadow:  0px 0px 0px 3px rgba(0,144,237,.4); " >
                   </div>
 
-
+				 
+					
                   <div class="carousel-item" th:each=" i : ${#numbers.sequence(1,vocaCardList.size -1)}">
                     <div class="card imgCard">
                       <img th:src="${vocaCardList.get(i).voImg}" class="card-img-top" alt="..." height="375px">
@@ -158,6 +161,9 @@
         integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
         crossorigin="anonymous"></script>
   <script th:inline="javascript">
+  
+  	// progress 조작 carousel 함수 안에 넣음 
+  	// /vendor/bootstrap/js/bootstrap.bundle.min.js 안에서 (progress검색)
 
     let dirNum = [[${vocaCardList.get(0).voDirNum}]];
     let input = "";
@@ -188,6 +194,9 @@
       let inputHwList = Array();
 
       inputHwList = inputHw.split(",");
+      
+      console.log(ansHw);
+      console.log(inputHwList);
 
       let sum = 0;
       for(let i = 0; i < ansHwList.length; i++){
@@ -204,7 +213,7 @@
           $('.progress-bar').removeClass("bg-danger");
         }else{
         }
-
+      
         sum = 0;
       }else if(sum == 0){ // 모두 틀렸을 때 (클래스명 : bg-danger 추가)
         if($('.progress-bar').hasClass("bg-warning")){

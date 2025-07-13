@@ -1,15 +1,21 @@
 package com.personal.voca.controller;
 
 import com.personal.voca.dto.VocaDTO;
+import com.personal.voca.dto.VocaTableDTO;
 import com.personal.voca.service.VocaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -45,6 +51,34 @@ public String test3(){
 
     @GetMapping("/index")
     public String index(){
+    	try {
+            String gooCrl = "https://news.google.com/search?q=intitle%3Ameet&hl=en-US&gl=US&ceid=US%3Aen";
+            	
+            Document doc = Jsoup.connect(gooCrl).get();
+            
+            
+            
+            Elements eUrl = doc.select("a.JtKRv");
+            System.out.println(eUrl.get(0).attr("href"));
+            System.out.println("news.google.com"+eUrl.get(0).attr("href"));
+            System.out.println(eUrl.get(1).attr("href"));
+            System.out.println(eUrl.get(2).attr("href"));
+            System.out.println(eUrl.get(3).html());
+            System.out.println(eUrl.get(4).html());
+            
+            String gooCrl2 = "https://translate.google.co.kr/?hl=ko&sl=auto&tl=ko&text=Meet%20the%20Women%20Launching%2C%20Recovering%20Artemis%20Missions&op=translate";
+        	
+            
+            Document doc2 = Jsoup.connect(gooCrl2).get();
+            
+            
+           
+            
+
+        }catch (Exception e){
+           
+        }
+    	
         return "index";
     }
 
@@ -52,20 +86,75 @@ public String test3(){
     public String vocaInput(){
         return "vocaInput";
     }
+    
+    @GetMapping("/vocaTraining")
+    public String vocaTraining(){
+        return "vocaTraining";
+    }
+    
+    @GetMapping("/vocaTraining2")
+    public String vocaTraining2(){
+        return "vocaTraining2";
+    }
+    
+    @GetMapping("/vocaTraining3")
+    public String vocaTraining3(){
+        return "vocaTraining3";
+    }
+    
+    @GetMapping("/vocaTraining4")
+    public String vocaTraining4(){
+        return "vocaTraining4";
+    }
+    
+    @GetMapping("/vocaTraining5")
+    public String vocaTraining5(){
+        return "vocaTraining5";
+    }
+    
+    @GetMapping("/sentenceTraining")
+    public String sentenceTraining(){
+        return "sentenceTraining";
+    }
+    
+    @GetMapping("/stcTraining")
+    public ModelAndView stcTraining(){
+    	
+    	int dirNum = 401;
+    	System.out.println(111);
+        return vsvc.vocaStcTraining(dirNum);
+    }
+    
 
     @GetMapping("/vocaCardQuiz")
     public ModelAndView vocaCardQuiz(@RequestParam int dirNum, @RequestParam int quizLv, @RequestParam int type){
         return vsvc.vocaCardQuiz(dirNum, quizLv, type);
     }
-
+    
+    @GetMapping("/vocaMemorize")
+    public ModelAndView vocaMemorize(@RequestParam int dirNum){
+        return vsvc.vocaMemorize(dirNum);
+    }
+    
     @GetMapping("/vocaSubmit")
-    public ModelAndView vocaSubmit(@RequestParam String tbName, @RequestParam String input){
-        return vsvc.vocaSubmit(tbName, input);
+    public ModelAndView vocaSubmit(@RequestParam String tbName, @RequestParam String input, @RequestParam String userId, @RequestParam int share){
+        return vsvc.vocaSubmit(tbName, input, userId, share);
     }
 
     @GetMapping("/vocaTable")
-    public ModelAndView vocaTable(){
-        return vsvc.vocaTable();
+    public ModelAndView vocaTable(@RequestParam String userId , int page){
+        return vsvc.vocaTable(userId, page,0);
+    }
+
+    @PostMapping("/vocaList")
+    public @ResponseBody List<Object> vocaList(@RequestParam int page){
+        String userId = " ";
+        try {
+        	userId = session.getAttribute("userId").toString();
+        }catch(Exception e) {
+        	
+        }
+        return vsvc.vocaList(userId, page);
     }
 
     @GetMapping("/vocaView")
@@ -75,6 +164,7 @@ public String test3(){
 
     @PostMapping("/checkSave")
     public @ResponseBody List<List<VocaDTO>> checkSave(@RequestParam String input, @RequestParam int dirNum){
+    	System.out.println(input);
         return vsvc.checkSave(input, dirNum);
     }
 
@@ -99,8 +189,8 @@ public String test3(){
     }
 
     @GetMapping("/vocaModify")
-    public ModelAndView vocaModify(@RequestParam String tbName, @RequestParam int dirNum, @RequestParam String input){
-        return vsvc.vocaModify(tbName, dirNum, input);
+    public ModelAndView vocaModify(@RequestParam String tbName, @RequestParam int dirNum, @RequestParam String input, @RequestParam int share){
+        return vsvc.vocaModify(tbName, dirNum, input, share);
     }
 
     @PostMapping("/imgSearch")
@@ -143,7 +233,6 @@ public String test3(){
 
     @PostMapping("/randomVoca")
     public @ResponseBody String randomVoca() {
-
         return vsvc.randomVoca();
     }
 

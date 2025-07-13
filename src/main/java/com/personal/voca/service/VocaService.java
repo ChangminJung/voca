@@ -2,6 +2,7 @@ package com.personal.voca.service;
 
 
 import com.personal.voca.dto.VocaDTO;
+import com.personal.voca.dto.VocaTableDTO;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -9,9 +10,11 @@ import java.util.List;
 public interface VocaService {
 
 
-    ModelAndView vocaSubmit(String tbName, String input);
+    ModelAndView vocaSubmit(String tbName, String input, String userId, int share);
 
-    ModelAndView vocaTable();
+    ModelAndView vocaTable(String userId , int page, int type);
+
+    List<Object> vocaList(String userId, int page);
 
     ModelAndView vocaView(int dirNum);
 
@@ -25,7 +28,7 @@ public interface VocaService {
 
     ModelAndView vocaModiForm(int dirNum);
 
-    ModelAndView vocaModify(String tbName, int dirNum, String input);
+    ModelAndView vocaModify(String tbName, int dirNum, String input, int share);
 
     ModelAndView imgModiform(int voNum);
 
@@ -35,6 +38,10 @@ public interface VocaService {
 
     ModelAndView vocaCardQuiz(int dirNum, int quizLv, int type);
 
+    ModelAndView vocaMemorize(int dirNum);
+    
+    ModelAndView vocaStcTraining(int dirNum);
+    
     ModelAndView quizResult(int dirNum, String input);
 
     String dirNumCheck();

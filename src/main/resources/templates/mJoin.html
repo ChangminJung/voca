@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Pages / Register - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/img/favicon.png" rel="icon">
+  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Mar 09 2023 with Bootstrap v5.2.3
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  <style>
+    .inputInval {
+      border-color: #dc3545;
+      padding-right: calc(1.5em + 0.75rem);
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right calc(0.375em + 0.1875rem) center;
+      background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    }
+    .inputInval:focus {
+      border-color: #dc3545;
+      box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+    }
+
+    .inputVal {
+      border-color: #198754;
+      padding-right: calc(1.5em + 0.75rem);
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right calc(0.375em + 0.1875rem) center;
+      background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    }
+    .inputVal:focus {
+      border-color: #198754;
+      box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+    }
+
+
+  </style>
+
+
+</head>
+
+<body>
+
+  <main>
+    <div class="container">
+
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+              <div class="d-flex justify-content-center py-4">
+                <a href="home" class="logo d-flex align-items-center w-auto">
+                  <img src="/img/logo.png" alt="">
+                  <span class="d-none d-lg-block">NiceAdmin</span>
+                </a>
+              </div><!-- End Logo -->
+
+              <div class="card mb-3">
+
+                <div class="card-body">
+
+                  <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">회원 가입</h5>
+                  </div>
+
+                  <form class="row g-3" novalidate id="mJoinForm" action="mJoin" method="post" name="mJoinForm">
+                    <div class="col-12">
+                      <label for="memId" class="form-label">아이디</label>
+                      <input type="text" name="memId" class="form-control" id="memId" onblur="idCheck()" />
+                      <div class="invalid-feedback id-inval"></div>
+                    </div>
+                    <div class="col-12">
+                      <label for="memPw" class="form-label">비밀번호</label>
+                      <input type="password" name="memPw" class="form-control" id="memPw"  onkeyup="pwRegexp()" onchange="pwCheck()">
+                      <div class="invalid-feedback pw-inval"></div>
+                    </div>
+                    <div class="col-12">
+                      <label for="checkPw" class="form-label">비밀번호 확인</label>
+                      <input type="password" name="checkPw" class="form-control" id="checkPw"  onkeyup="pwCheck()">
+                      <div class="invalid-feedback checkPw-inval"></div>
+                    </div>
+                    <div class="col-9">
+                      <label for="memEmail0" class="form-label">이메일</label>
+                      <input type="email" name="memEmail0" class="form-control" id="memEmail0" >
+                      <div class="invalid-feedback email-inval"></div>
+                    </div>
+                    <div class="col-3">
+                      <label class="form-label">&nbsp; </label>
+                      <input type="button" class="btn btn-primary w-100 form-control" value="전송" onclick="mEmailCheck()">
+                    </div>
+                    <div class="col-9" id="emailDiv" style="display: none;">
+                      <input type="text" name="emailCheck" class="form-control" id="emailCheck" placeholder="인증번호 입력">
+                      <div class="invalid-feedback emailCk-inval"></div>
+                      <input type="hidden" name="memEmail" id="memEmail">
+                    </div>
+                    <div class="col-3" id="emailDiv2" style="display: none;">
+                      <input type="button" class="btn btn-outline-primary w-100 form-control" value="인증" onclick="emailCheck0()" >
+                    </div>
+
+
+                    <div class="col-12">
+                      <input type="button" class="btn btn-primary w-100" value="가입하기" onclick="goSubmit()">
+                    </div>
+                    <div class="col-12">
+                      <p class="small mb-0">이미 회원가입이 되어있나요? <a href="mLogin">로그인</a></p>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+
+              <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main><!-- End #main -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/chart.js/chart.umd.js"></script>
+  <script src="/vendor/echarts/echarts.min.js"></script>
+  <script src="/vendor/quill/quill.min.js"></script>
+  <script src="/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.js"
+          integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+          crossorigin="anonymous"></script>
+  <script>
+
+    let confI = false;
+    let confP = false;
+    let confP2 = false;
+    let confE = false;
+    let uuid0 = "";
+
+
+    function goSubmit(){
+      if(!confI){
+        alert("아이디를 확인해주세요.");
+        return;
+      }
+      if(!confP){
+        alert("비밀번호를 확인해주세요.");
+        return;
+      }
+      if(!confP2){
+        alert("비밀번호 확인을 확인해주세요.");
+        return;
+      }
+      if(!confE){
+        alert("이메일을 확인해주세요.");
+        return;
+      }
+
+      mJoinForm.submit();
+
+
+    }
+
+
+    function idCheck(){
+      let memId = document.getElementById("memId").value;
+      let memId0 = document.getElementById("memId");
+
+      let spe = memId.search(/[`~!@#$%^&*|\\\'\":;\/?]/);
+      let spc = memId.search(/[\s/]/);
+      let hw = memId.search(/[ㄱ-ㅎ가-힣]/);
+      console.log(hw);
+      $.ajax({
+        type : "POST",
+        url : "idoverlap",
+        data : {
+          "memId" : memId
+        },
+        async : false,
+        dataType : "text",
+        success : function(result){
+          if(result == "OK"){
+            if(memId == null || memId == ""){
+              memId0.classList.remove("inputVal");
+              memId0.classList.add("inputInval");
+              $('.id-inval').html("필수 입력 항목입니다.");
+              $('.id-inval').css({"display" : "block"});
+              confI = false;
+            }else if(spc != -1){
+              memId0.classList.remove("inputVal");
+              memId0.classList.add("inputInval");
+              $('.id-inval').html("공백없이 입력해주세요.");
+              $('.id-inval').css({"display" : "block"});
+              confI = false;
+            }else if(spe >= 0 ){
+              memId0.classList.remove("inputVal");
+              memId0.classList.add("inputInval");
+              $('.id-inval').html("특수문자는 입력할 수 없습니다.");
+              $('.id-inval').css({"display" : "block"});
+              confI = false;
+            }else if(hw >= 0){
+              memId0.classList.remove("inputVal");
+              memId0.classList.add("inputInval");
+              $('.id-inval').html("한글은 입력할 수 없습니다.");
+              $('.id-inval').css({"display" : "block"});
+            }else{  // 사용할 수 있는 아이디일 경우 실행
+              memId0.classList.remove("inputInval");
+              memId0.classList.add("inputVal");
+              $('.id-inval').css({"display" : "none"});
+              confI = true;
+            }
+          }
+          else{
+            // 사용할 수 없는 아이디일 경우 실행
+            memId0.classList.remove("inputVal");
+            memId0.classList.add("inputInval");
+            $('.id-inval').html("사용중인 아이디입니다.");
+            $('.id-inval').css({"display" : "block"});
+            confI = false;
+          }
+        },
+        error : function(){
+          alert("idoverlap 함수 통신실패!");
+          confI = false;
+        }
+      });
+
+    }
+
+    function pwRegexp(){
+      let memPw = document.getElementById("memPw").value;
+      let memPw0 = document.getElementById("memPw");
+
+      let num = memPw.search(/[0-9]/);
+      let eng = memPw.search(/[a-z]/);
+      let spc = memPw.search(/[\s/]/);
+      console.log(memPw);
+
+      // search 의 리턴 값은 없으면(false) -1, 있으면(true) 0이상의 양수가 (1개의 정수형 리턴값) 나온다.
+
+      if(memPw.length < 6 || memPw.length > 20){
+        memPw0.classList.remove("inputVal");
+        memPw0.classList.add("inputInval");
+        $('.pw-inval').html("비밀번호는 6자리에서 20자리 이내로 입력해주세요.");
+        $('.pw-inval').css({"display" : "block"});
+        confP = false;
+      }else if(spc != -1){
+        memPw0.classList.remove("inputVal");
+        memPw0.classList.add("inputInval");
+        $('.pw-inval').html("비밀번호는 공백없이 입력해주세요.");
+        $('.pw-inval').css({"display" : "block"});
+        confP = false;
+      }else if(num < 0 || eng < 0 ){
+        memPw0.classList.remove("inputVal");
+        memPw0.classList.add("inputInval");
+        $('.pw-inval').html("영문자,숫자를 혼합하여 입력해주세요.");
+        $('.pw-inval').css({"display" : "block"});
+        confP = false;
+      }else{
+        memPw0.classList.remove("inputInval");
+        memPw0.classList.add("inputVal");
+        $('.pw-inval').html("사용가능한 비밀번호 입니다.");
+        $('.pw-inval').css({"display" : "none"});
+        confP = true;
+      }
+    }
+
+    function pwCheck(){
+      let memPw = document.getElementById("memPw").value;
+      let checkPw = document.getElementById("checkPw").value;
+      let checkPw0 = document.getElementById("checkPw");
+
+      if(checkPw == null || checkPw == ""){
+        confP2= false;
+      }else if(memPw == checkPw){
+        checkPw0.classList.remove("inputInval");
+        checkPw0.classList.add("inputVal");
+        $('.checkPw-inval').html("비밀번호가 일치합니다.");
+        $('.checkPw-inval').css({"display" : "none"});
+        confP2 = true;
+      }else{
+        checkPw0.classList.remove("inputVal");
+        checkPw0.classList.add("inputInval");
+        $('.checkPw-inval').html("비밀번호가 일치하지 않습니다.");
+        $('.checkPw-inval').css({"display" : "block"});
+
+        confP2 = false;
+      }
+    }
+
+    function mEmailCheck(){
+
+      let memEmail = document.getElementById("memEmail0").value;
+      let memEmail0 = document.getElementById("memEmail0");
+
+      let spc = memEmail.search(/[\s/]/);
+      let gby = memEmail.search(/[@]/);
+      let spe = memEmail.search(/[`~!#$%^&*|\\\'\":;\/?]/);
+
+      if(memEmail == null || memEmail == ""){
+        memEmail0.classList.remove("inputVal");
+        memEmail0.classList.add("inputInval");
+        $('.email-inval').html("이메일을 입력해주세요.");
+        $('.email-inval').css({"display" : "block"});
+      }else if(spc != -1){
+        memEmail0.classList.remove("inputVal");
+        memEmail0.classList.add("inputInval");
+        $('.email-inval').html("공백없이 입력해주세요.");
+        $('.emial-inval').css({"display" : "block"});
+      }else if(spe >= 0 ){
+        memEmail0.classList.remove("inputVal");
+        memEmail0.classList.add("inputInval");
+        $('.email-inval').html("특수문자는 입력할 수 없습니다.");
+        $('.email-inval').css({"display" : "block"});
+      }else if(gby <= 0){
+        memEmail0.classList.remove("inputVal");
+        memEmail0.classList.add("inputInval");
+        $('.email-inval').html("이메일을 정확히 입력해주세요.");
+        $('.email-inval').css({"display" : "block"});
+      }else{  // 사용할 수 있는 아이디일 경우 실행
+        memEmail0.classList.remove("inputInval");
+        memEmail0.classList.add("inputVal");
+        $('.email-inval').css({"display" : "none"});
+
+
+        $('#emailDiv').css({"display" : "initial"});
+        $('#memEmail').val(memEmail);
+        $('#emailDiv2').css({"display" : "initial"});
+
+
+        $.ajax({
+          type : "POST",
+          url : "mEmailCheck",
+          data : {
+            "memEmail" : memEmail
+          },
+          dataType : "text" ,
+          success : function(uuid){
+            uuid0 = uuid;
+          },
+          error : function(){
+            alert("이메일인증 통신 실패!");
+          }
+        });
+      }
+    }
+
+    function emailCheck0(){
+
+      let emailCheck = document.getElementById("emailCheck").value;
+      let emailCheck0 = document.getElementById("emailCheck");
+
+      if( emailCheck == null || emailCheck == ""){
+        emailCheck0.classList.remove("inputVal");
+        emailCheck0.classList.add("inputInval");
+        $('.emailCk-inval').html("인증번호를 입력해주세요.");
+        $('.emailCk-inval').css({"display" : "block"});
+        confE = false;
+      }else if($("#emailCheck").val() == uuid0){
+        emailCheck0.classList.remove("inputInval");
+        emailCheck0.classList.add("inputVal");
+        $('.emailCk-inval').css({"display" : "none"});
+        confE = true;
+      }else{
+        emailCheck0.classList.remove("inputVal");
+        emailCheck0.classList.add("inputInval");
+        $('.emailCk-inval').html("인증번호가 일치하지 않습니다.");
+        $('.emailCk-inval').css({"display" : "block"});
+        confE = false;
+      }
+    }
+
+    function insertHtmlFun(nodeTemp, htmlTemp) {
+      removeAllChild(nodeTemp);
+      nodeTemp.insertAdjacentHTML("afterBegin", htmlTemp);
+    }
+
+    function removeAllChild(nodeTemp) {
+      while (nodeTemp.hasChildNodes()) { nodeTemp.removeChild(nodeTemp.lastChild);
+      }
+    }
+  </script>
+</body>
+</html>

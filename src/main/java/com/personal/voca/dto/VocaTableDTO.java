@@ -11,5 +11,10 @@ public class VocaTableDTO {
     private String voTbName;
     private String voDate;
 
+    private String voOwnerId;
+    private int voShare;
+    private int rowN;
+    private int startRow;
+    private int endRow;
 
 }

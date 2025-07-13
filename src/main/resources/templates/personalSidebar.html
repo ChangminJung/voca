@@ -23,18 +23,51 @@
                 <span>Index</span>
             </a>
         </li><!-- End Dashboard Nav -->
-        <li class="nav-item">
+        <li th:if="${session.userId ne null}" class="nav-item">
             <a class="nav-link collapsed" href="vocaInput">
+            								
                 <i class="bi bi-grid"></i>
                 <span>VocaInput</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="vocaTable">
+
+            <a th:if="${session.userId ne null}" class="nav-link collapsed" th:href="@{/vocaTable(userId=${session.userId}, page=1)}">
+                <i class="bi bi-grid"></i>
+                <span>VocaTable</span>
+            </a>
+            <a th:if="${session.userId eq null}" class="nav-link collapsed" href="vocaTable?userId= &page=1">
                 <i class="bi bi-grid"></i>
                 <span>VocaTable</span>
             </a>
         </li>
+        <li th:if="${session.userId eq null}" class="nav-item">
+            <a class="nav-link collapsed" href="mJoin">
+                <i class="bi bi-grid"></i>
+                <span>Join</span>
+            </a>
+        </li>
+        <li th:if="${session.userId eq null}" class="nav-item">
+            <a class="nav-link collapsed" href="mLogin">
+                <i class="bi bi-grid"></i>
+                <span>Login</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="sentenceTraining">
+                <i class="bi bi-grid"></i>
+                <span>sentenceTraining</span>
+            </a>
+        </li>
+        
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="stcTraining">
+                <i class="bi bi-grid"></i>
+                <span>stcTraining</span>
+            </a>
+        </li>
+        
+
 <!--        <li class="nav-item">-->
 <!--            <a class="nav-link collapsed" href="test">-->
 <!--                <i class="bi bi-grid"></i>-->

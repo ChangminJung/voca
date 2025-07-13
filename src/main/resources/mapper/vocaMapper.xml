@@ -12,35 +12,55 @@
 
 
     <insert id="vocaSubmit" parameterType="voca">
-        INSERT INTO VOCAT VALUES (VOC_SEQ.NEXTVAL,VOD_SEQ.CURRVAL, #{voTbName} , #{voSp}, #{voHw}, #{voImg}, #{voDate}, 0, 0)
+        INSERT INTO VOCAT VALUES (VOC_SEQ.NEXTVAL,VOD_SEQ.CURRVAL, #{voTbName} , #{voSp}, #{voHw}, #{voImg}, #{voDate}, 1, #{voExample1}, #{voExample2}, #{voExample3}, #{voExample4}, #{voExample5})
     </insert>
 
-    <insert id="voDirSubmit" parameterType="voca">
-        INSERT INTO VOCADIR VALUES (VOD_SEQ.NEXTVAL, #{voTbName} , #{voDate})
+    <insert id="voDirSubmit" parameterType="vocaTb">
+        INSERT INTO VOCADIR VALUES (VOD_SEQ.NEXTVAL, #{voTbName} , #{voDate}, #{voOwnerId}, ${voShare})
     </insert>
 
     <update id="voDirModify" parameterType="voca">
-        UPDATE VOCADIR SET VOTBNAME = #{voTbName} WHERE VODIRNUM = ${voDirNum}
+        UPDATE VOCADIR SET VOTBNAME = #{voTbName}, VOSHARE = ${voShare} WHERE VODIRNUM = ${voDirNum}
     </update>
 
-    <select id="vocaTable" resultType="vocaTb">
-        SELECT * FROM VOCADIR ORDER BY VODIRNUM ASC
+    <select id="vocaTable" resultType="vocaTb" parameterType="vocaTb">
+        SELECT * FROM (SELECT VO.*, ROWNUM AS ROWN FROM VOCADIR VO WHERE VOOWNERID = #{voOwnerId} or VOSHARE = 1 ORDER BY VODIRNUM ASC) WHERE ROWN BETWEEN ${startRow} AND ${endRow}
+    </select>
+    
+    <select id="memTable" resultType="vocaTb" parameterType="vocaTb">
+        SELECT * FROM (SELECT VO.*, ROWNUM AS ROWN FROM VOCADIR VO WHERE VOOWNERID = #{voOwnerId} ORDER BY VODIRNUM ASC) WHERE ROWN BETWEEN ${startRow} AND ${endRow}
+    </select>
+
+    <select id="vocaCount" resultType="int">
+        SELECT COUNT(*) FROM VOCADIR WHERE VOOWNERID = #{voOwnerId} or VOSHARE = 1
     </select>
 
     <select id="vocaView" resultType="voca" parameterType="int">
         SELECT * FROM VOCAT WHERE VODIRNUM = ${dirNum} ORDER BY VONUM DESC
     </select>
+    
+    <select id="vocaStcView" resultType="vocaStc" parameterType="int">
+        SELECT * FROM VOCASTC WHERE VODIRNUM = ${dirNum} ORDER BY VOSTCNUM DESC
+    </select>
+    
+    <select id="vocaUserId" resultType="String" parameterType="int">
+        SELECT VOOWNERID FROM VOCADIR WHERE VODIRNUM = ${dirNum}
+    </select>
 
-    <select id="vocaCheckView" resultType="voca" parameterType="int">
-        SELECT * FROM VOCAT WHERE VODIRNUM = ${dirNum} AND VOCHECK = 0 ORDER BY VONUM DESC
+	<select id="vocaCheckInput" resultType="String" parameterType="vocaCk">
+        SELECT VOCHECKINPUT FROM VOCACHECK WHERE VODIRNUM = ${voDirNum} AND VOUSERID = #{voUserId}
     </select>
 
     <select id="vocaViewOne" parameterType="int" resultType="voca">
         SELECT * FROM VOCAT WHERE VONUM = ${voNum}
     </select>
 
-    <update id="checkSave" parameterType="voca">
-        UPDATE VOCAT SET VOCHECK = ${voCheck} WHERE VONUM = ${voNum}
+	<insert id="checkInsert" parameterType="vocaCk">
+        INSERT INTO VOCACHECK VALUES (${voDirNum}, #{voUserId}, #{voCheckInput})
+    </insert>
+
+    <update id="checkSave" parameterType="vocaCk">
+        UPDATE VOCACHECK SET VOCHECKINPUT = #{voCheckInput} WHERE VODIRNUM = ${voDirNum} AND VOUSERID = #{voUserId}
     </update>
 
     <update id="imgUpdate" parameterType="voca">
@@ -78,5 +98,14 @@
     <select id="vocaRanOne" parameterType="int" resultType="voca">
         SELECT * FROM (SELECT VOCAT.* ,ROWNUM AS RN FROM VOCAT ORDER BY VONUM ASC) WHERE RN = ${ranNum} ORDER BY VONUM ASC
     </select>
+    
+    <select id="vocaPart" resultType="voca" parameterType="voca">
+        SELECT * FROM VOCAT WHERE VONUM != ${voNum} AND (VOPARTONE = #{voPartOne} OR VOPARTTWO = #{voPartOne} 
+        <if test='voPartTwo != null'>
+			OR VOPARTONE = #{voPartTwo} OR VOPARTTWO = #{voPartTwo}
+ 		</if>
+        )
+    </select>
+    
 
 </mapper>

@@ -61,7 +61,7 @@
           <div class="card-body">
             <h5 class="card-title">[[${vocaCardList.get(0).voTbName}]]
               <button type="button" class="btn btn-warning" onclick="imgSearch()" style="margin-left: 10px; float: right;">오류 그림 재탐색</button>
-              <button type="button" class="btn btn-success" onclick="imgModify()" style="float: right;">그림 수정</button>
+              <button th:if="${session.userId eq ownerId}" type="button" class="btn btn-success" onclick="imgModify()" style="float: right;">그림 수정</button>
                   <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal" style="margin-left: 10px; float: revert;">
                     그림 퀴즈
                   </button>
@@ -73,14 +73,15 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <p> 1 단계 : [[${vocaCardList.size/4}]] 개 </p>
-                          <p> 2 단계 : [[${vocaCardList.size/2}]] 개 </p>
-                          <p> 3 단계 : [[${vocaCardList.size/1}]] 개 </p>
+                          <p> 1 단계 : [[${vocaCardList.size/4}]] 개 <span th:if="${vocaCardList.size/4 le 1}">(시험불가)</span></p>
+                          <p> 2 단계 : [[${vocaCardList.size/2}]] 개 <span th:if="${vocaCardList.size/2 le 1}">(시험불가)</span></p>
+                          <p> 3 단계 : [[${vocaCardList.size/1}]] 개 <span th:if="${vocaCardList.size/1 le 1}">(시험불가)</span></p>
                         </div>
                         <div class="modal-footer" >
-                          <button style="float: left;" type="button" class="btn btn-primary" th:onclick="cardQuiz([[${vocaCardList.get(0).voDirNum}]], 4, [[${type}]])">1 단계</button>
-                          <button style="float: left;" type="button" class="btn btn-primary" th:onclick="cardQuiz([[${vocaCardList.get(0).voDirNum}]], 2, [[${type}]])">2 단계</button>
-                          <button style="float: left;" type="button" class="btn btn-primary" th:onclick="cardQuiz([[${vocaCardList.get(0).voDirNum}]], 1, [[${type}]])">3 단계</button>
+                          
+                          <button th:if="${vocaCardList.size/4 gt 1}" style="float: left;" type="button" class="btn btn-primary" th:onclick="cardQuiz([[${vocaCardList.get(0).voDirNum}]], 4, [[${type}]])">1 단계</button>
+                          <button th:if="${vocaCardList.size/2 gt 1}" style="float: left;" type="button" class="btn btn-primary" th:onclick="cardQuiz([[${vocaCardList.get(0).voDirNum}]], 2, [[${type}]])">2 단계</button>
+                          <button th:if="${vocaCardList.size/1 gt 1}" style="float: left;" type="button" class="btn btn-primary" th:onclick="cardQuiz([[${vocaCardList.get(0).voDirNum}]], 1, [[${type}]])">3 단계</button>
                         </div>
                       </div>
                     </div>
@@ -264,7 +265,7 @@
       location.href='vocaCardQuiz?dirNum='+ dirNum +'&quizLv=' + quizLv +'&type=' + type;
     }
 
-
+    
 
 
   </script>

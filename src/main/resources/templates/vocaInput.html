@@ -109,27 +109,65 @@
             <div class="card-body ">
               <div class="row mb-3" style="margin-top: 1vh;">
                 <div class="col-md-2">
-                  <input type="text" autocomplete="off" id="tbName" class="form-control" placeholder="Table Name">
+                  <input type="text" autocomplete="off" id="tbName" class="form-control" placeholder="Table Name"> 
                 </div>
+                
+                <div class="col-md-5">
+                <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked="">
+                      <label class="form-check-label" for="gridRadios1">
+                        공유
+                      </label>
+                </div>
+                <div class="form-check">
+                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                      <label class="form-check-label" for="gridRadios2">
+                        비공유
+                      </label>
+				</div>
+                </div>
+                
               </div>
               <!-- General Form Elements -->
               <form>
                 <div class="row mb-3">
                   <label for="inputText" class="col-sm-1 col-form-label"> </label>
-                  <label for="inputText" class="col-sm-5 col-form-label">영단어</label>
-                  <label for="inputText" class="col-sm-5 col-form-label">한글 뜻 (여러 개 일경우 ' , ' 로 구분)</label>
+                  <label for="inputText" class="col-sm-3 col-form-label">영단어</label>
+                  <label for="inputText" class="col-sm-1 col-form-label">품사</label>
+                  
+                  <label for="inputText" class="col-sm-5 col-form-label inputDiv1">한글 뜻</label>
+                  <label for="inputText" class="col-sm-1 col-form-label">품사2</label>
                 </div>
 
-                <div class="row mb-3" th:each="i : ${#numbers.sequence(1,10)}">
+                <div class="row mb-3 rowInput" th:each="i : ${#numbers.sequence(1,10)}">
                   <label for="inputText" class="col-sm-1 col-form-label">[[${i}]].</label>
-                  <div class="col-sm-5">
+                  <div class="col-sm-3">
                     <input type="text" autocomplete="off" class="form-control spel" th:id="spel+${i}" placeholder="spelling">
                   </div>
-                  <div class="col-sm-6">
-                    <input type="text" autocomplete="off" class="form-control hw" th:id="hw+${i}" placeholder="한글 뜻">
-                  </div>
+                  <div class="col-sm-1">
+                  
+                  <select th:id="inputStateOne+${i}" name="partOne" class="form-select" th:onchange="selectOn('One[[${i}]]')" th:onblur="selectBlur([[${i}]])">
+                    <option selected>...</option>
+                    <option value="n">명사(n)</option>
+                    <option value="v">동사(v)</option>
+                    <option value="adj">형용사(adj)</option>
+                    <option value="adv">부사(adv)</option>
+                    <option value="prep">전치사(prep)</option>
+                    <option value="conj">접속사(conj)</option>
+                    <option value="Int">감탄사(Int)</option>
+                  </select>
                 </div>
-
+                  <div class="col-sm-5 inputDiv1">
+                    <input type="text" autocomplete="off" class="form-control hw" th:id="hwOne+${i}" placeholder="한글 뜻" th:onfocus="inputFocus('One[[${i}]]')">
+                  </div>
+                  
+                  
+                </div>
+                  
+                  
+                  
+                </div>
+				
 
                 <div id="newVoca"> </div>
 
@@ -184,7 +222,90 @@
 
 
   <script>
-
+  
+  	function inputFocus(str){
+  		
+  		console.log($('.rowInput').eq(str.substring(3,str.length)).$('.inputDiv1'));
+  		if($('.rowInput').eq(str.substring(3,str.length))){
+  			
+  			
+  			$('.inputDiv1').eq(str.substring(3,str.length)).removeClass("col-sm-1");
+  			$('.inputDiv1').eq(str.substring(3,str.length)).addClass("col-sm-4");
+  	  		
+  	  		if(str.substring(0,3)=='One'){
+  	  			$("#hwTwo"+str.substring(3,str.length)).removeClass("col-sm-4");
+  	  			$("#hwTwo"+str.substring(3,str.length)).addClass("col-sm-1");
+  	  		}else{
+  	  			$("#hwOne"+str.substring(3,str.length)).removeClass("col-sm-4");
+	  			$("#hwOne"+str.substring(3,str.length)).addClass("col-sm-1");
+  	  		}
+  	  		
+  	  		
+  		}
+  		
+  		
+  	}
+  
+	
+  
+  	function selectOn(str){
+  		
+  		$("#inputState"+str+" option:eq(1)").text("명사(n)");
+  		$("#inputState"+str+" option:eq(2)").text("동사(v)");
+  		$("#inputState"+str+" option:eq(3)").text("형용사(adj)");
+  		$("#inputState"+str+" option:eq(4)").text("부사(adv)");
+  		$("#inputState"+str+" option:eq(5)").text("전치사(prep)");
+  		$("#inputState"+str+" option:eq(6)").text("접속사(conj)");
+  		$("#inputState"+str+" option:eq(7)").text("감탄사(Int)");
+  		
+  		$("#inputState"+str+" option:selected").text($("#inputState"+str+" option:selected").val());
+  		
+  		if(str.substring(0,3)== 'Two'){
+  			$('.inputDiv1').eq(0).removeClass("col-sm-5");
+  			$('.inputDiv1').eq(0).addClass("col-sm-1");
+  			
+  			$('.inputDiv1').eq(str.substring(3,str.length)).removeClass("col-sm-5");
+  			$('.inputDiv1').eq(str.substring(3,str.length)).addClass("col-sm-1");
+  			
+  			let div2Input ='';
+  			div2Input += '<div class="col-sm-4 inputDiv2">'
+            + '<input type="text" autocomplete="off" class="form-control hw" id="hwTwo'+ str.substring(3,str.length) +'" placeholder="한글 뜻" onfocus="inputFocus(\'Two'+ str.substring(3,str.length) +'\')">'
+          	+ '</div>';
+  			
+  			$('.rowInput').eq(str.substring(3,str.length)-1).append(div2Input);
+          	
+  			
+  		}
+  		
+  		
+  		
+  	}
+  	
+  	function selectBlur(i){
+  		
+  		
+  		if(!$('#inputStateTwo'+i).length){
+  			blurInput ="";
+  	  		blurInput +='<div class="col-sm-1">'
+  	  			+'<select id="inputStateTwo'+i+'" name="partTwo" class="form-select" onchange="selectOn(\'Two'+i+'\')" >'
+  	        +'<option selected>...</option>'
+  	        +'<option value="n">명사(n)</option>'
+  	        +'<option value="v">동사(v)</option>'
+  	        +'<option value="adj">형용사(adj)</option>'
+  	        +'<option value="adv">부사(adv)</option>'
+  	        +'<option value="prep">전치사(prep)</option>'
+  	        +'<option value="conj">접속사(conj)</option>'
+  	        +'<option value="Int">감탄사(Int)</option>'
+  	      	+'</select>'
+  	      	+'</div>';
+  	  		
+  	  		$('.rowInput').eq(i-1).append(blurInput);
+  		}
+  		
+  		
+  	}
+  	
+  
     function vocaAdd(){
 
       let length = $('.spel').length;
@@ -210,7 +331,9 @@
     function vocaSubmit(){
       let input = "";
       let length = $('.spel').length;
-
+      let userId = '[[${session.userId}]]';
+      let share = (true == $('#gridRadios1').is(":checked"))? 1 : 0;
+		
       for(let i = length-1 ; i > -1 ; i--){
         if($('#spel'+(i+1)).val() != null && $('#spel'+(i+1)).val() != "" && $('#hw'+(i+1)).val() != null && $('#hw'+(i+1)).val() != ""){
           input += $('#spel'+(i+1)).val() + "/" + $('#hw'+(i+1)).val() +"_";
@@ -227,11 +350,9 @@
         $('#tbName').val(new Date().toLocaleString());
       }
 
-      // 확인 후 제거
-      len = 40;
 
       sbBool = 1;
-      location.href = "vocaSubmit?tbName="+ $('#tbName').val() +"&input="+input;
+      location.href = "vocaSubmit?tbName="+ $('#tbName').val() +"&input="+input + "&userId=" + userId + "&share=" + share;
       // location.href = "vocaSubmit?tbName=Day12&input=adversity/역경,  불운_promising/유망한,  전망이 좋은_impede/저해하다,  방해하다_dwindle/줄어들다,  감소되다_depression/불황_prosperity/번영_wane/감소,  쇠퇴_implication/영향,  밀접한 관계_thrive/번영하다,  성공하다_economical/경제적인,  절약되는_fairly/상당히,  꽤_consequence/결과_substitute/대용품;  대신하다_director/임원,  책임자_boom/붐,  호황_likely/~할 것 같은_industry/산업_indicator/지표,  지수_period/기간,  시기_fall/(값,  가치가) 하락하다_lead/이끌다,  지휘하다;  (어떤 결과에) 이르다_prospect/전망,  예상_evidence/증거_evenly/고르게,  균등하게_drastic/과감한;  급격한_particular/특정한_costly/비용이 많이 드는,  손실이 큰_limited/제한된,  한정된_remain/계속 ~한 상태이다;  아직 ~해야 하다_pleased/만족해하는,  기쁜_potential/잠재적인;  가능성_analyst/분석가_boost/(경기를) 부양시키다,  상승시키다_assert/단언하다,  주장하다_soar/(물가 등이) 폭등하다,  높이 치솟다_rapidly/급속히,  빨리_unstable/불안정한,  변하기 쉬운_brisk/활발한,  호황의_dramatically/극적으로_stagnant/침체된,  불경기의_";
     }
 

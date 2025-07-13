@@ -51,7 +51,27 @@
     color: black;
   }
 
+  .divCard1{
+    position: absolute;
+    z-index: 11111;
+    margin: 50px;
+  }
 
+	
+  .bx{
+  	font-size:1.5rem;
+  	padding-right:15px;
+  	line-height:0;
+  	
+  }
+  .border-light {
+  	
+  }
+  
+  a{
+  font-family:initial;
+   color:rgba(0, 0, 0, 1);
+  }
 
 
 
@@ -82,7 +102,11 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">[[${voca.get(0).voTbName}]]
-                <button id="cardBtn" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal2" style="margin-left: 10px; float: revert;">
+                
+                <button th:if="${session.userId eq null}" id="cardBtn" type="button" class="btn btn-danger btn-sm" style="margin-left: 10px; float: revert;" onclick="vocaCard(0)">
+                  그림카드
+                </button>
+                <button th:if="${session.userId ne null}" id="cardBtn" type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal2" style="margin-left: 10px; float: revert;">
                   그림카드
                 </button>
                 <div class="modal fade" id="basicModal2" tabindex="-1">
@@ -100,7 +124,11 @@
                   </div>
                 </div><!-- End Basic Modal-->
 
-                <button id="tenBtn" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal3" style="margin-left: 10px; float: revert; background-color: #fd7e14; border-color: #fd7e14;">
+                
+                <button th:if="${session.userId eq null}" id="tenBtn" type="button" class="btn btn-danger btn-sm" style="margin-left: 5px; float: revert; background-color: #fd7e14; border-color: #fd7e14;" onclick="vocaTenQuiz(0)">
+                  십자 말풀이
+                </button>
+                <button th:if="${session.userId ne null}" id="tenBtn" type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#basicModal3" style="margin-left: 5px; float: revert; background-color: #fd7e14; border-color: #fd7e14;">
                   십자 말풀이
                 </button>
                 <div class="modal fade" id="basicModal3" tabindex="-1">
@@ -117,12 +145,14 @@
                     </div>
                   </div>
                 </div><!-- End Basic Modal-->
-
-              <button type="button" id="modBtn" th:onclick="location.href='vocaModiForm?dirNum=[[${voca.get(0).voDirNum}]]'" class="btn btn-primary" style="float: right;">수정하기</button>
+				<button id="mmrBtn" type="button" class="btn btn-primary btn-sm" style="margin-left: 5px; float: revert;" onclick="vocaMemorize()">
+                  단어 암기
+                </button>
+              <button th:if="${session.userId eq ownerId}" type="button" id="modBtn" th:onclick="location.href='vocaModiForm?dirNum=[[${voca.get(0).voDirNum}]]'" class="btn btn-success" style="float: right;">수정하기</button>
               </h5>
               <h1 id="checkH" class="card-title" style="margin: 2px; padding: 2px;">
-                <button type="button" onclick="remCheck()" class="btn btn-outline-primary btn-sm btnTog" style="float: revert;" data-bs-toggle="tooltip" data-bs-placement="top" title="체크 시 단어가 제외 됩니다.">외운 단어 체크</button>
-                <button type="button" id="delBtn" onclick="delCheck()" class="btn btn-outline-danger btn-sm btnTog" style="float: revert; margin-left: 10px;" data-bs-toggle="tooltip" data-bs-placement="top" title="외운 단어를 제거합니다." >외운 단어 제거</button>
+                <button th:if="${session.userId ne null}" type="button" onclick="remCheck()" class="btn btn-outline-primary btn-sm btnTog" style="float: revert;" data-bs-toggle="tooltip" data-bs-placement="top" title="체크 시 단어가 제외 됩니다.">외운 단어 체크</button>
+                <button th:if="${session.userId ne null}" type="button" id="delBtn" onclick="delCheck()" class="btn btn-outline-danger btn-sm btnTog" style="float: revert; margin-left: 10px;" data-bs-toggle="tooltip" data-bs-placement="top" title="외운 단어를 제거합니다." >외운 단어 제거</button>
                 <button type="button" id="addBtn" onclick="addCheck()" class="btn btn-outline-warning btn-sm" style="float: revert; margin-left: 10px; display: none;">모든 단어 표시</button>
 
               </h1>
@@ -137,10 +167,13 @@
                 </thead>
                 <tbody id="tbBody">
                 <tr th:each="voca : ${voca}">
-                  <th th:id="voCount+${vocaStat.count}" scope="row">[[${vocaStat.count}]]</th>
-                  <td>[[${voca.voSp}]]</td>
+             
+                  <th th:id="voCount+${vocaStat.count}">[[${vocaStat.count}]]</th>
+                  <td class="tbDiv">[[${voca.voSp}]]</td>
                   <td class="hw0" >[[${voca.voHw}]]</td>
                   <td hidden="hidden" th:id="voNum+${vocaStat.count}">[[${voca.voNum}]]</td>
+				
+				
                 </tr>
 
                 </tbody>
@@ -148,7 +181,11 @@
               </table>
               <!-- End Default Table Example -->
               <div id="lastBtn">
-                <button id="testBtn" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal" >
+                
+                <button th:if="${session.userId eq null}" id="testBtn" type="button" class="btn btn-danger" onclick="vocaTest(0)">
+                  시험보기
+                </button>
+                <button th:if="${session.userId ne null}" id="testBtn" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#basicModal" >
                   시험보기
                 </button>
                 <div class="modal fade" id="basicModal" tabindex="-1">
@@ -274,7 +311,9 @@
     $('#checkH').append('<button type="button" onclick="checkSave()" class="btn btn-outline-success btn-sm checkBtn" style="margin-left: 10px; float: revert;" >저장하기</button>')
     $('#lastBtn').append('<button type="button" onclick="checkSave()" class="btn btn-outline-success btn-sm checkBtn" style="margin-left: 10px; float: revert;" >저장하기</button>')
     for(let i = 0; i < vocaTot.length; i++){
-      if(vocaTot[i].voCheck == 0){
+      
+    	
+    	if(vocaTot[i].voCheck == 0){
         $('#voCount'+(i+1)).append('<input class="form-check-input checkBox" type="checkbox" name="ckList" id="voCheck'+ (i+1) +'" style="width: 30px; height: 30px; margin: 0px; margin-left: 15px;">');
       }else{
         $('#voCount'+(i+1)).append('<input class="form-check-input checkBox" type="checkbox" name="ckList" id="voCheck'+ (i+1) +'" checked="checked" style="width: 30px; height: 30px; margin: 0px; margin-left: 15px;">');
@@ -332,7 +371,7 @@
     $('#delBtn').css({'display' : 'initial'});
 
 
-    let checkInput = "";
+    let checkInput = "_";
 
     for(let i = 0; i < $('.hw0').length; i++){
       let voCheck = 0;
@@ -351,9 +390,9 @@
       },
       dataType : "json" ,
       success : function(data){
-        vocaTot = data[0];
-        vocaCheck = data[1];
-
+        vocaCheck = data[0];
+        vocaTot = data[1];
+		
       },
       error : function(){
         alert("체크 저장 통신 실패!");
@@ -373,7 +412,129 @@
   function vocaTenQuiz(num){
     location.href='vocaTenQuiz?dirNum='+ dirNum +'&type='+num;
   }
+  
+  function vocaMemorize(){
+	    location.href='vocaMemorize?dirNum='+ dirNum;
+  }
+  
+  
+  
+  /*
+  let divCard = '';
+  let tbDiv0 = null;
+  
+  $('.tbDiv').hover(function (e){
 
+	  //let aIdNumber = $(this).html().toString().substring($(this).html().toString().indexOf('>')+1, $(this).html().toString().indexOf('<',3));
+
+	    if(tbDiv0 != this){
+	    $('.divCard1').remove();
+	    divCard= '';
+	    }
+
+	    
+	    $(".spinner-border").css({"width" : "20px"});
+	    $(".spinner-border").css({"height" : "20px"});
+	    $(".spinner-border").css({"background-color" : "#0d6efd"});
+	    $(".spinner-border").removeClass("spinner-border text-primary");
+
+	    $(this).addClass("spinner-border text-primary");
+	    $(this).css({"display" : "block"});
+	    $(this).css({"background-color" : "white"});
+	    $(this).css({"width" : "10px"});
+	    $(this).css({"height" : "10px"});
+	    
+
+	    let aa = Math.round($('.section').offset().left);
+	    let bb = Math.round($(this).offset().left);
+	    let cc = Math.round($(this).offset().top);
+	    let dd = Math.round(e.screenY);
+	    let ee = Math.round($(this).innerHeight());
+	    let ee1 = Math.round($(this).outerHeight());
+	    console.log(ee);
+	    console.log(ee1);
+
+	    if(tbDiv0 != this){
+	    if((bb-aa) >= 420){
+
+	      if(divCard == ''){
+	        divCard += '<div class="alert alert-light border-light alert-dismissible fade show divCard1" style="left: '+ (aa + (bb-aa -435)) +'px; top: '+ (cc-10) +'px;" role="alert">\n' +
+	                '      <a href="www.naver.com"><i class="bx bx-news"></i></a><a href="www.naver.com">Meet the Women Launching, Recovering Artemis Missions</a>' +
+	                '      <hr>\n' +
+	                '      <a href="www.naver.com"><i class="bx bx-news"></i></a><a href="www.naver.com">Australia and UK sign defense and security treaty to meet "contemporary challenges"</a>' +
+	                '      <hr>\n' +
+	                '      <a href="www.naver.com"><i class="bx bx-news"></i></a><a href="www.naver.com">The DH Meet-Up: Podcasting and the VR Classroom Recap</a>' +
+	                '      <hr>\n' +
+	                '      <a href="www.naver.com"><i class="bx bx-news"></i></a><a href="www.naver.com">NC bars have longer to meet food inspection rules</a>' +
+	                '      <hr>\n' +
+	                '      <a href="www.naver.com"><i class="bx bx-news"></i></a><a href="www.naver.com">Community meet and greet held for City of Sparks Manager candidates</a>' +
+	                '      <button id="divCard" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onmousedown="divCardClose()"></button>\n' +
+	                '    </div>';
+	        $('#main').append(divCard);
+	      }
+	    }else{
+
+	      if(divCard == '') {
+	        if (dd <= 500) {
+	          divCard += '<div class="alert alert-light border-light alert-dismissible fade show divCard1" style="left: ' + (bb + 15) + 'px; top: ' + (cc -10) + 'px;" role="alert">\n' +
+	          			 '      <a href="www.naver.com"><i class="bx bx-news"></i></a><a href="www.naver.com">Meet the Women Launching, Recovering Artemis Missions</a>' +
+              			 '      <hr>\n' +
+              			'      <a href="www.naver.com"><i class="bx bx-news"></i></a><a href="www.naver.com">Australia and UK sign defense and security treaty to meet "contemporary challenges"</a>' +
+    	                '      <hr>\n' +
+    	                '      <a href="www.naver.com"><i class="bx bx-news"></i></a><a href="www.naver.com">The DH Meet-Up: Podcasting and the VR Classroom Recap</a>' +
+    	                '      <hr>\n' +
+    	                '      <a href="www.naver.com"><i class="bx bx-news"></i></a><a href="www.naver.com">NC bars have longer to meet food inspection rules</a>' +
+    	                '      <hr>\n' +
+    	                '      <a href="www.naver.com"><i class="bx bx-news"></i></a><a href="www.naver.com">Community meet and greet held for City of Sparks Manager candidates</a>' +
+	                  '      <button id="divCard" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onmousedown="divCardClose()"></button>\n' +
+	                  '    </div>';
+	          $('#main').append(divCard);
+	        } else {
+	          divCard += '<div class="alert alert-light border-light alert-dismissible fade show divCard1" style="left: ' + (bb + 15) + 'px; top: ' + (cc - 338) + 'px;" role="alert">\n' +
+	          			'      <a href="www.naver.com"><i class="bx bx-news"></i></a><a href="www.naver.com">Meet the Women Launching, Recovering Artemis Missions</a>' +
+              			'      <hr>\n' +
+              			'      <a href="www.naver.com"><i class="bx bx-news"></i></a><a href="www.naver.com">Australia and UK sign defense and security treaty to meet "contemporary challenges"</a>' +
+    	                '      <hr>\n' +
+    	                '      <a href="www.naver.com"><i class="bx bx-news"></i></a><a href="www.naver.com">The DH Meet-Up: Podcasting and the VR Classroom Recap</a>' +
+    	                '      <hr>\n' +
+    	                '      <a href="www.naver.com"><i class="bx bx-news"></i></a><a href="www.naver.com">NC bars have longer to meet food inspection rules</a>' +
+    	                '      <hr>\n' +
+    	                '      <a href="www.naver.com"><i class="bx bx-news"></i></a><a href="www.naver.com">Community meet and greet held for City of Sparks Manager candidates</a>' +
+	                  '      <button id="divCard" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onmousedown="divCardClose()"></button>\n' +
+	                  '    </div>';
+	          $('#main').append(divCard);
+	        }
+	      }
+	    }
+	    }
+
+	    tbDiv0 = this;
+
+	  }
+	  );
+  
+	//예외처리(초기화)
+  $('.section').on({
+    'click': function (e) {
+
+      tbDiv0 = null;
+      $('#divCard').click();
+      divCard= '';
+      
+     
+    }
+  });
+  $(document).keydown(function (e) {
+    if (e.keyCode == 27 || e.which == 27) {
+      tbDiv0 = null;
+      $('#divCard').click();
+      divCard= '';
+      
+      
+    }
+  });
+	
+  */
 
 </script>
 
